@@ -1,0 +1,42 @@
+{
+  "name": "grid-js-component",
+  "version": "1.0.0",
+  "description": "A reactjs, angular and vuejs grid component.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p src",
+    "lint": "tslint \"src/*.ts\" \"src/*.tsx\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/grid-js-component.git"
+  },
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/grid-js-component/issues"
+  },
+  "homepage": "https://github.com/plantain-00/grid-js-component#readme",
+  "devDependencies": {
+    "@angular/common": "4.0.1",
+    "@angular/compiler": "4.0.1",
+    "@angular/core": "4.0.1",
+    "@angular/forms": "4.0.1",
+    "@angular/platform-browser": "4.0.1",
+    "@angular/platform-browser-dynamic": "4.0.1",
+    "core-js": "2.4.1",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "rev-static": "2.1.2",
+    "rxjs": "5.3.0",
+    "tslint": "5.0.0",
+    "typescript": "2.2.2",
+    "vue": "2.2.6",
+    "vue-class-component": "5.0.1",
+    "webpack": "2.3.3",
+    "zone.js": "0.8.5"
+  },
+  "dependencies": {
+    "tslib": "1.6.0"
+  }
+}
