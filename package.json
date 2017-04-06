@@ -4,8 +4,9 @@
   "description": "A reactjs, angular and vuejs grid component.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p src",
-    "lint": "tslint \"src/*.ts\" \"src/*.tsx\""
+    "build": "tsc -p src && tsc -p demo && webpack && npm run clean-rev && rev-static",
+    "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\"",
+    "clean-rev": "rm -f demo/react.bundle-*.js demo/vue.bundle-*.js demo/angular.bundle-*.js"
   },
   "repository": {
     "type": "git",

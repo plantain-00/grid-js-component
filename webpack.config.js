@@ -3,12 +3,11 @@ const path = require("path");
 
 module.exports = {
     entry: {
-        index: "./index",
-        vendor: "./vendor"
+        vue: "./demo/vue/index",
     },
     output: {
-        path: path.join(__dirname, "static/"),
-        filename: "[name].js"
+        path: path.join(__dirname, "demo/"),
+        filename: "[name].bundle.js"
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -24,9 +23,6 @@ module.exports = {
             output: {
                 comments: false,
             },
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ["index", "vendor"]
         }),
     ],
     resolve: {

@@ -3,7 +3,7 @@ import Component from "vue-class-component";
 
 @Component({
     template: ``,
-    props: ["data", "last", "checkbox", "path", "draggable"],
+    props: [],
 })
 class Grid extends Vue {
 }

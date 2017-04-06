@@ -6,3 +6,19 @@
 
 # grid-js-component
 A reactjs, angular and vuejs grid component.
+
+#### install
+
+`npm i grid-js-component`
+
+#### vuejs component demo
+
+```ts
+import "grid-js-component/dist/vue";
+<grid>
+</grid>
+```
+
+the online demo: https://plantain-00.github.io/grid-js-component/demo/vue/index.html
+
+the source code of the demo: https://github.com/plantain-00/grid-js-component/tree/master/demo/vue

@@ -1,8 +1,7 @@
 module.exports = {
     inputFiles: [
-        "demo/foo.js",
-        "demo/bar.css",
-        "demo/*.ejs.html",
+        "demo/vue.bundle.js",
+        "demo/vue/index.ejs.html",
     ],
     outputFiles: file => file.replace(".ejs", ""),
     json: false,
@@ -11,7 +10,4 @@ module.exports = {
     },
     sha: 256,
     customNewFileName: (filePath, fileString, md5String, baseName, extensionName) => baseName + "-" + md5String + extensionName,
-    noOutputFiles: [
-        "demo/worker.js",
-    ],
 };
