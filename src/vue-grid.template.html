@@ -1,0 +1,11 @@
+<table>
+    <tr v-for="row in data.rows">
+        <td v-for="cell in row.cells">
+            <template v-if="cell.component">
+                <component :is='cell.component' :data='cell.value'>
+                </component>
+            </template>
+            <template v-else>{{cell.value}}</template>
+        </td>
+    </tr>
+</table>
