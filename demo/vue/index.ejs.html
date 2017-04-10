@@ -1,23 +1,23 @@
 <style>
-    #container {
-        height: 100px;
-        width: 500px;
-    }
-    
     #container table {
         border-collapse: collapse;
-        width: 100%;
+        width: 150px;
+        display: block;
+        overflow-x: auto;
     }
     
-    #container table tr td {
+    #container th,
+    #container td {
         border: 1px solid black;
+        width: 100px;
+        min-width: 100px;
+        height: 20px;
     }
-    #container table tr th {
-        border: 1px solid black;
-    }
-
+    
     #container table tbody {
-        overflow: auto;
+        overflow-y: auto;
+        display: inline-block;
+        height: 100px;
     }
 </style>
 <div id="container">
