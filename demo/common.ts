@@ -1,17 +1,17 @@
 import { GridData } from "../dist/common";
 
 export const data: GridData = {
+    headers: {
+        cells: [
+            {
+                value: "name",
+            },
+            {
+                value: "proficiency",
+            },
+        ],
+    },
     rows: [
-        {
-            cells: [
-                {
-                    value: "name",
-                },
-                {
-                    value: "proficiency",
-                },
-            ],
-        },
         {
             cells: [
                 {

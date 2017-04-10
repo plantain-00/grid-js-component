@@ -1,4 +1,5 @@
 export type GridData = {
+    headers : GridRowData;
     rows: GridRowData[];
 };
 
