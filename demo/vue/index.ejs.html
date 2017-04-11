@@ -1,9 +1,8 @@
+<link rel='stylesheet' href='../../node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css' />
 <style>
     #container table {
         border-collapse: collapse;
         width: 150px;
-        display: block;
-        overflow-x: auto;
     }
     
     #container th,
@@ -13,11 +12,24 @@
         min-width: 100px;
         height: 20px;
     }
+
+    #container table thead {
+        width: 150px;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    #container table thead tr {
+        position: relative;
+        display: inline-block;
+        left: 0px;
+    }
     
     #container table tbody {
-        overflow-y: auto;
         display: inline-block;
         height: 100px;
+        position: relative;
+        width: 150px;
     }
 </style>
 <div id="container">

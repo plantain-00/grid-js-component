@@ -1,4 +1,5 @@
 import * as Vue from "vue";
+import * as Ps from "perfect-scrollbar";
 
 import "../../dist/vue";
 import { data } from "../common";
@@ -23,4 +24,16 @@ new Vue({
     data: {
         data,
     },
+});
+
+const container = document.getElementsByTagName("tbody")[0];
+Ps.initialize(container);
+
+const heads = document.getElementsByClassName("head-row");
+
+container.addEventListener("ps-scroll-x", e => {
+    /* tslint:disable:prefer-for-of */
+    for (let i = 0; i < heads.length; i++) {
+        (heads[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
+    }
 });

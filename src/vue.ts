@@ -8,6 +8,10 @@ import * as common from "./common";
 })
 class Grid extends Vue {
     data: common.GridData;
+
+    scroll(e: any) {
+        console.log(e);
+    }
 }
 
 Vue.component("grid", Grid);

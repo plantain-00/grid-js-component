@@ -1,6 +1,6 @@
 <table>
     <thead v-if="data.headers && data.headers.cells">
-        <tr>
+        <tr class="head-row">
             <th v-for="cell in data.headers.cells">
                 <template v-if="cell.component">
                     <component :is='cell.component' :data='cell.value'>
