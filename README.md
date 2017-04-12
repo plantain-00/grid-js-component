@@ -19,6 +19,8 @@ A reactjs, angular and vuejs grid component.
 
 #### vuejs component demo
 
+`npm i vue vue-class-component`
+
 ```ts
 import "grid-js-component/dist/vue";
 <grid :data="data">
@@ -28,3 +30,35 @@ import "grid-js-component/dist/vue";
 the online demo: https://plantain-00.github.io/grid-js-component/demo/vue/index.html
 
 the source code of the demo: https://github.com/plantain-00/grid-js-component/tree/master/demo/vue
+
+#### properties and events of the component
+
+name | type | description
+--- | --- | ---
+data | [GridData](#grid-data-structure)[] | the data of the tree
+
+#### grid data structure
+
+```ts
+type GridData = {
+    headers: GridRowData;
+    rows: GridRowData[];
+};
+
+type GridRowData = {
+    cells: GridCellData[];
+};
+
+type GridCellData = {
+    value: any; // the value in the cell
+    component?: string; //  if exists, show the component rather than the value in the cell
+};
+```
+
+#### features
+
++ vuejs component
++ reactjs component
++ angular component
++ scrollbar
++ custom cell component
