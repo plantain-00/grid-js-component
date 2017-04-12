@@ -4,8 +4,8 @@
   "description": "A reactjs, angular and vuejs grid component.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p src && tsc -p demo && npm run minifier-template && webpack && npm run clean-rev && rev-static",
-    "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\"",
+    "build": "tsc -p src && tsc -p demo && lessc src/grid.less > dist/grid.css && cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && lessc demo/common.less > demo/common.css && npm run minifier-template && webpack && npm run clean-rev && rev-static",
+    "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\" && stylelint \"src/*.less\" \"demo/*.less\" --syntax less",
     "clean-rev": "rimraf demo/react.bundle-*.js demo/vue.bundle-*.js demo/angular.bundle-*.js",
     "minifier-template": "html-minifier --collapse-whitespace --case-sensitive --collapse-inline-tag-whitespace src/vue-grid.template.html -o dist/vue-grid.html"
   },
@@ -27,16 +27,18 @@
     "@angular/platform-browser": "4.0.1",
     "@angular/platform-browser-dynamic": "4.0.1",
     "@types/node": "7.0.12",
-    "@types/perfect-scrollbar": "0.6.1",
+    "clean-css-cli": "4.0.11",
     "core-js": "2.4.1",
     "html-minifier": "3.4.2",
-    "perfect-scrollbar": "0.6.16",
+    "less": "2.7.2",
     "raw-loader": "0.5.1",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "rev-static": "2.1.2",
     "rimraf": "2.6.1",
     "rxjs": "5.3.0",
+    "stylelint": "7.10.1",
+    "stylelint-config-standard": "16.0.0",
     "tslint": "5.0.0",
     "typescript": "2.2.2",
     "vue": "2.2.6",
@@ -45,6 +47,8 @@
     "zone.js": "0.8.5"
   },
   "dependencies": {
+    "@types/perfect-scrollbar": "0.6.1",
+    "perfect-scrollbar": "0.6.16",
     "tslib": "1"
   }
 }

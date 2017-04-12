@@ -11,11 +11,17 @@ A reactjs, angular and vuejs grid component.
 
 `npm i grid-js-component`
 
+#### link css
+
+```html
+<link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
+```
+
 #### vuejs component demo
 
 ```ts
 import "grid-js-component/dist/vue";
-<grid>
+<grid :data="data">
 </grid>
 ```
 

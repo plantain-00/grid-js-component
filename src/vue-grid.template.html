@@ -1,6 +1,6 @@
-<table>
-    <thead v-if="data.headers && data.headers.cells">
-        <tr class="head-row">
+<table class="grid">
+    <thead v-if="data.headers && data.headers.cells" class="grid-head">
+        <tr class="grid-head-row">
             <th v-for="cell in data.headers.cells">
                 <template v-if="cell.component">
                     <component :is='cell.component' :data='cell.value'>
@@ -10,7 +10,7 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="grid-body">
         <tr v-for="row in data.rows">
             <td v-for="cell in row.cells">
                 <template v-if="cell.component">

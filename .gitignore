@@ -39,3 +39,4 @@ jspm_packages
 dist
 demo/**/*.js
 demo/**/index.html
+*.css

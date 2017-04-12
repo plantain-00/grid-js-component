@@ -11,3 +11,7 @@ export type GridCellData = {
     value: any;
     component?: string;
 };
+
+import * as Ps from "perfect-scrollbar";
+
+export { Ps };
