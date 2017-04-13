@@ -31,6 +31,17 @@ the online demo: https://plantain-00.github.io/grid-js-component/demo/vue/index.
 
 the source code of the demo: https://github.com/plantain-00/grid-js-component/tree/master/demo/vue
 
+#### reactjs component demo
+
+```ts
+import { Grid } from "grid-js-component/dist/react";
+<Grid data={data} />
+```
+
+the online demo: https://plantain-00.github.io/grid-js-component/demo/react/index.html
+
+the source code of the demo: https://github.com/plantain-00/grid-js-component/tree/master/demo/react
+
 #### properties and events of the component
 
 name | type | description
@@ -52,7 +63,7 @@ type GridRowData = {
 
 type GridCellData = {
     value: any; // the value in the cell
-    component?: string; //  if exists, show the component rather than the value in the cell
+    component?: string | React.ComponentClass<{ data: any }>; //  if exists, show the component rather than the value in the cell
     style?: string; // the class string of the cell, used to set style
 };
 ```

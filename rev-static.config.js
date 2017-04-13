@@ -2,6 +2,8 @@ module.exports = {
     inputFiles: [
         "demo/vue.bundle.js",
         "demo/vue/index.ejs.html",
+        "demo/react.bundle.js",
+        "demo/react/index.ejs.html",
     ],
     outputFiles: file => file.replace(".ejs", ""),
     json: false,

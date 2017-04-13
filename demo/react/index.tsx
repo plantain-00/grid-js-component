@@ -1,6 +1,25 @@
-import { GridData } from "../dist/common";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-export const data: GridData = {
+import { Grid } from "../../dist/react";
+import { GridData } from "../../dist/common";
+
+class ProficiencyPercent extends React.Component<{ data: number }, {}>{
+    get style(): React.CSSProperties {
+        return {
+            width: this.props.data + "%",
+            backgroundColor: this.props.data >= 50 ? "rgb(0, 160, 0)" : "rgb(255, 153, 0)",
+            padding: "3px",
+        };
+    }
+    render() {
+        return (
+            <div style={this.style}>{ this.props.data }%</div>
+        );
+    }
+}
+
+const data: GridData = {
     headers: {
         cells: [
             {
@@ -21,7 +40,7 @@ export const data: GridData = {
                 },
                 {
                     value: 30,
-                    component: "proficiency-percent",
+                    component: ProficiencyPercent,
                 },
             ],
         },
@@ -32,7 +51,7 @@ export const data: GridData = {
                 },
                 {
                     value: 90,
-                    component: "proficiency-percent",
+                    component: ProficiencyPercent,
                 },
             ],
         },
@@ -43,7 +62,7 @@ export const data: GridData = {
                 },
                 {
                     value: 10,
-                    component: "proficiency-percent",
+                    component: ProficiencyPercent,
                 },
             ],
         },
@@ -54,7 +73,7 @@ export const data: GridData = {
                 },
                 {
                     value: 70,
-                    component: "proficiency-percent",
+                    component: ProficiencyPercent,
                 },
             ],
         },
@@ -65,7 +84,7 @@ export const data: GridData = {
                 },
                 {
                     value: 60,
-                    component: "proficiency-percent",
+                    component: ProficiencyPercent,
                 },
             ],
         },
@@ -76,9 +95,19 @@ export const data: GridData = {
                 },
                 {
                     value: 20,
-                    component: "proficiency-percent",
+                    component: ProficiencyPercent,
                 },
             ],
         },
     ],
 };
+
+class Main extends React.Component<{}, {}> {
+    render() {
+        return (
+            <Grid data={data}></Grid>
+        );
+    }
+}
+
+ReactDOM.render(<Main />, document.getElementById("container"));

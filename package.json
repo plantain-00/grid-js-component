@@ -27,6 +27,7 @@
     "@angular/platform-browser": "4.0.1",
     "@angular/platform-browser-dynamic": "4.0.1",
     "@types/node": "7.0.12",
+    "@types/react-dom": "0.14.23",
     "clean-css-cli": "4.0.11",
     "core-js": "2.4.1",
     "html-minifier": "3.4.2",
@@ -48,6 +49,7 @@
   },
   "dependencies": {
     "@types/perfect-scrollbar": "0.6.1",
+    "@types/react": "15.0.21",
     "perfect-scrollbar": "0.6.16",
     "tslib": "1"
   }

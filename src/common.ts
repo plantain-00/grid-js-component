@@ -10,7 +10,7 @@ export type GridRowData = {
 
 export type GridCellData = {
     value: any;
-    component?: string;
+    component?: string | React.ComponentClass<{ data: any }>;
     style?: string;
 };
 
