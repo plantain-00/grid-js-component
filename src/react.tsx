@@ -1,14 +1,16 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import * as common from "./common";
 
 export class Grid extends React.Component<{ data: common.GridData; }, {}> {
     container: HTMLElement;
-    heads: HTMLCollectionOf<Element>;
+    heads: NodeList;
 
     componentDidMount() {
-        this.container = document.getElementsByClassName("grid-body")[0] as HTMLElement;
+        this.heads = ReactDOM.findDOMNode(this).childNodes[0].childNodes;
+        this.container = ReactDOM.findDOMNode(this).childNodes[1] as HTMLElement;
+
         common.Ps.initialize(this.container);
-        this.heads = document.getElementsByClassName("grid-head-row");
 
         this.container.addEventListener("ps-scroll-x", e => {
             /* tslint:disable:prefer-for-of */

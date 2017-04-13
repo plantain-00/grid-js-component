@@ -10,12 +10,13 @@ class Grid extends Vue {
     data: common.GridData;
 
     container: HTMLElement;
-    heads: HTMLCollectionOf<Element>;
+    heads: NodeList;
 
     mounted() {
-        this.container = document.getElementsByClassName("grid-body")[0] as HTMLElement;
+        this.heads = this.$el.childNodes[0].childNodes;
+        this.container = this.$el.childNodes[1] as HTMLElement;
+
         common.Ps.initialize(this.container);
-        this.heads = document.getElementsByClassName("grid-head-row");
 
         this.container.addEventListener("ps-scroll-x", e => {
             /* tslint:disable:prefer-for-of */
