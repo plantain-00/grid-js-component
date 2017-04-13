@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import { Grid } from "../../dist/react";
 import { GridData } from "../../dist/common";
 
-class ProficiencyPercent extends React.Component<{ data: number }, {}>{
+class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     get style(): React.CSSProperties {
         return {
             width: this.props.data + "%",
@@ -14,7 +14,7 @@ class ProficiencyPercent extends React.Component<{ data: number }, {}>{
     }
     render() {
         return (
-            <div style={this.style}>{ this.props.data }%</div>
+            <div style={this.style}>{this.props.data}%</div>
         );
     }
 }
