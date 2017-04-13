@@ -5,6 +5,7 @@ export type GridData = {
 
 export type GridRowData = {
     cells: GridCellData[];
+    style?: string;
 };
 
 export type GridCellData = {

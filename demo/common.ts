@@ -8,9 +8,10 @@ export const data: GridData = {
             },
             {
                 value: "proficiency",
-                style: "test-class",
+                style: "test-cell-class",
             },
         ],
+        style: "test-row-class",
     },
     rows: [
         {

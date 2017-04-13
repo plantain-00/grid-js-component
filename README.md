@@ -47,6 +47,7 @@ type GridData = {
 
 type GridRowData = {
     cells: GridCellData[];
+    style?: string; // the class string of the row, used to set style
 };
 
 type GridCellData = {
