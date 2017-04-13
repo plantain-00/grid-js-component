@@ -52,7 +52,37 @@ type GridRowData = {
 type GridCellData = {
     value: any; // the value in the cell
     component?: string; //  if exists, show the component rather than the value in the cell
+    style?: string; // the class string of the cell, used to set style
 };
+```
+
+#### general styles
+
+```less
+.grid {
+  border-collapse: collapse;
+  width: 150px;
+}
+
+.grid-head {
+  width: 150px;
+}
+
+.grid-body {
+  height: 100px;
+  width: 150px;
+}
+
+.grid-head-row { }
+.grid-body-row { }
+
+.grid-head-row-cell,
+.grid-body-row-cell {
+  border: 1px solid black;
+  width: 100px;
+  min-width: 100px;
+  height: 20px;
+}
 ```
 
 #### features

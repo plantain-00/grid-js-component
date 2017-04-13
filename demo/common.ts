@@ -8,6 +8,7 @@ export const data: GridData = {
             },
             {
                 value: "proficiency",
+                style: "test-class",
             },
         ],
     },

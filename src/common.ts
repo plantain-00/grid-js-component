@@ -10,6 +10,7 @@ export type GridRowData = {
 export type GridCellData = {
     value: any;
     component?: string;
+    style?: string;
 };
 
 import * as Ps from "perfect-scrollbar";
