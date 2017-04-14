@@ -67,7 +67,7 @@ type GridRowData = {
 
 type GridCellData = {
     value: any; // the value in the cell
-    component?: string | React.ComponentClass<{ data: any }>; //  if exists, show the component rather than the value in the cell
+    component?: string | Function; //  if exists, show the component rather than the value in the cell
     style?: string; // the class string of the cell, used to set style
 };
 ```

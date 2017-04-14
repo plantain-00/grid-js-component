@@ -4,10 +4,10 @@ import "../../dist/vue";
 import { GridData } from "../../dist/common";
 
 Vue.component("proficiency-percent", {
-    template: `<div :style="getStyle()">{{data}}%</div>`,
+    template: `<div :style="style">{{data}}%</div>`,
     props: ["data"],
-    methods: {
-        getStyle(this: any) {
+    computed: {
+        style(this: { data: number }) {
             return {
                 width: this.data + "%",
                 backgroundColor: this.data >= 50 ? "rgb(0, 160, 0)" : "rgb(255, 153, 0)",
@@ -107,3 +107,4 @@ new Vue({
         data,
     },
 });
+/* tslint:enable:no-unused-expression */

@@ -23,6 +23,7 @@ class Grid extends Vue {
             for (let i = 0; i < this.heads.length; i++) {
                 (this.heads[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
             }
+            /* tslint:enable:prefer-for-of */
         });
     }
     beforeDestroy() {
