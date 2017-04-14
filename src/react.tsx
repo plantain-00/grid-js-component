@@ -4,18 +4,18 @@ import * as common from "./common";
 
 export class Grid extends React.Component<{ data: common.GridData; }, {}> {
     container: HTMLElement;
-    heads: NodeList;
+    heads: HTMLElement;
 
     componentDidMount() {
-        this.heads = ReactDOM.findDOMNode(this).childNodes[0].childNodes;
+        this.heads = ReactDOM.findDOMNode(this).childNodes[0] as HTMLElement;
         this.container = ReactDOM.findDOMNode(this).childNodes[1] as HTMLElement;
 
         common.Ps.initialize(this.container);
 
         this.container.addEventListener("ps-scroll-x", e => {
             /* tslint:disable:prefer-for-of */
-            for (let i = 0; i < this.heads.length; i++) {
-                (this.heads[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
+            for (let i = 0; i < this.heads.childNodes.length; i++) {
+                (this.heads.childNodes[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
             }
             /* tslint:enable:prefer-for-of */
         });
