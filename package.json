@@ -1,7 +1,7 @@
 {
   "name": "grid-js-component",
   "version": "1.0.0",
-  "description": "A reactjs, angular and vuejs grid component.",
+  "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
     "build": "npm run build-ts && npm run build-less && npm run minifier-template && webpack && npm run clean-rev && rev-static",

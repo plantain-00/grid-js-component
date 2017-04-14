@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/npm/dm/grid-js-component.svg)](https://www.npmjs.com/package/grid-js-component)
 
 # grid-js-component
-A reactjs, angular and vuejs grid component.
+A reactjs and vuejs grid component.
 
 #### install
 
@@ -105,6 +105,5 @@ type GridCellData = {
 
 + vuejs component
 + reactjs component
-+ angular component
 + scrollbar
 + custom cell component
