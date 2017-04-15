@@ -108,3 +108,27 @@ type GridCellData = {
 + scrollbar
 + custom cell component
 + freeze columns
+
+#### changelogs
+
+##### v2
+
+```bash
+// v1
++ grid
++ grid-head
++ grid-head-row
++ grid-head-row-cell
++ grid-body
++ grid-body-row
++ grid-body-row-cell
+
+// v2
++ grid-main
++ grid-main-head
++ grid-main-head-row
++ grid-main-head-row-cell
++ grid-main-body
++ grid-main-body-row
++ grid-main-body-row-cell
+```

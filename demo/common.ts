@@ -83,4 +83,41 @@ export const data: GridData = {
             ],
         },
     ],
+    rightHeaders: {
+        cells: [
+            { value: "gender" },
+        ],
+    },
+    rightRows: [
+        {
+            cells: [
+                { value: "male" },
+            ],
+        },
+        {
+            cells: [
+                { value: "female" },
+            ],
+        },
+        {
+            cells: [
+                { value: "female" },
+            ],
+        },
+        {
+            cells: [
+                { value: "male" },
+            ],
+        },
+        {
+            cells: [
+                { value: "female" },
+            ],
+        },
+        {
+            cells: [
+                { value: "female" },
+            ],
+        },
+    ],
 };
