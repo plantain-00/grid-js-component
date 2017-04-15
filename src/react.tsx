@@ -33,14 +33,14 @@ export class Grid extends React.Component<{ data: common.GridData; }, {}> {
             const headCells = this.props.data.headers.cells.map(cell => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 return (
-                    <th className={"grid-head-row-cell " + (cell.style || "")}>
+                    <th className={"grid-main-head-row-cell " + (cell.style || "")}>
                         {headCell}
                     </th >
                 );
             });
             head = (
-                <thead className="grid-head">
-                    <tr className={"grid-head-row " + (this.props.data.headers.style || "")}>
+                <thead className="grid-main-head">
+                    <tr className={"grid-main-head-row " + (this.props.data.headers.style || "")}>
                         {headCells}
                     </tr>
                 </thead >
@@ -50,13 +50,13 @@ export class Grid extends React.Component<{ data: common.GridData; }, {}> {
             const cells = row.cells.map(cell => {
                 const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 return (
-                    <td className={"grid-body-row-cell " + (cell.style || "")}>
+                    <td className={"grid-main-body-row-cell " + (cell.style || "")}>
                         {bodyCell}
                     </td>
                 );
             });
             return (
-                <tr className={"grid-body-row " + (row.style || "")}>
+                <tr className={"grid-main-body-row " + (row.style || "")}>
                     {cells}
                 </tr >
             );
@@ -64,7 +64,7 @@ export class Grid extends React.Component<{ data: common.GridData; }, {}> {
         return (
             <table className="grid">
                 {head}
-                <tbody className="grid-body">
+                <tbody className="grid-main-body">
                     {body}
                 </tbody >
             </table >

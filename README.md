@@ -58,6 +58,10 @@ data | [GridData](#grid-data-structure)[] | the data of the tree
 type GridData = {
     headers: GridRowData;
     rows: GridRowData[];
+    leftHeaders?: GridRowData;
+    leftRows?: GridRowData[];
+    rightHeaders?: GridRowData;
+    rightRows?: GridRowData[];
 };
 
 type GridRowData = {
@@ -74,32 +78,28 @@ type GridCellData = {
 
 #### general styles
 
-```less
-.grid {
-  border-collapse: collapse;
-  width: 150px;
-}
-
-.grid-head {
-  width: 150px;
-}
-
-.grid-body {
-  height: 100px;
-  width: 150px;
-}
-
-.grid-head-row { }
-.grid-body-row { }
-
-.grid-head-row-cell,
-.grid-body-row-cell {
-  border: 1px solid black;
-  width: 100px;
-  min-width: 100px;
-  height: 20px;
-}
-```
++ grid
++ grid-main
++ grid-main-head
++ grid-main-head-row
++ grid-main-head-row-cell
++ grid-main-body
++ grid-main-body-row
++ grid-main-body-row-cell
++ grid-left
++ grid-left-head
++ grid-left-head-row
++ grid-left-head-row-cell
++ grid-left-body
++ grid-left-body-row
++ grid-left-body-row-cell
++ grid-right
++ grid-right-head
++ grid-right-head-row
++ grid-right-head-row-cell
++ grid-right-body
++ grid-right-body-row
++ grid-right-body-row-cell
 
 #### features
 
@@ -107,3 +107,4 @@ type GridCellData = {
 + reactjs component
 + scrollbar
 + custom cell component
++ freeze columns

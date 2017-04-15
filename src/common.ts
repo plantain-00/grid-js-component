@@ -1,6 +1,10 @@
 export type GridData = {
     headers: GridRowData;
     rows: GridRowData[];
+    leftHeaders?: GridRowData;
+    leftRows?: GridRowData[];
+    rightHeaders?: GridRowData;
+    rightRows?: GridRowData[];
 };
 
 export type GridRowData = {

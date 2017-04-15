@@ -11,10 +11,12 @@ class Grid extends Vue {
 
     container: HTMLElement;
     heads: HTMLElement;
+    leftContainer: HTMLElement;
 
     mounted() {
-        this.heads = this.$el.childNodes[0] as HTMLElement;
-        this.container = this.$el.childNodes[1] as HTMLElement;
+        this.heads = this.$el.childNodes[1].childNodes[0] as HTMLElement;
+        this.container = this.$el.childNodes[1].childNodes[1] as HTMLElement;
+        this.leftContainer = this.$el.childNodes[0].childNodes[1] as HTMLElement;
 
         common.Ps.initialize(this.container);
 
@@ -22,6 +24,9 @@ class Grid extends Vue {
             /* tslint:disable:prefer-for-of */
             for (let i = 0; i < this.heads.childNodes.length; i++) {
                 (this.heads.childNodes[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
+            }
+            for (let i = 0; i < this.leftContainer.childNodes.length; i++) {
+                (this.leftContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
             }
             /* tslint:enable:prefer-for-of */
         });

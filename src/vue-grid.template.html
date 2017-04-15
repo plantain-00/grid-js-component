@@ -1,24 +1,78 @@
-<table class="grid">
-    <thead v-if="data.headers && data.headers.cells" class="grid-head">
-        <tr :class="'grid-head-row ' + (data.headers.style || '')">
-            <th v-for="cell in data.headers.cells" :class="'grid-head-row-cell ' + (cell.style || '')">
-                <template v-if="cell.component">
-                    <component :is="cell.component" :data="cell.value">
-                    </component>
-                </template>
-                <template v-else>{{cell.value}}</template>
-            </th>
-        </tr>
-    </thead>
-    <tbody class="grid-body">
-        <tr v-for="row in data.rows" :class="'grid-body-row ' + (row.style || '')">
-            <td v-for="cell in row.cells" :class="'grid-body-row-cell ' + (cell.style || '')">
-                <template v-if="cell.component">
-                    <component :is="cell.component" :data="cell.value">
-                    </component>
-                </template>
-                <template v-else>{{cell.value}}</template>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="grid">
+    <table class="grid-left">
+        <thead class="grid-left-head">
+            <template v-if="data.leftHeaders && data.leftHeaders.cells">
+                <tr :class="'grid-left-head-row ' + (data.leftHeaders.style || '')">
+                    <th v-for="cell in data.leftHeaders.cells" :class="'grid-left-head-row-cell ' + (cell.style || '')">
+                        <template v-if="cell.component">
+                            <component :is="cell.component" :data="cell.value">
+                            </component>
+                        </template>
+                        <template v-else>{{cell.value}}</template>
+                    </th>
+                </tr>
+            </template>
+        </thead>
+        <tbody class="grid-left-body">
+            <tr v-for="row in data.leftRows" :class="'grid-left-body-row ' + (row.style || '')">
+                <td v-for="cell in row.cells" :class="'grid-left-body-row-cell ' + (cell.style || '')">
+                    <template v-if="cell.component">
+                        <component :is="cell.component" :data="cell.value">
+                        </component>
+                    </template>
+                    <template v-else>{{cell.value}}</template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="grid-main">
+        <thead v-if="data.headers && data.headers.cells" class="grid-main-head">
+            <tr :class="'grid-main-head-row ' + (data.headers.style || '')">
+                <th v-for="cell in data.headers.cells" :class="'grid-main-head-row-cell ' + (cell.style || '')">
+                    <template v-if="cell.component">
+                        <component :is="cell.component" :data="cell.value">
+                        </component>
+                    </template>
+                    <template v-else>{{cell.value}}</template>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="grid-main-body">
+            <tr v-for="row in data.rows" :class="'grid-main-body-row ' + (row.style || '')">
+                <td v-for="cell in row.cells" :class="'grid-main-body-row-cell ' + (cell.style || '')">
+                    <template v-if="cell.component">
+                        <component :is="cell.component" :data="cell.value">
+                        </component>
+                    </template>
+                    <template v-else>{{cell.value}}</template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="grid-right">
+        <thead class="grid-right-head">
+            <template v-if="data.rightHeaders && data.rightHeaders.cells">
+                <tr :class="'grid-right-head-row ' + (data.rightHeaders.style || '')">
+                    <th v-for="cell in data.rightHeaders.cells" :class="'grid-right-head-row-cell ' + (cell.style || '')">
+                        <template v-if="cell.component">
+                            <component :is="cell.component" :data="cell.value">
+                            </component>
+                        </template>
+                        <template v-else>{{cell.value}}</template>
+                    </th>
+                </tr>
+            </template>
+        </thead>
+        <tbody class="grid-right-body">
+            <tr v-for="row in data.rightRows" :class="'grid-right-body-row ' + (row.style || '')">
+                <td v-for="cell in row.cells" :class="'grid-right-body-row-cell ' + (cell.style || '')">
+                    <template v-if="cell.component">
+                        <component :is="cell.component" :data="cell.value">
+                        </component>
+                    </template>
+                    <template v-else>{{cell.value}}</template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

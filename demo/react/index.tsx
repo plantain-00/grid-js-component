@@ -9,7 +9,6 @@ class ProficiencyPercent extends React.Component<{ data: number }, {}> {
         return {
             width: this.props.data + "%",
             backgroundColor: this.props.data >= 50 ? "rgb(0, 160, 0)" : "rgb(255, 153, 0)",
-            padding: "3px",
         };
     }
     render() {
