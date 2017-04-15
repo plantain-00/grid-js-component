@@ -27,6 +27,9 @@ This component should work with `webpack`, and it requires `npm install raw-load
 
 ```ts
 import "grid-js-component/dist/vue";
+```
+
+```html
 <grid :data="data">
 </grid>
 ```
@@ -39,6 +42,9 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 
 ```ts
 import { Grid } from "grid-js-component/dist/react";
+```
+
+```html
 <Grid data={data} />
 ```
 

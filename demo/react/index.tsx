@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { Grid } from "../../dist/react";
-import { GridData } from "../../dist/common";
 
 class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     get style(): React.CSSProperties {
@@ -18,88 +17,12 @@ class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     }
 }
 
-const data: GridData = {
-    headers: {
-        cells: [
-            {
-                value: "name",
-            },
-            {
-                value: "proficiency",
-                style: "test-cell-class",
-            },
-        ],
-        style: "test-row-class",
-    },
-    rows: [
-        {
-            cells: [
-                {
-                    value: "John",
-                },
-                {
-                    value: 30,
-                    component: ProficiencyPercent,
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    value: "Sara",
-                },
-                {
-                    value: 90,
-                    component: ProficiencyPercent,
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    value: "Lili",
-                },
-                {
-                    value: 10,
-                    component: ProficiencyPercent,
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    value: "Smith",
-                },
-                {
-                    value: 70,
-                    component: ProficiencyPercent,
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    value: "Lucy",
-                },
-                {
-                    value: 60,
-                    component: ProficiencyPercent,
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    value: "Emily",
-                },
-                {
-                    value: 20,
-                    component: ProficiencyPercent,
-                },
-            ],
-        },
-    ],
-};
+import { data } from "../common";
+
+for (const row of data.rows) {
+    row.cells[0].component = ProficiencyPercent;
+}
+console.log(data);
 
 class Main extends React.Component<{}, {}> {
     render() {
