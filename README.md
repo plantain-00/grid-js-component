@@ -56,7 +56,7 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 
 name | type | description
 --- | --- | ---
-data | [GridData](#grid-data-structure)[] | the data of the tree
+data | [GridData](#grid-data-structure) | the data of the tree
 
 #### grid data structure
 

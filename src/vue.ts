@@ -22,24 +22,27 @@ class Grid extends Vue {
 
         common.Ps.initialize(this.container);
 
-        this.container.addEventListener("ps-scroll-x", e => {
-            /* tslint:disable:prefer-for-of */
-            for (let i = 0; i < this.heads.childNodes.length; i++) {
-                (this.heads.childNodes[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
-            }
-            for (let i = 0; i < this.leftContainer.childNodes.length; i++) {
-                (this.leftContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
-            }
-            for (let i = 0; i < this.rightContainer.childNodes.length; i++) {
-                (this.rightContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
-            }
-            /* tslint:enable:prefer-for-of */
-        });
+        this.container.addEventListener("ps-scroll-x", e => common.handleScrollEvent(e, this.heads, this.leftContainer, this.rightContainer));
+
+        if (this.data.leftRows) {
+            this.leftContainer.addEventListener("mousewheel", e => common.updateScroll(e, this.container));
+        }
+        if (this.data.rightRows) {
+            this.rightContainer.addEventListener("mousewheel", e => common.updateScroll(e, this.container));
+        }
     }
     beforeDestroy() {
         if (this.container) {
             common.Ps.destroy(this.container);
+
             this.container.removeEventListener("ps-scroll-x");
+
+            if (this.data.leftRows) {
+                this.leftContainer.removeEventListener("mousewheel");
+            }
+            if (this.data.rightRows) {
+                this.rightContainer.removeEventListener("mousewheel");
+            }
         }
     }
 }
