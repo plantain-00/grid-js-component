@@ -14,6 +14,17 @@ class Grid extends Vue {
     leftContainer: HTMLElement;
     rightContainer: HTMLElement;
 
+    sort(column: string) {
+        this.$emit("sort", column);
+    }
+
+    isAsc(column: string) {
+        return this.data.sortType === "asc" && this.data.sortColumn === column;
+    }
+    isDesc(column: string) {
+        return this.data.sortType === "desc" && this.data.sortColumn === column;
+    }
+
     mounted() {
         this.heads = this.$el.childNodes[1].childNodes[0] as HTMLElement;
         this.container = this.$el.childNodes[1].childNodes[1] as HTMLElement;

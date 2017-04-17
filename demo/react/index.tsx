@@ -17,17 +17,38 @@ class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     }
 }
 
-import { data } from "../common";
+import * as common from "../common";
 
+const data = common.getViewData();
 for (const row of data.rows) {
     row.cells[0].component = ProficiencyPercent;
 }
 console.log(data);
 
 class Main extends React.Component<{}, {}> {
+    data = data;
+
+    sort(column: string) {
+        const sortType = this.data.sortType === "asc" ? "desc" : "asc";
+        common.sort(column, sortType);
+
+        const viewData = common.getViewData();
+        for (const row of viewData.rows) {
+            row.cells[0].component = ProficiencyPercent;
+        }
+        viewData.sortColumn = column;
+        viewData.sortType = sortType;
+        console.log(viewData);
+
+        this.data = viewData;
+        this.setState({ data: this.data });
+    }
+
     render() {
         return (
-            <Grid data={data}></Grid>
+            <Grid data={this.data}
+                sort={column => this.sort(column)}>
+            </Grid>
         );
     }
 }

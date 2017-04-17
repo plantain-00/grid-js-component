@@ -30,7 +30,8 @@ import "grid-js-component/dist/vue";
 ```
 
 ```html
-<grid :data="data">
+<grid :data="data"
+    @sort="sort(arguments[0])">
 </grid>
 ```
 
@@ -45,7 +46,9 @@ import { Grid } from "grid-js-component/dist/react";
 ```
 
 ```html
-<Grid data={data} />
+<Grid data={this.data}
+    sort={column => this.sort(column)}>
+</Grid>
 ```
 
 the online demo: https://plantain-00.github.io/grid-js-component/demo/react/index.html
@@ -57,6 +60,7 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 name | type | description
 --- | --- | ---
 data | [GridData](#grid-data-structure) | the data of the tree
+sort | (sortColumn: string) => void | triggered when click a header to sort
 
 #### grid data structure
 
@@ -68,6 +72,8 @@ type GridData = {
     leftRows?: GridRowData[];
     rightHeaders?: GridRowData;
     rightRows?: GridRowData[];
+    sortColumn?: string;
+    sortType?: "asc" | "desc";
 };
 
 type GridRowData = {
@@ -114,6 +120,7 @@ type GridCellData = {
 + scrollbar
 + custom cell component
 + freeze columns
++ sort
 
 #### changelogs
 

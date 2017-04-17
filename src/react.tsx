@@ -2,11 +2,25 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as common from "./common";
 
-export class Grid extends React.Component<{ data: common.GridData; }, {}> {
+export class Grid extends React.Component<{
+    data: common.GridData;
+    sort: (sortColumn: string) => void;
+}, {}> {
     container: HTMLElement;
     heads: HTMLElement;
     leftContainer: HTMLElement;
     rightContainer: HTMLElement;
+
+    sort(column: string) {
+        this.props.sort(column);
+    }
+
+    isAsc(column: string) {
+        return this.props.data.sortType === "asc" && this.props.data.sortColumn === column;
+    }
+    isDesc(column: string) {
+        return this.props.data.sortType === "desc" && this.props.data.sortColumn === column;
+    }
 
     componentDidMount() {
         this.heads = ReactDOM.findDOMNode(this).childNodes[1].childNodes[0] as HTMLElement;
@@ -45,8 +59,21 @@ export class Grid extends React.Component<{ data: common.GridData; }, {}> {
         if (this.props.data.headers && this.props.data.headers.cells) {
             const headCells = this.props.data.headers.cells.map(cell => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const ascMarker = this.isAsc(cell.value) ? (
+                    <svg width="10" height="10">
+                        <polygon points="0,10 5,0 10,10"></polygon>
+                    </svg>
+                ) : null;
+                const descMarker = this.isDesc(cell.value) ? (
+                    <svg width="10" height="10">
+                        <polygon points="0,0 5,10 10,0"></polygon>
+                    </svg>
+                ) : null;
                 return (
-                    <th className={"grid-main-head-row-cell " + (cell.style || "")}>
+                    <th className={"grid-main-head-row-cell " + (cell.style || "")}
+                        onClick={e => this.sort(cell.value)}>
+                        {ascMarker}
+                        {descMarker}
                         {headCell}
                     </th>
                 );
@@ -64,8 +91,21 @@ export class Grid extends React.Component<{ data: common.GridData; }, {}> {
         if (this.props.data.leftHeaders && this.props.data.leftHeaders.cells) {
             const headCells = this.props.data.leftHeaders.cells.map(cell => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const ascMarker = this.isAsc(cell.value) ? (
+                    <svg width="10" height="10">
+                        <polygon points="0,10 5,0 10,10"></polygon>
+                    </svg>
+                ) : null;
+                const descMarker = this.isDesc(cell.value) ? (
+                    <svg width="10" height="10">
+                        <polygon points="0,0 5,10 10,0"></polygon>
+                    </svg>
+                ) : null;
                 return (
-                    <th className={"grid-left-head-row-cell " + (cell.style || "")}>
+                    <th className={"grid-left-head-row-cell " + (cell.style || "")}
+                        onClick={e => this.sort(cell.value)}>
+                        {ascMarker}
+                        {descMarker}
                         {headCell}
                     </th>
                 );
@@ -81,8 +121,21 @@ export class Grid extends React.Component<{ data: common.GridData; }, {}> {
         if (this.props.data.rightHeaders && this.props.data.rightHeaders.cells) {
             const headCells = this.props.data.rightHeaders.cells.map(cell => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const ascMarker = this.isAsc(cell.value) ? (
+                    <svg width="10" height="10">
+                        <polygon points="0,10 5,0 10,10"></polygon>
+                    </svg>
+                ) : null;
+                const descMarker = this.isDesc(cell.value) ? (
+                    <svg width="10" height="10">
+                        <polygon points="0,0 5,10 10,0"></polygon>
+                    </svg>
+                ) : null;
                 return (
-                    <th className={"grid-right-head-row-cell " + (cell.style || "")}>
+                    <th className={"grid-right-head-row-cell " + (cell.style || "")}
+                        onClick={e => this.sort(cell.value)}>
+                        {ascMarker}
+                        {descMarker}
                         {headCell}
                     </th>
                 );

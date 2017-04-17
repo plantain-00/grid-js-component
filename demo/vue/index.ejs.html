@@ -1,6 +1,8 @@
 <link rel='stylesheet' href='../../dist/grid.min.css' />
 <link rel='stylesheet' href='../common.css' />
 <div id="container">
-    <grid :data="data"></grid>
+    <grid :data="data"
+        @sort="sort(arguments[0])">
+    </grid>
 </div>
 <script src="../<%=demoVueBundleJs %>" crossOrigin="anonymous" integrity="<%=sri.demoVueBundleJs %>"></script>

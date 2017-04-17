@@ -5,6 +5,8 @@ export type GridData = {
     leftRows?: GridRowData[];
     rightHeaders?: GridRowData;
     rightRows?: GridRowData[];
+    sortColumn?: string;
+    sortType?: "asc" | "desc";
 };
 
 export type GridRowData = {

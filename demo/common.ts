@@ -1,123 +1,93 @@
 import { GridData } from "../dist/common";
 
-export const data: GridData = {
-    headers: {
-        cells: [
-            { value: "proficiency", style: "test-cell-class" },
-            { value: "country" },
-        ],
-        style: "test-row-class",
+const rawData = [
+    {
+        name: "John",
+        proficiency: 30,
+        country: "Spain",
+        gender: "male",
     },
-    rows: [
-        {
-            cells: [
-                { value: 30 },
-                { value: "Spain" },
-            ],
-        },
-        {
-            cells: [
-                { value: 90 },
-                { value: "Italy" },
-            ],
-        },
-        {
-            cells: [
-                { value: 10 },
-                { value: "Japan" },
-            ],
-        },
-        {
-            cells: [
-                { value: 70 },
-                { value: "Norway" },
-            ],
-        },
-        {
-            cells: [
-                { value: 60 },
-                { value: "Peru" },
-            ],
-        },
-        {
-            cells: [
-                { value: 20 },
-                { value: "Greece" },
-            ],
-        },
-    ],
-    leftHeaders: {
-        cells: [
-            { value: "name" },
-        ],
+    {
+        name: "Sara",
+        proficiency: 90,
+        country: "Italy",
+        gender: "female",
     },
-    leftRows: [
-        {
-            cells: [
-                { value: "John" },
-            ],
-        },
-        {
-            cells: [
-                { value: "Sara" },
-            ],
-        },
-        {
-            cells: [
-                { value: "Lili" },
-            ],
-        },
-        {
-            cells: [
-                { value: "Smith" },
-            ],
-        },
-        {
-            cells: [
-                { value: "Lucy" },
-            ],
-        },
-        {
-            cells: [
-                { value: "Emily" },
-            ],
-        },
-    ],
-    rightHeaders: {
-        cells: [
-            { value: "gender" },
-        ],
+    {
+        name: "Lili",
+        proficiency: 10,
+        country: "Japan",
+        gender: "female",
     },
-    rightRows: [
-        {
+    {
+        name: "Smith",
+        proficiency: 70,
+        country: "Norway",
+        gender: "male",
+    },
+    {
+        name: "Lucy",
+        proficiency: 60,
+        country: "Peru",
+        gender: "female",
+    },
+    {
+        name: "Emily",
+        proficiency: 20,
+        country: "Greece",
+        gender: "female",
+    },
+];
+
+export function sort(sortColumn: string, sortType: "asc" | "desc") {
+    rawData.sort((a: any, b: any) => sortType === "asc"
+        ? (typeof a[sortColumn] === "string" ? a[sortColumn].localeCompare(b[sortColumn]) : a[sortColumn] - b[sortColumn])
+        : (typeof b[sortColumn] === "string" ? b[sortColumn].localeCompare(a[sortColumn]) : b[sortColumn] - a[sortColumn]));
+}
+
+export function getViewData() {
+    const data: GridData = {
+        sortType: "desc",
+        sortColumn: "",
+        headers: {
             cells: [
-                { value: "male" },
+                { value: "proficiency", style: "test-cell-class" },
+                { value: "country" },
+            ],
+            style: "test-row-class",
+        },
+        rows: [],
+        leftHeaders: {
+            cells: [
+                { value: "name" },
             ],
         },
-        {
+        leftRows: [],
+        rightHeaders: {
             cells: [
-                { value: "female" },
+                { value: "gender" },
             ],
         },
-        {
+        rightRows: [],
+    };
+
+    for (const row of rawData) {
+        data.rows.push({
             cells: [
-                { value: "female" },
+                { value: row.proficiency },
+                { value: row.country },
             ],
-        },
-        {
+        });
+        data.leftRows!.push({
             cells: [
-                { value: "male" },
+                { value: row.name },
             ],
-        },
-        {
+        });
+        data.rightRows!.push({
             cells: [
-                { value: "female" },
+                { value: row.gender },
             ],
-        },
-        {
-            cells: [
-                { value: "female" },
-            ],
-        },
-    ],
-};
+        });
+    }
+    return data;
+}
