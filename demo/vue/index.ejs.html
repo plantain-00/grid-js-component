@@ -2,7 +2,11 @@
 <link rel='stylesheet' href='../common.css' />
 <div id="container">
     <grid :data="data"
-        @sort="sort(arguments[0])">
+        @sort="sort(arguments[0])"
+        @click="click(arguments[0])">
     </grid>
+    <p>
+        clicked cell value: {{clickedCellValue}}
+    </p>
 </div>
 <script src="../<%=demoVueBundleJs %>" crossOrigin="anonymous" integrity="<%=sri.demoVueBundleJs %>"></script>

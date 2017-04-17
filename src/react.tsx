@@ -4,7 +4,9 @@ import * as common from "./common";
 
 export class Grid extends React.Component<{
     data: common.GridData;
+
     sort: (sortColumn: string) => void;
+    click: (clickData: common.ClickData) => void;
 }, {}> {
     container: HTMLElement;
     heads: HTMLElement;
@@ -20,6 +22,10 @@ export class Grid extends React.Component<{
     }
     isDesc(column: string) {
         return this.props.data.sortType === "desc" && this.props.data.sortColumn === column;
+    }
+
+    click(clickData: common.ClickData) {
+        this.props.click(clickData);
     }
 
     componentDidMount() {
@@ -147,11 +153,12 @@ export class Grid extends React.Component<{
             );
         }
 
-        const mainBody = this.props.data.rows.map(row => {
-            const cells = row.cells.map(cell => {
+        const mainBody = this.props.data.rows.map((row, rowIndex) => {
+            const cells = row.cells.map((cell, columnIndex) => {
                 const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 return (
-                    <td className={"grid-main-body-row-cell " + (cell.style || "")}>
+                    <td className={"grid-main-body-row-cell " + (cell.style || "")}
+                        onClick={() => this.click({ cell, row, body: this.props.data.rows, rowIndex, columnIndex })}>
                         {bodyCell}
                     </td>
                 );
@@ -162,11 +169,12 @@ export class Grid extends React.Component<{
                 </tr>
             );
         });
-        const leftBody = this.props.data.leftRows ? this.props.data.leftRows.map(row => {
-            const cells = row.cells.map(cell => {
+        const leftBody = this.props.data.leftRows ? this.props.data.leftRows.map((row, rowIndex) => {
+            const cells = row.cells.map((cell, columnIndex) => {
                 const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 return (
-                    <td className={"grid-left-body-row-cell " + (cell.style || "")}>
+                    <td className={"grid-left-body-row-cell " + (cell.style || "")}
+                        onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
                         {bodyCell}
                     </td>
                 );
@@ -177,11 +185,12 @@ export class Grid extends React.Component<{
                 </tr>
             );
         }) : null;
-        const rightBody = this.props.data.rightRows ? this.props.data.rightRows.map(row => {
-            const cells = row.cells.map(cell => {
+        const rightBody = this.props.data.rightRows ? this.props.data.rightRows.map((row, rowIndex) => {
+            const cells = row.cells.map((cell, columnIndex) => {
                 const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 return (
-                    <td className={"grid-right-body-row-cell " + (cell.style || "")}>
+                    <td className={"grid-right-body-row-cell " + (cell.style || "")}
+                        onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>
                         {bodyCell}
                     </td>
                 );

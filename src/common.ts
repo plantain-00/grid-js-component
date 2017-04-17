@@ -22,6 +22,14 @@ export type GridCellData = {
     style?: string;
 };
 
+export type ClickData = {
+    cell: GridCellData;
+    row: GridRowData;
+    body: GridRowData[];
+    rowIndex: number;
+    columnIndex: number;
+};
+
 import * as Ps from "perfect-scrollbar";
 
 export { Ps };

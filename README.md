@@ -61,6 +61,7 @@ name | type | description
 --- | --- | ---
 data | [GridData](#grid-data-structure) | the data of the tree
 sort | (sortColumn: string) => void | triggered when click a header to sort
+click | (clickData: [ClickData](#click-data-structure)) => void | triggered when click a cell
 
 #### grid data structure
 
@@ -85,6 +86,18 @@ type GridCellData = {
     value: any; // the value in the cell
     component?: string | Function; //  if exists, show the component rather than the value in the cell
     style?: string; // the class string of the cell, used to set style
+};
+```
+
+#### click data structure
+
+```ts
+type ClickData = {
+    cell: GridCellData; // the cell object clicked
+    row: GridRowData; // the row object clicked
+    body: GridRowData[]; // the body object clicked
+    rowIndex: number; // the row index clicked
+    columnIndex: number; // the column index clicked
 };
 ```
 

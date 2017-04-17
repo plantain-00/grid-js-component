@@ -22,8 +22,9 @@
             </template>
         </thead>
         <tbody class="grid-left-body">
-            <tr v-for="row in data.leftRows" :class="'grid-left-body-row ' + (row.style || '')">
-                <td v-for="cell in row.cells" :class="'grid-left-body-row-cell ' + (cell.style || '')">
+            <tr v-for="(row, rowIndex) in data.leftRows" :class="'grid-left-body-row ' + (row.style || '')">
+                <td v-for="(cell, columnIndex) in row.cells" :class="'grid-left-body-row-cell ' + (cell.style || '')"
+                    @click="click({ cell, row, body: data.leftRows, rowIndex, columnIndex })">
                     <template v-if="cell.component">
                         <component :is="cell.component" :data="cell.value">
                         </component>
@@ -54,8 +55,9 @@
             </tr>
         </thead>
         <tbody class="grid-main-body">
-            <tr v-for="row in data.rows" :class="'grid-main-body-row ' + (row.style || '')">
-                <td v-for="cell in row.cells" :class="'grid-main-body-row-cell ' + (cell.style || '')">
+            <tr v-for="(row, rowIndex) in data.rows" :class="'grid-main-body-row ' + (row.style || '')">
+                <td v-for="(cell, columnIndex) in row.cells" :class="'grid-main-body-row-cell ' + (cell.style || '')"
+                    @click="click({ cell, row, body: data.rows, rowIndex, columnIndex })">
                     <template v-if="cell.component">
                         <component :is="cell.component" :data="cell.value">
                         </component>
@@ -88,8 +90,9 @@
             </template>
         </thead>
         <tbody class="grid-right-body">
-            <tr v-for="row in data.rightRows" :class="'grid-right-body-row ' + (row.style || '')">
-                <td v-for="cell in row.cells" :class="'grid-right-body-row-cell ' + (cell.style || '')">
+            <tr v-for="(row, rowIndex) in data.rightRows" :class="'grid-right-body-row ' + (row.style || '')">
+                <td v-for="(cell, columnIndex) in row.cells" :class="'grid-right-body-row-cell ' + (cell.style || '')"
+                    @click="click({ cell, row, body: data.rightRows, rowIndex, columnIndex })">
                     <template v-if="cell.component">
                         <component :is="cell.component" :data="cell.value">
                         </component>

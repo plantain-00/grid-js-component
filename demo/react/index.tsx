@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { Grid } from "../../dist/react";
+import * as common from "../../dist/common";
 
 class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     get style(): React.CSSProperties {
@@ -17,9 +18,9 @@ class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     }
 }
 
-import * as common from "../common";
+import { getViewData, sort } from "../common";
 
-const data = common.getViewData();
+const data = getViewData();
 for (const row of data.rows) {
     row.cells[0].component = ProficiencyPercent;
 }
@@ -27,12 +28,13 @@ console.log(data);
 
 class Main extends React.Component<{}, {}> {
     data = data;
+    clickedCellValue: any = null;
 
     sort(column: string) {
         const sortType = this.data.sortType === "asc" ? "desc" : "asc";
-        common.sort(column, sortType);
+        sort(column, sortType);
 
-        const viewData = common.getViewData();
+        const viewData = getViewData();
         for (const row of viewData.rows) {
             row.cells[0].component = ProficiencyPercent;
         }
@@ -44,11 +46,22 @@ class Main extends React.Component<{}, {}> {
         this.setState({ data: this.data });
     }
 
+    click(clickData: common.ClickData) {
+        this.clickedCellValue = clickData.cell.value;
+        this.setState({ clickedCellValue: this.clickedCellValue });
+    }
+
     render() {
         return (
-            <Grid data={this.data}
-                sort={column => this.sort(column)}>
-            </Grid>
+            <div>
+                <Grid data={this.data}
+                    sort={column => this.sort(column)}
+                    click={clickData => this.click(clickData)}>
+                </Grid>
+                <p>
+                    clicked cell value: {this.clickedCellValue}
+                </p>
+            </div>
         );
     }
 }

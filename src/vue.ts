@@ -25,6 +25,10 @@ class Grid extends Vue {
         return this.data.sortType === "desc" && this.data.sortColumn === column;
     }
 
+    click(clickData: common.ClickData) {
+        this.$emit("click", clickData);
+    }
+
     mounted() {
         this.heads = this.$el.childNodes[1].childNodes[0] as HTMLElement;
         this.container = this.$el.childNodes[1].childNodes[1] as HTMLElement;

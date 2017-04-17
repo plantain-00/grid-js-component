@@ -1,6 +1,7 @@
 import * as Vue from "vue";
 
 import "../../dist/vue";
+import * as common from "../../dist/common";
 
 Vue.component("proficiency-percent", {
     template: `<div :style="style">{{data}}%</div>`,
@@ -15,9 +16,9 @@ Vue.component("proficiency-percent", {
     },
 });
 
-import * as common from "../common";
+import { getViewData, sort } from "../common";
 
-const data = common.getViewData();
+const data = getViewData();
 for (const row of data.rows) {
     row.cells[0].component = "proficiency-percent";
 }
@@ -28,13 +29,14 @@ new Vue({
     el: "#container",
     data: {
         data,
+        clickedCellValue: null,
     },
     methods: {
         sort(this: This, column: string) {
             const sortType = this.data.sortType === "asc" ? "desc" : "asc";
-            common.sort(column, sortType);
+            sort(column, sortType);
 
-            const viewData = common.getViewData();
+            const viewData = getViewData();
             for (const row of viewData.rows) {
                 row.cells[0].component = "proficiency-percent";
             }
@@ -44,10 +46,14 @@ new Vue({
 
             this.data = viewData;
         },
+        click(this: This, clickData: common.ClickData) {
+            this.clickedCellValue = clickData.cell.value;
+        },
     },
 });
 /* tslint:enable:no-unused-expression */
 
 type This = Vue & {
     data: typeof data;
+    clickedCellValue: any;
 };
