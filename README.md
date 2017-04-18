@@ -31,7 +31,8 @@ import "grid-js-component/dist/vue";
 
 ```html
 <grid :data="data"
-    @sort="sort(arguments[0])">
+    @sort="sort(arguments[0])"
+    @click="click(arguments[0])">
 </grid>
 ```
 
@@ -45,9 +46,10 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 import { Grid } from "grid-js-component/dist/react";
 ```
 
-```html
+```jsx
 <Grid data={this.data}
-    sort={column => this.sort(column)}>
+    sort={column => this.sort(column)}
+    click={clickData => this.click(clickData)}>
 </Grid>
 ```
 
