@@ -32,7 +32,8 @@ import "grid-js-component/dist/vue";
 ```html
 <grid :data="data"
     @sort="sort(arguments[0])"
-    @click="click(arguments[0])">
+    @click="click(arguments[0])"
+    @action="action(arguments[0])">
 </grid>
 ```
 
@@ -49,7 +50,8 @@ import { Grid } from "grid-js-component/dist/react";
 ```jsx
 <Grid data={this.data}
     sort={sortData => this.sort(sortData)}
-    click={clickData => this.click(clickData)}>
+    click={clickData => this.click(clickData)}
+    action={actionData => this.action(actionData)}>
 </Grid>
 ```
 
@@ -61,9 +63,10 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 
 name | type | description
 --- | --- | ---
-data | [GridData](#grid-data-structure) | the data of the tree
+data | [GridData](#grid-data-structure) | the data of the grid
 sort | (sortData: [SortData](#sort-data-structure)) => void | triggered when click a header to sort
 click | (clickData: [ClickData](#click-data-structure)) => void | triggered when click a cell
+action | (actionData: [ActionData](#action-data-structure)) => void | triggered when custom component triggered events
 
 #### grid data structure
 
@@ -112,6 +115,21 @@ type ClickData = {
     columnIndex: number; // the column index clicked
 };
 ```
+
+#### action data structure
+
+```ts
+type ActionData = {
+    data: any; //  the raw event data from the custom component
+} & (SortData | ClickData);
+```
+
+#### properties and events of the custom component
+
+name | type | description
+--- | --- | ---
+data | any | is `GridCellData.value`
+action | (actionData: any) => void | the `actionData` is `ActionData.data`
 
 #### general styles
 

@@ -19,14 +19,18 @@ class Grid extends Vue {
     }
 
     isAsc(column: string) {
-        return this.data.sortType === "asc" && this.data.sortColumn === column;
+        return this.data.sortType === "asc" && this.data.sortColumn !== "" && this.data.sortColumn === column;
     }
     isDesc(column: string) {
-        return this.data.sortType === "desc" && this.data.sortColumn === column;
+        return this.data.sortType === "desc" && this.data.sortColumn !== "" && this.data.sortColumn === column;
     }
 
     click(clickData: common.ClickData) {
         this.$emit("click", clickData);
+    }
+
+    action(actionData: common.ActionData) {
+        this.$emit("action", actionData);
     }
 
     mounted() {

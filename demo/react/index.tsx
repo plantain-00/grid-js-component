@@ -18,29 +18,46 @@ class ProficiencyPercent extends React.Component<{ data: number }, {}> {
     }
 }
 
-import { getViewData, sort } from "../common";
+class DeleteButton extends React.Component<{ data: number, action: (actionData: any) => void }, {}> {
+    click() {
+        this.props.action({ type: "delete", id: this.props.data });
+    }
+    render() {
+        return (
+            <button onClick={e => this.click()}>delete</button>
+        );
+    }
+}
+
+import { getViewData, sort, deleteOne } from "../common";
+
+function setComponents(viewData: common.GridData) {
+    for (const row of viewData.rows) {
+        row.cells[0].component = ProficiencyPercent;
+    }
+    for (const row of viewData.rightRows!) {
+        row.cells[0].component = DeleteButton;
+    }
+}
 
 const data = getViewData();
-for (const row of data.rows) {
-    row.cells[0].component = ProficiencyPercent;
-}
-console.log(data);
+setComponents(data);
 
 class Main extends React.Component<{}, {}> {
     data = data;
     clickedCellValue: any = null;
 
     sort(sortData: common.SortData) {
+        if (!sortData.cell.value) {
+            return;
+        }
         const sortType = this.data.sortType === "asc" ? "desc" : "asc";
         sort(sortData.cell.value, sortType);
 
         const viewData = getViewData();
-        for (const row of viewData.rows) {
-            row.cells[0].component = ProficiencyPercent;
-        }
+        setComponents(viewData);
         viewData.sortColumn = sortData.cell.value;
         viewData.sortType = sortType;
-        console.log(viewData);
 
         this.data = viewData;
         this.setState({ data: this.data });
@@ -51,12 +68,23 @@ class Main extends React.Component<{}, {}> {
         this.setState({ clickedCellValue: this.clickedCellValue });
     }
 
+    action(actionData: common.ActionData) {
+        deleteOne(actionData.data.id);
+
+        const viewData = getViewData();
+        setComponents(viewData);
+
+        this.data = viewData;
+        this.setState({ data: this.data });
+    }
+
     render() {
         return (
             <div>
                 <Grid data={this.data}
                     sort={sortData => this.sort(sortData)}
-                    click={clickData => this.click(clickData)}>
+                    click={clickData => this.click(clickData)}
+                    action={actionData => this.action(actionData)}>
                 </Grid>
                 <p>
                     clicked cell value: {this.clickedCellValue}

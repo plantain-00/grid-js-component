@@ -6,6 +6,7 @@ export class Grid extends React.Component<{
     data: common.GridData;
     sort: (sortData: common.SortData) => void;
     click: (clickData: common.ClickData) => void;
+    action: (actionData: common.ActionData) => void;
 }, {}> {
     container: HTMLElement;
     heads: HTMLElement;
@@ -17,14 +18,18 @@ export class Grid extends React.Component<{
     }
 
     isAsc(column: string) {
-        return this.props.data.sortType === "asc" && this.props.data.sortColumn === column;
+        return this.props.data.sortType === "asc" && this.props.data.sortColumn !== "" && this.props.data.sortColumn === column;
     }
     isDesc(column: string) {
-        return this.props.data.sortType === "desc" && this.props.data.sortColumn === column;
+        return this.props.data.sortType === "desc" && this.props.data.sortColumn !== "" && this.props.data.sortColumn === column;
     }
 
     click(clickData: common.ClickData) {
         this.props.click(clickData);
+    }
+
+    action(actionData: common.ActionData) {
+        this.props.action(actionData);
     }
 
     componentDidMount() {
@@ -63,7 +68,10 @@ export class Grid extends React.Component<{
         let mainHead: JSX.Element | null = null;
         if (this.props.data.headers && this.props.data.headers.cells) {
             const headCells = this.props.data.headers.cells.map((cell, columnIndex) => {
-                const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: common.ActionData) => void }>, {
+                    data: cell.value,
+                    action: (actionData: any) => this.action({ cell, header: this.props.data.headers, columnIndex, data: actionData }),
+                }) : cell.value;
                 const ascMarker = this.isAsc(cell.value) ? (
                     <svg width="10" height="10">
                         <polygon points="0,10 5,0 10,10"></polygon>
@@ -95,7 +103,10 @@ export class Grid extends React.Component<{
         let leftHead: JSX.Element | null = null;
         if (this.props.data.leftHeaders && this.props.data.leftHeaders.cells) {
             const headCells = this.props.data.leftHeaders.cells.map((cell, columnIndex) => {
-                const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                    data: cell.value,
+                    action: (actionData: any) => this.action({ cell, header: this.props.data.leftHeaders!, columnIndex, data: actionData }),
+                }) : cell.value;
                 const ascMarker = this.isAsc(cell.value) ? (
                     <svg width="10" height="10">
                         <polygon points="0,10 5,0 10,10"></polygon>
@@ -125,7 +136,10 @@ export class Grid extends React.Component<{
         let rightHead: JSX.Element | null = null;
         if (this.props.data.rightHeaders && this.props.data.rightHeaders.cells) {
             const headCells = this.props.data.rightHeaders.cells.map((cell, columnIndex) => {
-                const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                    data: cell.value,
+                    action: (actionData: any) => this.action({ cell, header: this.props.data.rightHeaders!, columnIndex, data: actionData }),
+                }) : cell.value;
                 const ascMarker = this.isAsc(cell.value) ? (
                     <svg width="10" height="10">
                         <polygon points="0,10 5,0 10,10"></polygon>
@@ -154,7 +168,10 @@ export class Grid extends React.Component<{
 
         const mainBody = this.props.data.rows.map((row, rowIndex) => {
             const cells = row.cells.map((cell, columnIndex) => {
-                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                    data: cell.value,
+                    action: (actionData: any) => this.action({ cell, row, body: this.props.data.rows, rowIndex, columnIndex, data: actionData }),
+                }) : cell.value;
                 return (
                     <td className={"grid-main-body-row-cell " + (cell.style || "")}
                         onClick={() => this.click({ cell, row, body: this.props.data.rows, rowIndex, columnIndex })}>
@@ -170,7 +187,10 @@ export class Grid extends React.Component<{
         });
         const leftBody = this.props.data.leftRows ? this.props.data.leftRows.map((row, rowIndex) => {
             const cells = row.cells.map((cell, columnIndex) => {
-                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                    data: cell.value,
+                    action: (actionData: any) => this.action({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex, data: actionData }),
+                }) : cell.value;
                 return (
                     <td className={"grid-left-body-row-cell " + (cell.style || "")}
                         onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
@@ -186,7 +206,10 @@ export class Grid extends React.Component<{
         }) : null;
         const rightBody = this.props.data.rightRows ? this.props.data.rightRows.map((row, rowIndex) => {
             const cells = row.cells.map((cell, columnIndex) => {
-                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
+                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                    data: cell.value,
+                    action: (actionData: any) => this.action({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex, data: actionData }),
+                }) : cell.value;
                 return (
                     <td className={"grid-right-body-row-cell " + (cell.style || "")}
                         onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>

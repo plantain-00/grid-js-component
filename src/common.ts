@@ -36,6 +36,10 @@ export type ClickData = {
     columnIndex: number;
 };
 
+export type ActionData = {
+    data: any;
+} & (SortData | ClickData);
+
 import * as Ps from "perfect-scrollbar";
 
 export { Ps };

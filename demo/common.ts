@@ -1,37 +1,43 @@
 import { GridData } from "../dist/common";
 
-const rawData = [
+let rawData = [
     {
+        id: 1,
         name: "John",
         proficiency: 30,
         country: "Spain",
         gender: "male",
     },
     {
+        id: 2,
         name: "Sara",
         proficiency: 90,
         country: "Italy",
         gender: "female",
     },
     {
+        id: 3,
         name: "Lili",
         proficiency: 10,
         country: "Japan",
         gender: "female",
     },
     {
+        id: 4,
         name: "Smith",
         proficiency: 70,
         country: "Norway",
         gender: "male",
     },
     {
+        id: 5,
         name: "Lucy",
         proficiency: 60,
         country: "Peru",
         gender: "female",
     },
     {
+        id: 6,
         name: "Emily",
         proficiency: 20,
         country: "Greece",
@@ -45,6 +51,10 @@ export function sort(sortColumn: string, sortType: "asc" | "desc") {
         : (typeof b[sortColumn] === "string" ? b[sortColumn].localeCompare(a[sortColumn]) : b[sortColumn] - a[sortColumn]));
 }
 
+export function deleteOne(id: number) {
+    rawData = rawData.filter(d => d.id !== id);
+}
+
 export function getViewData() {
     const data: GridData = {
         sortType: "desc",
@@ -53,6 +63,7 @@ export function getViewData() {
             cells: [
                 { value: "proficiency", style: "test-cell-class" },
                 { value: "country" },
+                { value: "gender" },
             ],
             style: "test-row-class",
         },
@@ -65,7 +76,7 @@ export function getViewData() {
         leftRows: [],
         rightHeaders: {
             cells: [
-                { value: "gender" },
+                { value: "" },
             ],
         },
         rightRows: [],
@@ -76,6 +87,7 @@ export function getViewData() {
             cells: [
                 { value: row.proficiency },
                 { value: row.country },
+                { value: row.gender },
             ],
         });
         data.leftRows!.push({
@@ -85,7 +97,7 @@ export function getViewData() {
         });
         data.rightRows!.push({
             cells: [
-                { value: row.gender },
+                { value: row.id },
             ],
         });
     }
