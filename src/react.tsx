@@ -10,8 +10,8 @@ export class Grid extends React.Component<{
 }, {}> {
     container: HTMLElement;
     heads: HTMLElement;
-    leftContainer: HTMLElement;
-    rightContainer: HTMLElement;
+    leftContainer?: HTMLElement;
+    rightContainer?: HTMLElement;
 
     sort(sortData: common.SortData) {
         this.props.sort(sortData);
@@ -35,17 +35,21 @@ export class Grid extends React.Component<{
     componentDidMount() {
         this.heads = ReactDOM.findDOMNode(this).childNodes[1].childNodes[0] as HTMLElement;
         this.container = ReactDOM.findDOMNode(this).childNodes[1].childNodes[1] as HTMLElement;
-        this.leftContainer = ReactDOM.findDOMNode(this).childNodes[0].childNodes[1] as HTMLElement;
-        this.rightContainer = ReactDOM.findDOMNode(this).childNodes[2].childNodes[1] as HTMLElement;
+        if (ReactDOM.findDOMNode(this).childNodes[0].childNodes.length > 1) {
+            this.leftContainer = ReactDOM.findDOMNode(this).childNodes[0].childNodes[1] as HTMLElement;
+        }
+        if (ReactDOM.findDOMNode(this).childNodes[2].childNodes.length > 1) {
+            this.rightContainer = ReactDOM.findDOMNode(this).childNodes[2].childNodes[1] as HTMLElement;
+        }
 
         common.Ps.initialize(this.container);
 
         this.container.addEventListener("ps-scroll-x", e => common.handleScrollEvent(e, this.heads, this.leftContainer, this.rightContainer));
 
-        if (this.props.data.leftRows) {
+        if (this.leftContainer) {
             this.leftContainer.addEventListener("mousewheel", e => common.updateScroll(e, this.container));
         }
-        if (this.props.data.rightRows) {
+        if (this.rightContainer) {
             this.rightContainer.addEventListener("mousewheel", e => common.updateScroll(e, this.container));
         }
     }
@@ -55,10 +59,10 @@ export class Grid extends React.Component<{
 
             this.container.removeEventListener("ps-scroll-x");
 
-            if (this.props.data.leftRows) {
+            if (this.leftContainer) {
                 this.leftContainer.removeEventListener("mousewheel");
             }
-            if (this.props.data.rightRows) {
+            if (this.rightContainer) {
                 this.rightContainer.removeEventListener("mousewheel");
             }
         }
@@ -127,9 +131,11 @@ export class Grid extends React.Component<{
                 );
             });
             leftHead = (
-                <tr className={"grid-left-head-row " + (this.props.data.leftHeaders.style || "")}>
-                    {headCells}
-                </tr>
+                <thead className="grid-left-head">
+                    <tr className={"grid-left-head-row " + (this.props.data.leftHeaders.style || "")}>
+                        {headCells}
+                    </tr>
+                </thead>
             );
         }
 
@@ -160,9 +166,11 @@ export class Grid extends React.Component<{
                 );
             });
             rightHead = (
-                <tr className={"grid-right-head-row " + (this.props.data.rightHeaders.style || "")}>
-                    {headCells}
-                </tr>
+                <thead className="grid-right-head">
+                    <tr className={"grid-right-head-row " + (this.props.data.rightHeaders.style || "")}>
+                        {headCells}
+                    </tr>
+                </thead>
             );
         }
 
@@ -185,54 +193,66 @@ export class Grid extends React.Component<{
                 </tr>
             );
         });
-        const leftBody = this.props.data.leftRows ? this.props.data.leftRows.map((row, rowIndex) => {
-            const cells = row.cells.map((cell, columnIndex) => {
-                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
-                    data: cell.value,
-                    action: (actionData: any) => this.action({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex, data: actionData }),
-                }) : cell.value;
+        let leftBody: JSX.Element | null = null;
+        if (this.props.data.leftRows) {
+            const leftBodyRows = this.props.data.leftRows.map((row, rowIndex) => {
+                const cells = row.cells.map((cell, columnIndex) => {
+                    const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                        data: cell.value,
+                        action: (actionData: any) => this.action({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex, data: actionData }),
+                    }) : cell.value;
+                    return (
+                        <td className={"grid-left-body-row-cell " + (cell.style || "")}
+                            onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
+                            {bodyCell}
+                        </td>
+                    );
+                });
                 return (
-                    <td className={"grid-left-body-row-cell " + (cell.style || "")}
-                        onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
-                        {bodyCell}
-                    </td>
+                    <tr className={"grid-left-body-row " + (row.style || "")}>
+                        {cells}
+                    </tr>
                 );
             });
-            return (
-                <tr className={"grid-left-body-row " + (row.style || "")}>
-                    {cells}
-                </tr>
+            leftBody = (
+                <tbody className="grid-left-body">
+                    {leftBodyRows}
+                </tbody>
             );
-        }) : null;
-        const rightBody = this.props.data.rightRows ? this.props.data.rightRows.map((row, rowIndex) => {
-            const cells = row.cells.map((cell, columnIndex) => {
-                const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
-                    data: cell.value,
-                    action: (actionData: any) => this.action({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex, data: actionData }),
-                }) : cell.value;
+        }
+        let rightBody: JSX.Element | null = null;
+        if (this.props.data.rightRows) {
+            const rightBodyRows = this.props.data.rightRows.map((row, rowIndex) => {
+                const cells = row.cells.map((cell, columnIndex) => {
+                    const bodyCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number; action: (actionData: any) => void }>, {
+                        data: cell.value,
+                        action: (actionData: any) => this.action({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex, data: actionData }),
+                    }) : cell.value;
+                    return (
+                        <td className={"grid-right-body-row-cell " + (cell.style || "")}
+                            onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>
+                            {bodyCell}
+                        </td>
+                    );
+                });
                 return (
-                    <td className={"grid-right-body-row-cell " + (cell.style || "")}
-                        onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>
-                        {bodyCell}
-                    </td>
+                    <tr className={"grid-right-body-row " + (row.style || "")}>
+                        {cells}
+                    </tr>
                 );
             });
-            return (
-                <tr className={"grid-right-body-row " + (row.style || "")}>
-                    {cells}
-                </tr>
+            rightBody = (
+                <tbody className="grid-right-body">
+                    {rightBodyRows}
+                </tbody>
             );
-        }) : null;
+        }
 
         return (
             <div className="grid">
                 <table className="grid-left">
-                    <thead className="grid-left-head">
-                        {leftHead}
-                    </thead>
-                    <tbody className="grid-left-body">
-                        {leftBody}
-                    </tbody>
+                    {leftHead}
+                    {leftBody}
                 </table>
                 <table className="grid-main">
                     {mainHead}
@@ -241,12 +261,8 @@ export class Grid extends React.Component<{
                     </tbody>
                 </table>
                 <table className="grid-right">
-                    <thead className="grid-right-head">
-                        {rightHead}
-                    </thead>
-                    <tbody className="grid-right-body">
-                        {rightBody}
-                    </tbody>
+                    {rightHead}
+                    {rightBody}
                 </table>
             </div>
         );

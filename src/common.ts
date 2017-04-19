@@ -50,16 +50,20 @@ export function updateScroll(e: WheelEvent, container: HTMLElement) {
     Ps.update(container);
 }
 
-export function handleScrollEvent(e: Event, heads: HTMLElement, leftContainer: HTMLElement, rightContainer: HTMLElement) {
+export function handleScrollEvent(e: Event, heads: HTMLElement, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
     /* tslint:disable:prefer-for-of */
     for (let i = 0; i < heads.childNodes.length; i++) {
         (heads.childNodes[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
     }
-    for (let i = 0; i < leftContainer.childNodes.length; i++) {
-        (leftContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
+    if (leftContainer) {
+        for (let i = 0; i < leftContainer.childNodes.length; i++) {
+            (leftContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
+        }
     }
-    for (let i = 0; i < rightContainer.childNodes.length; i++) {
-        (rightContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
+    if (rightContainer) {
+        for (let i = 0; i < rightContainer.childNodes.length; i++) {
+            (rightContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
+        }
     }
     /* tslint:enable:prefer-for-of */
 }

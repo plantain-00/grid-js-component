@@ -11,8 +11,8 @@ class Grid extends Vue {
 
     container: HTMLElement;
     heads: HTMLElement;
-    leftContainer: HTMLElement;
-    rightContainer: HTMLElement;
+    leftContainer?: HTMLElement;
+    rightContainer?: HTMLElement;
 
     sort(sortData: common.SortData) {
         this.$emit("sort", sortData);
@@ -36,17 +36,21 @@ class Grid extends Vue {
     mounted() {
         this.heads = this.$el.childNodes[1].childNodes[0] as HTMLElement;
         this.container = this.$el.childNodes[1].childNodes[1] as HTMLElement;
-        this.leftContainer = this.$el.childNodes[0].childNodes[1] as HTMLElement;
-        this.rightContainer = this.$el.childNodes[2].childNodes[1] as HTMLElement;
+        if (this.$el.childNodes[0].childNodes.length > 1) {
+            this.leftContainer = this.$el.childNodes[0].childNodes[1] as HTMLElement;
+        }
+        if (this.$el.childNodes[2].childNodes.length > 1) {
+            this.rightContainer = this.$el.childNodes[2].childNodes[1] as HTMLElement;
+        }
 
         common.Ps.initialize(this.container);
 
         this.container.addEventListener("ps-scroll-x", e => common.handleScrollEvent(e, this.heads, this.leftContainer, this.rightContainer));
 
-        if (this.data.leftRows) {
+        if (this.leftContainer) {
             this.leftContainer.addEventListener("mousewheel", e => common.updateScroll(e, this.container));
         }
-        if (this.data.rightRows) {
+        if (this.rightContainer) {
             this.rightContainer.addEventListener("mousewheel", e => common.updateScroll(e, this.container));
         }
     }
@@ -56,10 +60,10 @@ class Grid extends Vue {
 
             this.container.removeEventListener("ps-scroll-x");
 
-            if (this.data.leftRows) {
+            if (this.leftContainer) {
                 this.leftContainer.removeEventListener("mousewheel");
             }
-            if (this.data.rightRows) {
+            if (this.rightContainer) {
                 this.rightContainer.removeEventListener("mousewheel");
             }
         }
