@@ -4,8 +4,7 @@ import * as common from "./common";
 
 export class Grid extends React.Component<{
     data: common.GridData;
-
-    sort: (sortColumn: string) => void;
+    sort: (sortData: common.SortData) => void;
     click: (clickData: common.ClickData) => void;
 }, {}> {
     container: HTMLElement;
@@ -13,8 +12,8 @@ export class Grid extends React.Component<{
     leftContainer: HTMLElement;
     rightContainer: HTMLElement;
 
-    sort(column: string) {
-        this.props.sort(column);
+    sort(sortData: common.SortData) {
+        this.props.sort(sortData);
     }
 
     isAsc(column: string) {
@@ -63,7 +62,7 @@ export class Grid extends React.Component<{
     render() {
         let mainHead: JSX.Element | null = null;
         if (this.props.data.headers && this.props.data.headers.cells) {
-            const headCells = this.props.data.headers.cells.map(cell => {
+            const headCells = this.props.data.headers.cells.map((cell, columnIndex) => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 const ascMarker = this.isAsc(cell.value) ? (
                     <svg width="10" height="10">
@@ -77,7 +76,7 @@ export class Grid extends React.Component<{
                 ) : null;
                 return (
                     <th className={"grid-main-head-row-cell " + (cell.style || "")}
-                        onClick={e => this.sort(cell.value)}>
+                        onClick={e => this.sort({ cell, header: this.props.data.headers, columnIndex })}>
                         {ascMarker}
                         {descMarker}
                         {headCell}
@@ -95,7 +94,7 @@ export class Grid extends React.Component<{
 
         let leftHead: JSX.Element | null = null;
         if (this.props.data.leftHeaders && this.props.data.leftHeaders.cells) {
-            const headCells = this.props.data.leftHeaders.cells.map(cell => {
+            const headCells = this.props.data.leftHeaders.cells.map((cell, columnIndex) => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 const ascMarker = this.isAsc(cell.value) ? (
                     <svg width="10" height="10">
@@ -109,7 +108,7 @@ export class Grid extends React.Component<{
                 ) : null;
                 return (
                     <th className={"grid-left-head-row-cell " + (cell.style || "")}
-                        onClick={e => this.sort(cell.value)}>
+                        onClick={e => this.sort({ cell, header: this.props.data.leftHeaders!, columnIndex })}>
                         {ascMarker}
                         {descMarker}
                         {headCell}
@@ -125,7 +124,7 @@ export class Grid extends React.Component<{
 
         let rightHead: JSX.Element | null = null;
         if (this.props.data.rightHeaders && this.props.data.rightHeaders.cells) {
-            const headCells = this.props.data.rightHeaders.cells.map(cell => {
+            const headCells = this.props.data.rightHeaders.cells.map((cell, columnIndex) => {
                 const headCell = cell.component ? React.createElement(cell.component as React.ComponentClass<{ data: number }>, { data: cell.value }) : cell.value;
                 const ascMarker = this.isAsc(cell.value) ? (
                     <svg width="10" height="10">
@@ -139,7 +138,7 @@ export class Grid extends React.Component<{
                 ) : null;
                 return (
                     <th className={"grid-right-head-row-cell " + (cell.style || "")}
-                        onClick={e => this.sort(cell.value)}>
+                        onClick={e => this.sort({ cell, header: this.props.data.rightHeaders!, columnIndex })}>
                         {ascMarker}
                         {descMarker}
                         {headCell}

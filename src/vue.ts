@@ -14,8 +14,8 @@ class Grid extends Vue {
     leftContainer: HTMLElement;
     rightContainer: HTMLElement;
 
-    sort(column: string) {
-        this.$emit("sort", column);
+    sort(sortData: common.SortData) {
+        this.$emit("sort", sortData);
     }
 
     isAsc(column: string) {

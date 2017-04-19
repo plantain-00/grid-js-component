@@ -32,15 +32,15 @@ new Vue({
         clickedCellValue: null,
     },
     methods: {
-        sort(this: This, column: string) {
+        sort(this: This, sortData: common.SortData) {
             const sortType = this.data.sortType === "asc" ? "desc" : "asc";
-            sort(column, sortType);
+            sort(sortData.cell.value, sortType);
 
             const viewData = getViewData();
             for (const row of viewData.rows) {
                 row.cells[0].component = "proficiency-percent";
             }
-            viewData.sortColumn = column;
+            viewData.sortColumn = sortData.cell.value;
             viewData.sortType = sortType;
             console.log(viewData);
 

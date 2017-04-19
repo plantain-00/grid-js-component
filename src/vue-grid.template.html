@@ -3,9 +3,9 @@
         <thead class="grid-left-head">
             <template v-if="data.leftHeaders && data.leftHeaders.cells">
                 <tr :class="'grid-left-head-row ' + (data.leftHeaders.style || '')">
-                    <th v-for="cell in data.leftHeaders.cells"
+                    <th v-for="(cell, columnIndex) in data.leftHeaders.cells"
                         :class="'grid-left-head-row-cell ' + (cell.style || '')"
-                        @click="sort(cell.value)">
+                        @click="sort({ cell, header: data.leftHeaders, columnIndex })">
                         <svg width="10" height="10" v-if="isAsc(cell.value)">
                             <polygon points="0,10 5,0 10,10"></polygon>
                         </svg>
@@ -37,9 +37,9 @@
     <table class="grid-main">
         <thead v-if="data.headers && data.headers.cells" class="grid-main-head">
             <tr :class="'grid-main-head-row ' + (data.headers.style || '')">
-                <th v-for="cell in data.headers.cells"
+                <th v-for="(cell, columnIndex) in data.headers.cells"
                     :class="'grid-main-head-row-cell ' + (cell.style || '')"
-                    @click="sort(cell.value)">
+                    @click="sort({ cell, header: data.headers, columnIndex })">
                     <svg width="10" height="10" v-if="isAsc(cell.value)">
                         <polygon points="0,10 5,0 10,10"></polygon>
                     </svg>
@@ -71,9 +71,9 @@
         <thead class="grid-right-head">
             <template v-if="data.rightHeaders && data.rightHeaders.cells">
                 <tr :class="'grid-right-head-row ' + (data.rightHeaders.style || '')">
-                    <th v-for="cell in data.rightHeaders.cells"
+                    <th v-for="(cell, columnIndex) in data.rightHeaders.cells"
                         :class="'grid-right-head-row-cell ' + (cell.style || '')"
-                        @click="sort(cell.value)">
+                        @click="sort({ cell, header: data.rightHeaders, columnIndex })">
                         <svg width="10" height="10" v-if="isAsc(cell.value)">
                             <polygon points="0,10 5,0 10,10"></polygon>
                         </svg>

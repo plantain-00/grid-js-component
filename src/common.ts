@@ -22,6 +22,12 @@ export type GridCellData = {
     style?: string;
 };
 
+export type SortData = {
+    cell: GridCellData;
+    header: GridRowData;
+    columnIndex: number;
+};
+
 export type ClickData = {
     cell: GridCellData;
     row: GridRowData;

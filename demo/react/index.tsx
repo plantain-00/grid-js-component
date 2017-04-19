@@ -30,15 +30,15 @@ class Main extends React.Component<{}, {}> {
     data = data;
     clickedCellValue: any = null;
 
-    sort(column: string) {
+    sort(sortData: common.SortData) {
         const sortType = this.data.sortType === "asc" ? "desc" : "asc";
-        sort(column, sortType);
+        sort(sortData.cell.value, sortType);
 
         const viewData = getViewData();
         for (const row of viewData.rows) {
             row.cells[0].component = ProficiencyPercent;
         }
-        viewData.sortColumn = column;
+        viewData.sortColumn = sortData.cell.value;
         viewData.sortType = sortType;
         console.log(viewData);
 
@@ -55,7 +55,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <Grid data={this.data}
-                    sort={column => this.sort(column)}
+                    sort={sortData => this.sort(sortData)}
                     click={clickData => this.click(clickData)}>
                 </Grid>
                 <p>

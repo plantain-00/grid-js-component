@@ -48,7 +48,7 @@ import { Grid } from "grid-js-component/dist/react";
 
 ```jsx
 <Grid data={this.data}
-    sort={column => this.sort(column)}
+    sort={sortData => this.sort(sortData)}
     click={clickData => this.click(clickData)}>
 </Grid>
 ```
@@ -62,7 +62,7 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 name | type | description
 --- | --- | ---
 data | [GridData](#grid-data-structure) | the data of the tree
-sort | (sortColumn: string) => void | triggered when click a header to sort
+sort | (sortData: [SortData](#sort-data-structure)) => void | triggered when click a header to sort
 click | (clickData: [ClickData](#click-data-structure)) => void | triggered when click a cell
 
 #### grid data structure
@@ -88,6 +88,16 @@ type GridCellData = {
     value: any; // the value in the cell
     component?: string | Function; //  if exists, show the component rather than the value in the cell
     style?: string; // the class string of the cell, used to set style
+};
+```
+
+#### sort data structure
+
+```ts
+type SortData = {
+    cell: GridCellData; // the cell object clicked
+    header: GridRowData; // the header object clicked
+    columnIndex: number; // the column index clicked
 };
 ```
 
@@ -138,6 +148,16 @@ type ClickData = {
 + sort
 
 #### changelogs
+
+##### v3
+
+```bash
+// v2
+sort: (columnName: string) => void;
+
+// v3
+sort: (sortData: common.SortData) => void;
+```
 
 ##### v2
 
