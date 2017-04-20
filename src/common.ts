@@ -44,9 +44,15 @@ import * as Ps from "perfect-scrollbar";
 
 export { Ps };
 
-export function updateScroll(e: WheelEvent, container: HTMLElement) {
+export function updateVerticalScroll(e: WheelEvent, container: HTMLElement) {
     const distance = e.wheelDelta > 0 ? 2 : (e.wheelDelta < 0 ? -2 : 0);
     container.scrollTop -= distance;
+    Ps.update(container);
+}
+
+export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement) {
+    const distance = e.wheelDelta > 0 ? 2 : (e.wheelDelta < 0 ? -2 : 0);
+    container.scrollLeft -= distance;
     Ps.update(container);
 }
 
