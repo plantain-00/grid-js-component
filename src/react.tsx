@@ -52,6 +52,7 @@ export class Grid extends React.Component<{
         if (this.rightContainer) {
             this.rightContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container));
         }
+        this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container));
     }
     componentWillUnmount() {
         if (this.container) {
@@ -65,7 +66,7 @@ export class Grid extends React.Component<{
             if (this.rightContainer) {
                 this.rightContainer.removeEventListener("mousewheel");
             }
-            this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container));
+            this.heads.removeEventListener("mousewheel");
         }
     }
 

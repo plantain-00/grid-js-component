@@ -67,6 +67,7 @@ class Grid extends Vue {
             if (this.rightContainer) {
                 this.rightContainer.removeEventListener("mousewheel");
             }
+            this.heads.removeEventListener("mousewheel");
         }
     }
 }
