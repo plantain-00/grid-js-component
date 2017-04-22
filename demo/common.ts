@@ -43,6 +43,13 @@ let rawData = [
         country: "Greece",
         gender: "female",
     },
+    {
+        id: 7,
+        name: "Alice",
+        proficiency: 65,
+        country: "Japan",
+        gender: "female",
+    },
 ];
 
 export function sort(sortColumn: string, sortType: "asc" | "desc") {

@@ -44,7 +44,8 @@ export class Grid extends React.Component<{
 
         common.Ps.initialize(this.container);
 
-        this.container.addEventListener("ps-scroll-x", e => common.handleScrollEvent(e, this.heads, this.leftContainer, this.rightContainer));
+        this.container.addEventListener("ps-scroll-y", e => common.handleScrollYEvent(e, this.leftContainer, this.rightContainer));
+        this.container.addEventListener("ps-scroll-x", e => common.handleScrollXEvent(e, this.heads));
 
         if (this.leftContainer) {
             this.leftContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container));
@@ -59,6 +60,7 @@ export class Grid extends React.Component<{
             common.Ps.destroy(this.container);
 
             this.container.removeEventListener("ps-scroll-x");
+            this.container.removeEventListener("ps-scroll-y");
 
             if (this.leftContainer) {
                 this.leftContainer.removeEventListener("mousewheel");
