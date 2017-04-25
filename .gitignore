@@ -40,3 +40,4 @@ dist
 demo/**/*.js
 demo/**/index.html
 *.css
+src/vue-grid.html

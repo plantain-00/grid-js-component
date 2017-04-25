@@ -17,10 +17,6 @@ A reactjs and vuejs grid component.
 <link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
 ```
 
-#### module bundler
-
-This component should work with `webpack`, and it requires `npm install raw-loader --save-dev` to load templates.
-
 #### vuejs component demo
 
 `npm i vue vue-class-component`
@@ -160,6 +156,7 @@ action | (actionData: any) => void | the `actionData` is `ActionData.data`
 
 + vuejs component
 + reactjs component
++ commonjs module
 + scrollbar
 + custom cell component
 + freeze columns
