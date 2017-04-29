@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run minifier-template && npm run file2variable && npm run build-ts && npm run build-less && webpack --config demo/webpack.config.js && npm run clean-rev && rev-static --config demo/rev-static.config.js",
-    "build-ts": "tsc -p src && tsc -p demo",
+    "build-ts": "npm run clean && tsc -p src && tsc -p demo",
     "build-less": "lessc src/grid.less > dist/grid.css && cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && lessc demo/common.less > demo/common.css",
     "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\" && stylelint \"src/*.less\" \"demo/*.less\" --syntax less",
     "clean-rev": "rimraf demo/react.bundle-*.js demo/vue.bundle-*.js",
     "minifier-template": "html-minifier --collapse-whitespace --case-sensitive --collapse-inline-tag-whitespace src/vue-grid.template.html -o src/vue-grid.html",
-    "file2variable": "file2variable-cli src/vue-grid.html -o src/vue-variables.ts"
+    "file2variable": "file2variable-cli src/vue-grid.html -o src/vue-variables.ts",
+    "clean": "rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -45,7 +46,7 @@
     "stylelint": "7.10.1",
     "stylelint-config-standard": "16.0.0",
     "tslint": "5.0.0",
-    "typescript": "2.2.2",
+    "typescript": "2.3.2",
     "vue": "2.2.6",
     "vue-class-component": "5.0.1",
     "webpack": "2.3.3",

@@ -2,16 +2,16 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "noImplicitAny": true,
-        "sourceMap": false,
+
+        "declaration": false,
+
+        "strict": true,
         "noUnusedLocals": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
         "noImplicitReturns": true,
+
         "skipLibCheck": true,
         "importHelpers": true,
         "jsx": "react",
-        "declaration": false,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true
     }
