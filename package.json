@@ -4,13 +4,12 @@
   "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run minifier-template && npm run file2variable && npm run build-ts && npm run build-less && webpack --config demo/webpack.config.js && npm run clean-rev && rev-static --config demo/rev-static.config.js",
+    "build": "npm run file2variable && npm run build-ts && npm run build-less && webpack --config demo/webpack.config.js && npm run clean-rev && rev-static --config demo/rev-static.config.js",
     "build-ts": "npm run clean && tsc -p src && tsc -p demo",
     "build-less": "lessc src/grid.less > dist/grid.css && cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && lessc demo/common.less > demo/common.css",
     "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\" && stylelint \"src/*.less\" \"demo/*.less\" --syntax less",
     "clean-rev": "rimraf demo/react.bundle-*.js demo/vue.bundle-*.js",
-    "minifier-template": "html-minifier --collapse-whitespace --case-sensitive --collapse-inline-tag-whitespace src/vue-grid.template.html -o src/vue-grid.html",
-    "file2variable": "file2variable-cli src/vue-grid.html -o src/vue-variables.ts",
+    "file2variable": "file2variable-cli src/vue-grid.html -o src/vue-variables.ts --html-minify",
     "clean": "rimraf dist"
   },
   "repository": {
@@ -35,8 +34,7 @@
     "@types/react-dom": "15.5.0",
     "clean-css-cli": "4.0.12",
     "core-js": "2.4.1",
-    "file2variable-cli": "1.0.0",
-    "html-minifier": "3.4.3",
+    "file2variable-cli": "1.1.0",
     "less": "2.7.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
