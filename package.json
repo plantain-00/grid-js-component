@@ -1,6 +1,6 @@
 {
   "name": "grid-js-component",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/plantain-00/grid-js-component#readme",
   "devDependencies": {
-    "@types/node": "7.0.14",
     "@types/react": "15.0.23",
     "@types/react-dom": "15.5.0",
     "clean-css-cli": "4.0.12",
@@ -42,7 +41,8 @@
     "webpack": "2.4.1"
   },
   "dependencies": {
-    "@types/perfect-scrollbar": "0.6.1",
+    "@types/node": "*",
+    "@types/perfect-scrollbar": "*",
     "perfect-scrollbar": "0.6.16",
     "tslib": "1"
   }
