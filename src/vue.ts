@@ -1,22 +1,34 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "./common";
-import { srcVueGridHtml } from "./vue-variables";
+import { srcVueGridTemplateHtml } from "./vue-variables";
 
 @Component({
-    template: srcVueGridHtml,
-    props: ["data"],
+    template: srcVueGridTemplateHtml,
+    props: ["data", "resize"],
 })
 class Grid extends Vue {
     data: common.GridData;
+    resize?: boolean;
 
     container: HTMLElement;
     heads: HTMLElement;
     leftContainer?: HTMLElement;
     rightContainer?: HTMLElement;
 
+    resizingCell: common.GridCellData | null = null;
+    initialClientX: number;
+    initialWidth: number;
+    initialRowWidth: number;
+    resizingIndex: number | null = null;
+    canSort = true;
+
     sort(sortData: common.SortData) {
-        this.$emit("sort", sortData);
+        if (this.canSort) {
+            this.$emit("sort", sortData);
+        } else {
+            this.canSort = true;
+        }
     }
 
     isAsc(column: string) {
@@ -32,6 +44,36 @@ class Grid extends Vue {
 
     action(actionData: common.ActionData) {
         this.$emit("action", actionData);
+    }
+
+    resizeStart(e: MouseEvent, cell: common.GridCellData, columnIndex: number) {
+        this.resizingCell = cell;
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        this.initialClientX = e.clientX;
+        this.initialWidth = (e.target as HTMLElement).parentElement!.getClientRects()[0].width;
+        this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width;
+        this.resizingIndex = columnIndex;
+    }
+    resizeEnd() {
+        this.resizingCell = null;
+    }
+    mousemove(e: MouseEvent) {
+        if (this.resizingCell) {
+            e.preventDefault();
+            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
+            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
+            this.resizingCell.width = cellWidth;
+            this.data.headers.width = rowWidth;
+            for (const row of this.data.rows) {
+                row.width = rowWidth;
+                row.cells[this.resizingIndex!].width = cellWidth;
+            }
+            this.canSort = false;
+        }
+    }
+    getStyle(width: number | undefined) {
+        return width ? { width } : {};
     }
 
     mounted() {

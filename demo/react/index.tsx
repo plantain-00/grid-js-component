@@ -82,6 +82,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <Grid data={this.data}
+                    resize={true}
                     sort={sortData => this.sort(sortData)}
                     click={clickData => this.click(clickData)}
                     action={actionData => this.action(actionData)}>

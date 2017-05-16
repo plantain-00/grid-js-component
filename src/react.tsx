@@ -4,6 +4,7 @@ import * as common from "./common";
 
 export class Grid extends React.Component<{
     data: common.GridData;
+    resize?: boolean;
     sort: (sortData: common.SortData) => void;
     click: (clickData: common.ClickData) => void;
     action: (actionData: common.ActionData) => void;
@@ -13,8 +14,19 @@ export class Grid extends React.Component<{
     leftContainer?: HTMLElement;
     rightContainer?: HTMLElement;
 
+    resizingCell: common.GridCellData | null = null;
+    initialClientX: number;
+    initialWidth: number;
+    initialRowWidth: number;
+    resizingIndex: number | null = null;
+    canSort = true;
+
     sort(sortData: common.SortData) {
-        this.props.sort(sortData);
+        if (this.canSort) {
+            this.props.sort(sortData);
+        } else {
+            this.canSort = true;
+        }
     }
 
     isAsc(column: string) {
@@ -30,6 +42,36 @@ export class Grid extends React.Component<{
 
     action(actionData: common.ActionData) {
         this.props.action(actionData);
+    }
+
+    resizeStart(e: React.MouseEvent<HTMLDivElement>, cell: common.GridCellData, columnIndex: number) {
+        this.resizingCell = cell;
+        e.stopPropagation();
+        this.initialClientX = e.clientX;
+        this.initialWidth = (e.target as HTMLElement).parentElement!.getClientRects()[0].width;
+        this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width;
+        this.resizingIndex = columnIndex;
+    }
+    resizeEnd() {
+        this.resizingCell = null;
+    }
+    mousemove(e: React.MouseEvent<HTMLDivElement>) {
+        if (this.resizingCell) {
+            e.preventDefault();
+            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
+            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
+            this.resizingCell.width = cellWidth;
+            this.props.data.headers.width = rowWidth;
+            for (const row of this.props.data.rows) {
+                row.width = rowWidth;
+                row.cells[this.resizingIndex!].width = cellWidth;
+            }
+            this.forceUpdate();
+            this.canSort = false;
+        }
+    }
+    getStyle(width: number | undefined) {
+        return width ? { width } : {};
     }
 
     componentDidMount() {
@@ -90,18 +132,22 @@ export class Grid extends React.Component<{
                         <polygon points="0,0 5,10 10,0"></polygon>
                     </svg>
                 ) : null;
+                const divider = this.props.resize ? (<div className="divider" onMouseDown={e => this.resizeStart(e, cell, columnIndex)}></div>) : null;
                 return (
                     <th className={"grid-main-head-row-cell " + (cell.style || "")}
+                        style={this.getStyle(cell.width)}
                         onClick={e => this.sort({ cell, header: this.props.data.headers, columnIndex })}>
                         {ascMarker}
                         {descMarker}
                         {headCell}
+                        {divider}
                     </th>
                 );
             });
             mainHead = (
                 <thead className="grid-main-head">
-                    <tr className={"grid-main-head-row " + (this.props.data.headers.style || "")}>
+                    <tr className={"grid-main-head-row " + (this.props.data.headers.style || "")}
+                        style={this.getStyle(this.props.data.headers.width)}>
                         {headCells}
                     </tr>
                 </thead>
@@ -186,13 +232,15 @@ export class Grid extends React.Component<{
                 }) : cell.value;
                 return (
                     <td className={"grid-main-body-row-cell " + (cell.style || "")}
+                        style={this.getStyle(cell.width)}
                         onClick={() => this.click({ cell, row, body: this.props.data.rows, rowIndex, columnIndex })}>
                         {bodyCell}
                     </td>
                 );
             });
             return (
-                <tr className={"grid-main-body-row " + (row.style || "")}>
+                <tr className={"grid-main-body-row " + (row.style || "")}
+                    style={this.getStyle(row.width)}>
                     {cells}
                 </tr>
             );
@@ -253,7 +301,7 @@ export class Grid extends React.Component<{
         }
 
         return (
-            <div className="grid">
+            <div className="grid" onMouseUp={e => this.resizeEnd()} onMouseMove={e => this.mousemove(e)}>
                 <table className="grid-left">
                     {leftHead}
                     {leftBody}

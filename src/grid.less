@@ -27,6 +27,17 @@
 
 .grid-main-head-row-cell {
   border-left-width: 0 !important;
+  position: relative;
+
+  .divider {
+    position: absolute;
+    right: -5px;
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    top: 0;
+    cursor: col-resize;
+  }
 }
 
 .grid-main-head-row-cell,
@@ -66,6 +77,10 @@
 .grid-right-body-row-cell {
   border-top-width: 0 !important;
   border-right-width: 0 !important;
+}
+
+.grid-main-body-row {
+  display: inline-block;
 }
 
 .grid-main-body-row-cell {

@@ -60,6 +60,7 @@ the source code of the demo: https://github.com/plantain-00/grid-js-component/tr
 name | type | description
 --- | --- | ---
 data | [GridData](#grid-data-structure) | the data of the grid
+resize | boolean? | whether the column can be resized
 sort | (sortData: [SortData](#sort-data-structure)) => void | triggered when click a header to sort
 click | (clickData: [ClickData](#click-data-structure)) => void | triggered when click a cell
 action | (actionData: [ActionData](#action-data-structure)) => void | triggered when custom component triggered events
@@ -81,12 +82,14 @@ type GridData = {
 type GridRowData = {
     cells: GridCellData[];
     style?: string; // the class string of the row, used to set style
+    width?: number;
 };
 
 type GridCellData = {
     value: any; // the value in the cell
     component?: string | Function; //  if exists, show the component rather than the value in the cell
     style?: string; // the class string of the cell, used to set style
+    width?: number;
 };
 ```
 
@@ -161,6 +164,7 @@ action | (actionData: any) => void | the `actionData` is `ActionData.data`
 + custom cell component
 + freeze columns
 + sort
++ resize
 
 #### changelogs
 

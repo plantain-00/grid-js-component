@@ -12,6 +12,7 @@ export type GridData = {
 export type GridRowData = {
     cells: GridCellData[];
     style?: string;
+    width?: number;
 };
 
 export type GridCellData = {
@@ -20,6 +21,7 @@ export type GridCellData = {
     component?: string | Function;
     /* tslint:enable:ban-types */
     style?: string;
+    width?: number;
 };
 
 export type SortData = {

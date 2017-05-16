@@ -68,11 +68,12 @@ export function getViewData() {
         sortColumn: "",
         headers: {
             cells: [
-                { value: "proficiency", style: "test-cell-class" },
-                { value: "country" },
-                { value: "gender" },
+                { value: "proficiency", style: "test-cell-class", width: 0 },
+                { value: "country", width: 0 },
+                { value: "gender", width: 0 },
             ],
             style: "test-row-class",
+            width: 0,
         },
         rows: [],
         leftHeaders: {
@@ -92,10 +93,11 @@ export function getViewData() {
     for (const row of rawData) {
         data.rows.push({
             cells: [
-                { value: row.proficiency },
-                { value: row.country },
-                { value: row.gender },
+                { value: row.proficiency, width: 0 },
+                { value: row.country, width: 0 },
+                { value: row.gender, width: 0 },
             ],
+            width: 0,
         });
         data.leftRows!.push({
             cells: [
