@@ -1,4 +1,4 @@
-<div class="grid" @mouseup="resizeEnd()" @mousemove="mousemove($event)">
+<div class="grid" @mouseup="resizeEnd($event)" @mousemove="mousemove($event)">
     <table class="grid-left">
         <thead class="grid-left-head" v-if="data.leftHeaders && data.leftHeaders.cells">
             <tr :class="'grid-left-head-row ' + (data.leftHeaders.style || '')">

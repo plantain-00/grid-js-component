@@ -1,4 +1,4 @@
-import { GridData } from "../dist/common";
+import { GridData, ResizeData } from "../dist/common";
 
 let rawData = [
     {
@@ -52,6 +52,9 @@ let rawData = [
     },
 ];
 
+const cellWidths = [0, 0, 0];
+let rowWidth = 0;
+
 export function sort(sortColumn: string, sortType: "asc" | "desc") {
     rawData.sort((a: any, b: any) => sortType === "asc"
         ? (typeof a[sortColumn] === "string" ? a[sortColumn].localeCompare(b[sortColumn]) : a[sortColumn] - b[sortColumn])
@@ -62,18 +65,23 @@ export function deleteOne(id: number) {
     rawData = rawData.filter(d => d.id !== id);
 }
 
+export function resized(resizeData: ResizeData) {
+    rowWidth = resizeData.rowWidth;
+    cellWidths[resizeData.index] = resizeData.cellWidth;
+}
+
 export function getViewData() {
     const data: GridData = {
         sortType: "desc",
         sortColumn: "",
         headers: {
             cells: [
-                { value: "proficiency", style: "test-cell-class", width: 0 },
-                { value: "country", width: 0 },
-                { value: "gender", width: 0 },
+                { value: "proficiency", style: "test-cell-class", width: cellWidths[0] },
+                { value: "country", width: cellWidths[1] },
+                { value: "gender", width: cellWidths[2] },
             ],
             style: "test-row-class",
-            width: 0,
+            width: rowWidth,
         },
         rows: [],
         leftHeaders: {
@@ -93,11 +101,11 @@ export function getViewData() {
     for (const row of rawData) {
         data.rows.push({
             cells: [
-                { value: row.proficiency, width: 0 },
-                { value: row.country, width: 0 },
-                { value: row.gender, width: 0 },
+                { value: row.proficiency, width: cellWidths[0] },
+                { value: row.country, width: cellWidths[1] },
+                { value: row.gender, width: cellWidths[2] },
             ],
-            width: 0,
+            width: rowWidth,
         });
         data.leftRows!.push({
             cells: [

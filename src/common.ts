@@ -42,6 +42,12 @@ export type ActionData = {
     data: any;
 } & (SortData | ClickData);
 
+export type ResizeData = {
+    cellWidth: number;
+    rowWidth: number;
+    index: number;
+};
+
 import * as Ps from "perfect-scrollbar";
 
 export { Ps };

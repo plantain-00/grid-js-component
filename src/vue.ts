@@ -55,8 +55,19 @@ class Grid extends Vue {
         this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width;
         this.resizingIndex = columnIndex;
     }
-    resizeEnd() {
+    resizeEnd(e: MouseEvent) {
         this.resizingCell = null;
+
+        if (!this.canSort) {
+            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
+            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
+            const resizeData: common.ResizeData = {
+                cellWidth,
+                rowWidth,
+                index: this.resizingIndex!,
+            };
+            this.$emit("resized", resizeData);
+        }
     }
     mousemove(e: MouseEvent) {
         if (this.resizingCell) {

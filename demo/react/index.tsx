@@ -29,7 +29,7 @@ class DeleteButton extends React.Component<{ data: number, action: (actionData: 
     }
 }
 
-import { getViewData, sort, deleteOne } from "../common";
+import { getViewData, sort, deleteOne, resized } from "../common";
 
 function setComponents(viewData: common.GridData) {
     for (const row of viewData.rows) {
@@ -78,6 +78,10 @@ class Main extends React.Component<{}, {}> {
         this.setState({ data: this.data });
     }
 
+    resized(resizeData: common.ResizeData) {
+        resized(resizeData);
+    }
+
     render() {
         return (
             <div>
@@ -85,7 +89,8 @@ class Main extends React.Component<{}, {}> {
                     resize={true}
                     sort={sortData => this.sort(sortData)}
                     click={clickData => this.click(clickData)}
-                    action={actionData => this.action(actionData)}>
+                    action={actionData => this.action(actionData)}
+                    resized={resizeData => this.resized(resizeData)}>
                 </Grid>
                 <p>
                     clicked cell value: {this.clickedCellValue}

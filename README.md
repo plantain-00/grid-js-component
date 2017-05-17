@@ -64,6 +64,7 @@ resize | boolean? | whether the column can be resized
 sort | (sortData: [SortData](#sort-data-structure)) => void | triggered when click a header to sort
 click | (clickData: [ClickData](#click-data-structure)) => void | triggered when click a cell
 action | (actionData: [ActionData](#action-data-structure)) => void | triggered when custom component triggered events
+resized | (resizeData: [ResizeData](#resize-data-structure)) => void | triggered when resizing action finished
 
 #### grid data structure
 
@@ -121,6 +122,16 @@ type ClickData = {
 type ActionData = {
     data: any; //  the raw event data from the custom component
 } & (SortData | ClickData);
+```
+
+#### resize data structure
+
+```ts
+type ResizeData = {
+    cellWidth: number;
+    rowWidth: number;
+    index: number;
+};
 ```
 
 #### properties and events of the custom component

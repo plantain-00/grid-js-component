@@ -26,7 +26,7 @@ Vue.component("delete-button", {
     },
 });
 
-import { getViewData, sort, deleteOne } from "../common";
+import { getViewData, sort, deleteOne, resized } from "../common";
 
 function setComponents(viewData: common.GridData) {
     for (const row of viewData.rows) {
@@ -72,6 +72,9 @@ new Vue({
             setComponents(viewData);
 
             this.data = viewData;
+        },
+        resized(resizeData: common.ResizeData) {
+            resized(resizeData);
         },
     },
 });

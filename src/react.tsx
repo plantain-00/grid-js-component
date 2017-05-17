@@ -8,6 +8,7 @@ export class Grid extends React.Component<{
     sort: (sortData: common.SortData) => void;
     click: (clickData: common.ClickData) => void;
     action: (actionData: common.ActionData) => void;
+    resized: (resizeData: common.ResizeData) => void;
 }, {}> {
     container: HTMLElement;
     heads: HTMLElement;
@@ -52,8 +53,19 @@ export class Grid extends React.Component<{
         this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width;
         this.resizingIndex = columnIndex;
     }
-    resizeEnd() {
+    resizeEnd(e: React.MouseEvent<HTMLDivElement>) {
         this.resizingCell = null;
+
+        if (!this.canSort) {
+            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
+            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
+            const resizeData: common.ResizeData = {
+                cellWidth,
+                rowWidth,
+                index: this.resizingIndex!,
+            };
+            this.props.resized(resizeData);
+        }
     }
     mousemove(e: React.MouseEvent<HTMLDivElement>) {
         if (this.resizingCell) {
@@ -301,7 +313,7 @@ export class Grid extends React.Component<{
         }
 
         return (
-            <div className="grid" onMouseUp={e => this.resizeEnd()} onMouseMove={e => this.mousemove(e)}>
+            <div className="grid" onMouseUp={e => this.resizeEnd(e)} onMouseMove={e => this.mousemove(e)}>
                 <table className="grid-left">
                     {leftHead}
                     {leftBody}
