@@ -1,4 +1,5 @@
 import * as Vue from "vue";
+import Component from "vue-class-component";
 
 import "../../dist/vue";
 import * as common from "../../dist/common";
@@ -40,47 +41,56 @@ function setComponents(viewData: common.GridData) {
 const data = getViewData();
 setComponents(data);
 
+@Component({
+    template: `
+    <div>
+        <grid :data="data"
+            resize="true"
+            @sort="sort(arguments[0])"
+            @click="click(arguments[0])"
+            @action="action(arguments[0])"
+            @resized="resized(arguments[0])">
+        </grid>
+        <p>
+            clicked cell value: {{clickedCellValue}}
+        </p>
+    </div>
+    `,
+})
+class App extends Vue {
+    data = data;
+    clickedCellValue = null;
+
+    sort(sortData: common.SortData) {
+        if (!sortData.cell.value) {
+            return;
+        }
+        const sortType = this.data.sortType === "asc" ? "desc" : "asc";
+        sort(sortData.cell.value, sortType);
+
+        const viewData = getViewData();
+        setComponents(viewData);
+        viewData.sortColumn = sortData.cell.value;
+        viewData.sortType = sortType;
+
+        this.data = viewData;
+    }
+    click(clickData: common.ClickData) {
+        this.clickedCellValue = clickData.cell.value;
+    }
+    action(actionData: common.ActionData) {
+        deleteOne(actionData.data.id);
+
+        const viewData = getViewData();
+        setComponents(viewData);
+
+        this.data = viewData;
+    }
+    resized(resizeData: common.ResizeData) {
+        resized(resizeData);
+    }
+}
+
 /* tslint:disable:no-unused-expression */
-new Vue({
-    el: "#container",
-    data: {
-        data,
-        clickedCellValue: null,
-    },
-    methods: {
-        sort(this: This, sortData: common.SortData) {
-            if (!sortData.cell.value) {
-                return;
-            }
-            const sortType = this.data.sortType === "asc" ? "desc" : "asc";
-            sort(sortData.cell.value, sortType);
-
-            const viewData = getViewData();
-            setComponents(viewData);
-            viewData.sortColumn = sortData.cell.value;
-            viewData.sortType = sortType;
-
-            this.data = viewData;
-        },
-        click(this: This, clickData: common.ClickData) {
-            this.clickedCellValue = clickData.cell.value;
-        },
-        action(this: This, actionData: common.ActionData) {
-            deleteOne(actionData.data.id);
-
-            const viewData = getViewData();
-            setComponents(viewData);
-
-            this.data = viewData;
-        },
-        resized(resizeData: common.ResizeData) {
-            resized(resizeData);
-        },
-    },
-});
+new App({ el: "#container" });
 /* tslint:enable:no-unused-expression */
-
-type This = Vue & {
-    data: typeof data;
-    clickedCellValue: any;
-};

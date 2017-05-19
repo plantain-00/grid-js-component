@@ -1,15 +1,4 @@
 <link rel='stylesheet' href='../../dist/grid.min.css' />
 <link rel='stylesheet' href='../common.css' />
-<div id="container">
-    <grid :data="data"
-        resize="true"
-        @sort="sort(arguments[0])"
-        @click="click(arguments[0])"
-        @action="action(arguments[0])"
-        @resized="resized(arguments[0])">
-    </grid>
-    <p>
-        clicked cell value: {{clickedCellValue}}
-    </p>
-</div>
+<div id="container"></div>
 <script src="../<%=demoVueBundleJs %>" crossOrigin="anonymous" integrity="<%=sri.demoVueBundleJs %>"></script>
