@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@types/perfect-scrollbar": "*",
-    "tslib": "1"
     "perfect-scrollbar": "0.7.1",
+    "tslib": "1"
   }
 }
