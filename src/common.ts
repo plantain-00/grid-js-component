@@ -17,9 +17,8 @@ export type GridRowData = {
 
 export type GridCellData = {
     value: any;
-    /* tslint:disable:ban-types */
+    // tslint:disable-next-line:ban-types
     component?: string | Function;
-    /* tslint:enable:ban-types */
     style?: string;
     width?: number;
 };
@@ -94,24 +93,23 @@ export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement) {
 }
 
 export function handleScrollYEvent(e: Event, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
-    /* tslint:disable:prefer-for-of */
     if (leftContainer) {
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < leftContainer.childNodes.length; i++) {
             (leftContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
         }
     }
     if (rightContainer) {
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < rightContainer.childNodes.length; i++) {
             (rightContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
         }
     }
-    /* tslint:enable:prefer-for-of */
 }
 
 export function handleScrollXEvent(e: Event, heads: HTMLElement) {
-    /* tslint:disable:prefer-for-of */
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < heads.childNodes.length; i++) {
         (heads.childNodes[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
     }
-    /* tslint:enable:prefer-for-of */
 }
