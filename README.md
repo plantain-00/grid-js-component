@@ -7,6 +7,17 @@
 # grid-js-component
 A reactjs and vuejs grid component.
 
+#### features
+
++ vuejs component
++ reactjs component
++ commonjs module
++ scrollbar
++ custom cell component
++ freeze columns
++ sort
++ resize
+
 #### install
 
 `npm i grid-js-component`
@@ -35,8 +46,6 @@ import "grid-js-component/dist/vue";
 
 the online demo: https://plantain-00.github.io/grid-js-component/demo/vue/index.html
 
-the source code of the demo: https://github.com/plantain-00/grid-js-component/tree/master/demo/vue
-
 #### reactjs component demo
 
 ```ts
@@ -52,8 +61,6 @@ import { Grid } from "grid-js-component/dist/react";
 ```
 
 the online demo: https://plantain-00.github.io/grid-js-component/demo/react/index.html
-
-the source code of the demo: https://github.com/plantain-00/grid-js-component/tree/master/demo/react
 
 #### properties and events of the component
 
@@ -165,17 +172,6 @@ action | (actionData: any) => void | the `actionData` is `ActionData.data`
 + grid-right-body
 + grid-right-body-row
 + grid-right-body-row-cell
-
-#### features
-
-+ vuejs component
-+ reactjs component
-+ commonjs module
-+ scrollbar
-+ custom cell component
-+ freeze columns
-+ sort
-+ resize
 
 #### changelogs
 

@@ -44,6 +44,7 @@ setComponents(data);
 @Component({
     template: `
     <div>
+        <a href="https://github.com/plantain-00/grid-js-component/tree/master/demo/vue/index.ts" target="_blank">the source code of the demo</a>
         <grid :data="data"
             resize="true"
             @sort="sort(arguments[0])"

@@ -85,6 +85,7 @@ class Main extends React.Component<{}, {}> {
     render() {
         return (
             <div>
+                <a href="https://github.com/plantain-00/grid-js-component/tree/master/demo/react/index.tsx" target="_blank">the source code of the demo</a>
                 <Grid data={this.data}
                     resize={true}
                     sort={sortData => this.sort(sortData)}
