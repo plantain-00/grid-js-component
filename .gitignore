@@ -41,3 +41,4 @@ demo/**/*.js
 demo/**/index.html
 *.css
 !*.config.js
+demo/**/*.css
