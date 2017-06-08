@@ -4,30 +4,12 @@ import * as ReactDOM from "react-dom";
 import { Grid } from "../../dist/react";
 import * as common from "../../dist/common";
 
-class ProficiencyPercent extends React.Component<{ data: number }, {}> {
-    get style(): React.CSSProperties {
-        return {
-            width: this.props.data + "%",
-            backgroundColor: this.props.data >= 50 ? "rgb(0, 160, 0)" : "rgb(255, 153, 0)",
-        };
-    }
-    render() {
-        return (
-            <div style={this.style}>{this.props.data}%</div>
-        );
-    }
-}
+const ProficiencyPercent: React.StatelessComponent<{ data: number }> = props => <div style={{
+    width: props.data + "%",
+    backgroundColor: props.data >= 50 ? "rgb(0, 160, 0)" : "rgb(255, 153, 0)",
+}}>{props.data}%</div>;
 
-class DeleteButton extends React.Component<{ data: number, action: (actionData: any) => void }, {}> {
-    click() {
-        this.props.action({ type: "delete", id: this.props.data });
-    }
-    render() {
-        return (
-            <button onClick={e => this.click()}>delete</button>
-        );
-    }
-}
+const DeleteButton: React.StatelessComponent<{ data: number, action: (actionData: any) => void }> = props => <button onClick={e => props.action({ type: "delete", id: props.data })}>delete</button>;
 
 import { getViewData, sort, deleteOne, resized } from "../common";
 
@@ -86,7 +68,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <a href="https://github.com/plantain-00/grid-js-component/tree/master/demo/react/index.tsx" target="_blank">the source code of the demo</a>
-                <br/>
+                <br />
                 <Grid data={this.data}
                     resize={true}
                     sort={sortData => this.sort(sortData)}
