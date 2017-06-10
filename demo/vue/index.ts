@@ -48,10 +48,10 @@ setComponents(data);
         <br/>
         <grid :data="data"
             resize="true"
-            @sort="sort(arguments[0])"
-            @click="click(arguments[0])"
-            @action="action(arguments[0])"
-            @resized="resized(arguments[0])">
+            @sort="sort($event)"
+            @click="click($event)"
+            @action="action($event)"
+            @resized="resized($event)">
         </grid>
         <p>
             clicked cell value: {{clickedCellValue}}

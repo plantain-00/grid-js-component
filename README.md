@@ -38,9 +38,9 @@ import "grid-js-component/dist/vue";
 
 ```html
 <grid :data="data"
-    @sort="sort(arguments[0])"
-    @click="click(arguments[0])"
-    @action="action(arguments[0])">
+    @sort="sort($event)"
+    @click="click($event)"
+    @action="action($event)">
 </grid>
 ```
 
