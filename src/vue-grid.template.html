@@ -12,7 +12,7 @@
                         <polygon points="0,0 5,10 10,0"></polygon>
                     </svg>
                     <template v-if="cell.component">
-                        <component :is="cell.component" :data="cell.value" @action="action({ cell, header: data.leftHeaders, columnIndex, data: arguments[0] })">
+                        <component :is="cell.component" :data="cell.value" @action="action({ cell, header: data.leftHeaders, columnIndex, data: $event })">
                         </component>
                     </template>
                     <template v-else>{{cell.value}}</template>
@@ -24,7 +24,7 @@
                 <td v-for="(cell, columnIndex) in row.cells" :class="'grid-left-body-row-cell ' + (cell.style || '')"
                     @click="click({ cell, row, body: data.leftRows, rowIndex, columnIndex })">
                     <template v-if="cell.component">
-                        <component :is="cell.component" :data="cell.value" @action="action({ cell, row, body: data.leftRows, rowIndex, columnIndex, data: arguments[0] })">
+                        <component :is="cell.component" :data="cell.value" @action="action({ cell, row, body: data.leftRows, rowIndex, columnIndex, data: $event })">
                         </component>
                     </template>
                     <template v-else>{{cell.value}}</template>
@@ -47,7 +47,7 @@
                         <polygon points="0,0 5,10 10,0"></polygon>
                     </svg>
                     <template v-if="cell.component">
-                        <component :is="cell.component" :data="cell.value" @action="action({ cell, header: data.headers, columnIndex, data: arguments[0] })">
+                        <component :is="cell.component" :data="cell.value" @action="action({ cell, header: data.headers, columnIndex, data: $event })">
                         </component>
                     </template>
                     <template v-else>{{cell.value}}</template>
@@ -62,7 +62,7 @@
                     :style="getStyle(cell.width)"
                     @click="click({ cell, row, body: data.rows, rowIndex, columnIndex })">
                     <template v-if="cell.component">
-                        <component :is="cell.component" :data="cell.value" @action="action({ cell, row, body: data.rows, rowIndex, columnIndex, data: arguments[0] })">
+                        <component :is="cell.component" :data="cell.value" @action="action({ cell, row, body: data.rows, rowIndex, columnIndex, data: $event })">
                         </component>
                     </template>
                     <template v-else>{{cell.value}}</template>
@@ -83,7 +83,7 @@
                         <polygon points="0,0 5,10 10,0"></polygon>
                     </svg>
                     <template v-if="cell.component">
-                        <component :is="cell.component" :data="cell.value" @action="action({ cell, header: data.rightHeaders, columnIndex, data: arguments[0] })">
+                        <component :is="cell.component" :data="cell.value" @action="action({ cell, header: data.rightHeaders, columnIndex, data: $event })">
                         </component>
                     </template>
                     <template v-else>{{cell.value}}</template>
@@ -95,7 +95,7 @@
                 <td v-for="(cell, columnIndex) in row.cells" :class="'grid-right-body-row-cell ' + (cell.style || '')"
                     @click="click({ cell, row, body: data.rightRows, rowIndex, columnIndex })">
                     <template v-if="cell.component">
-                        <component :is="cell.component" :data="cell.value" @action="action({ cell, row, body: data.rightRows, rowIndex, columnIndex, data: arguments[0] })">
+                        <component :is="cell.component" :data="cell.value" @action="action({ cell, row, body: data.rightRows, rowIndex, columnIndex, data: $event })">
                         </component>
                     </template>
                     <template v-else>{{cell.value}}</template>
