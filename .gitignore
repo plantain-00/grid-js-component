@@ -35,10 +35,13 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Source
 .vscode
 dist
 demo/**/*.js
-demo/**/index.html
-*.css
-!*.config.js
 demo/**/*.css
+!*.config.js
+!demo/*-*.js
+!demo/*-*.css
+spec/**/*.js
