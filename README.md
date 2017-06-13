@@ -11,7 +11,6 @@ A reactjs and vuejs grid component.
 
 + vuejs component
 + reactjs component
-+ commonjs module
 + scrollbar
 + custom cell component
 + freeze columns
