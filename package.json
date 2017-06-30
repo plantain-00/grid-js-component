@@ -7,11 +7,13 @@
     "build": "npm run file2variable && npm run build-ts && npm run build-less && webpack --config demo/webpack.config.js && npm run clean-rev && rev-static --config demo/rev-static.config.js",
     "build-ts": "npm run clean && tsc -p src && tsc -p demo",
     "build-less": "lessc src/grid.less > dist/grid.css && lessc demo/common.less > demo/common.css && npm run cleancss",
-    "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\" && stylelint \"src/*.less\" \"demo/*.less\" --syntax less",
+    "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\" && stylelint \"src/*.less\" \"demo/*.less\" --syntax less && npm run standard",
     "clean-rev": "rimraf demo/**/index.bundle-*.js",
     "file2variable": "file2variable-cli src/vue-grid.template.html -o src/vue-variables.ts --html-minify",
     "clean": "rimraf dist",
-    "cleancss": "cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css"
+    "cleancss": "cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css",
+    "standard": "standard **/*.config.js",
+    "fix": "standard --fix **/*.config.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,7 @@
     "react-dom": "15.5.4",
     "rev-static": "2.4.2",
     "rimraf": "2.6.1",
+    "standard": "10.0.2",
     "stylelint": "7.10.1",
     "stylelint-config-standard": "16.0.0",
     "tslint": "5.4.0",
