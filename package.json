@@ -46,7 +46,7 @@
     "webpack": "3.0.0"
   },
   "dependencies": {
-    "@types/perfect-scrollbar": "0.6.2",
+    "@types/perfect-scrollbar": "*",
     "perfect-scrollbar": "0.7.1",
     "tslib": "1"
   }
