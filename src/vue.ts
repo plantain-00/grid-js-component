@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "./common";
-import { srcVueGridTemplateHtml } from "./vue-variables";
+import { vueGridTemplateHtml } from "./vue-variables";
 
 @Component({
-    template: srcVueGridTemplateHtml,
+    template: vueGridTemplateHtml,
     props: ["data", "resize"],
 })
 class Grid extends Vue {
