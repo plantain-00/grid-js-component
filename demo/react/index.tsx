@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Grid } from "../../dist/react";
-import * as common from "../../dist/common";
+import { Grid, GridData, SortData, ClickData, ActionData, ResizeData } from "../../dist/react";
 
 const ProficiencyPercent: React.StatelessComponent<{ data: number }> = props => <div style={{
     width: props.data + "%",
@@ -13,7 +12,7 @@ const DeleteButton: React.StatelessComponent<{ data: number, action: (actionData
 
 import { getViewData, sort, deleteOne, resized } from "../common";
 
-function setComponents(viewData: common.GridData) {
+function setComponents(viewData: GridData) {
     for (const row of viewData.rows) {
         row.cells[0].component = ProficiencyPercent;
     }
@@ -29,7 +28,7 @@ class Main extends React.Component<{}, {}> {
     data = data;
     clickedCellValue: any = null;
 
-    sort(sortData: common.SortData) {
+    sort(sortData: SortData) {
         if (!sortData.cell.value) {
             return;
         }
@@ -45,12 +44,12 @@ class Main extends React.Component<{}, {}> {
         this.setState({ data: this.data });
     }
 
-    click(clickData: common.ClickData) {
+    click(clickData: ClickData) {
         this.clickedCellValue = clickData.cell.value;
         this.setState({ clickedCellValue: this.clickedCellValue });
     }
 
-    action(actionData: common.ActionData) {
+    action(actionData: ActionData) {
         deleteOne(actionData.data.id);
 
         const viewData = getViewData();
@@ -60,7 +59,7 @@ class Main extends React.Component<{}, {}> {
         this.setState({ data: this.data });
     }
 
-    resized(resizeData: common.ResizeData) {
+    resized(resizeData: ResizeData) {
         resized(resizeData);
     }
 

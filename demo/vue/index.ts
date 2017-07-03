@@ -2,7 +2,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 import "../../dist/vue";
-import * as common from "../../dist/common";
+import { GridData, SortData, ClickData, ActionData, ResizeData } from "../../dist/vue";
 
 Vue.component("proficiency-percent", {
     template: `<div :style="style">{{data}}%</div>`,
@@ -29,7 +29,7 @@ Vue.component("delete-button", {
 
 import { getViewData, sort, deleteOne, resized } from "../common";
 
-function setComponents(viewData: common.GridData) {
+function setComponents(viewData: GridData) {
     for (const row of viewData.rows) {
         row.cells[0].component = "proficiency-percent";
     }
@@ -63,7 +63,7 @@ class App extends Vue {
     data = data;
     clickedCellValue = null;
 
-    sort(sortData: common.SortData) {
+    sort(sortData: SortData) {
         if (!sortData.cell.value) {
             return;
         }
@@ -77,10 +77,10 @@ class App extends Vue {
 
         this.data = viewData;
     }
-    click(clickData: common.ClickData) {
+    click(clickData: ClickData) {
         this.clickedCellValue = clickData.cell.value;
     }
-    action(actionData: common.ActionData) {
+    action(actionData: ActionData) {
         deleteOne(actionData.data.id);
 
         const viewData = getViewData();
@@ -88,7 +88,7 @@ class App extends Vue {
 
         this.data = viewData;
     }
-    resized(resizeData: common.ResizeData) {
+    resized(resizeData: ResizeData) {
         resized(resizeData);
     }
 }
