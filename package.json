@@ -1,6 +1,6 @@
 {
   "name": "grid-js-component",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "cleancss": "cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css",
     "standard": "standard **/*.config.js",
     "fix": "standard --fix **/*.config.js",
-    "test": "tsc -p spec && karma start spec/karma.config.js"
+    "test": "tsc -p spec && karma start spec/karma.config.js",
+    "release": "clean-release"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "@types/react": "15.0.34",
     "@types/react-dom": "15.5.1",
     "clean-css-cli": "4.1.6",
+    "clean-release": "1.0.1",
     "file2variable-cli": "1.4.0",
     "github-fork-ribbon-css": "0.2.1",
     "jasmine": "2.6.0",
