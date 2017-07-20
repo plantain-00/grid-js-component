@@ -1,6 +1,6 @@
 {
   "name": "grid-js-component",
-  "version": "3.5.1",
+  "version": "4.0.0",
   "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "@types/react": "15.0.34",
     "@types/react-dom": "15.5.1",
     "clean-css-cli": "4.1.6",
-    "clean-release": "1.0.3",
+    "clean-release": "1.3.1",
     "file2variable-cli": "1.4.0",
     "github-fork-ribbon-css": "0.2.1",
     "jasmine": "2.6.0",

@@ -24,7 +24,7 @@ A reactjs and vuejs grid component.
 #### link css
 
 ```html
-<link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
+<link rel="stylesheet" href="./node_modules/grid-js-component/grid.min.css" />
 ```
 
 #### vuejs component demo
@@ -32,7 +32,7 @@ A reactjs and vuejs grid component.
 `npm i vue vue-class-component`
 
 ```ts
-import "grid-js-component/dist/vue";
+import "grid-js-component/vue";
 ```
 
 ```html
@@ -48,7 +48,7 @@ the online demo: https://plantain-00.github.io/grid-js-component/demo/vue/index.
 #### reactjs component demo
 
 ```ts
-import { Grid } from "grid-js-component/dist/react";
+import { Grid } from "grid-js-component/react";
 ```
 
 ```jsx
@@ -173,6 +173,16 @@ action | (actionData: any) => void | the `actionData` is `ActionData.data`
 + grid-right-body-row-cell
 
 #### changelogs
+
+##### v4
+
+```ts
+// v3
+import "grid-js-component/dist/vue";
+
+// v4
+import "grid-js-component/vue";
+```
 
 ##### v3
 

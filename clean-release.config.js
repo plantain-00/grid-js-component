@@ -1,11 +1,12 @@
 module.exports = {
   include: [
-    'dist/*',
+    'dist/**/*',
     'LICENSE',
     'package.json',
     'README.md'
   ],
   exclude: [
   ],
+  base: 'dist',
   postScript: 'npm publish [dir] --access public'
 }
