@@ -4,18 +4,11 @@
   "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run file2variable && npm run build-ts && npm run build-less && webpack --config demo/webpack.config.js && npm run clean-rev && rev-static --config demo/rev-static.config.js",
-    "build-ts": "npm run clean && tsc -p src && tsc -p demo",
-    "build-less": "lessc src/grid.less > dist/grid.css && lessc demo/common.less > demo/common.css && npm run cleancss",
-    "lint": "tslint \"src/*.ts\" \"src/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\" && stylelint \"src/*.less\" \"demo/*.less\" --syntax less && npm run standard",
-    "clean-rev": "rimraf demo/**/index.bundle-*.js",
-    "file2variable": "file2variable-cli src/vue-grid.template.html -o src/vue-variables.ts --html-minify --base src",
-    "clean": "rimraf dist",
-    "cleancss": "cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css && cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css",
-    "standard": "standard **/*.config.js",
-    "fix": "standard --fix **/*.config.js",
-    "test": "tsc -p spec && karma start spec/karma.config.js",
-    "release": "clean-release"
+    "build": "clean-scripts build",
+    "lint": "clean-scripts lint",
+    "test": "clean-scripts test",
+    "fix": "clean-scripts fix",
+    "release": "clean-scripts release"
   },
   "repository": {
     "type": "git",
@@ -33,6 +26,7 @@
     "@types/react-dom": "15.5.1",
     "clean-css-cli": "4.1.6",
     "clean-release": "1.3.1",
+    "clean-scripts": "1.0.0",
     "file2variable-cli": "1.4.0",
     "github-fork-ribbon-css": "0.2.1",
     "jasmine": "2.6.0",
