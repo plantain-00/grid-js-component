@@ -9,7 +9,7 @@ module.exports = {
     `lessc demo/common.less > demo/common.css`,
     `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css`,
     `cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css`,
-    `webpack --config demo/webpack.config.js`,
+    `webpack --display-modules --config demo/webpack.config.js`,
     `rev-static --config demo/rev-static.config.js`
   ],
   lint: [
