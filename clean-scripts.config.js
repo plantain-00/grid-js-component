@@ -1,30 +1,41 @@
 module.exports = {
   build: [
     `rimraf dist`,
-    `rimraf demo/**/index.bundle-*.js`,
-    `file2variable-cli src/vue-grid.template.html -o src/vue-variables.ts --html-minify --base src`,
-    `tsc -p src`,
-    `tsc -p demo`,
-    `lessc src/grid.less > dist/grid.css`,
-    `lessc demo/common.less > demo/common.css`,
-    `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css`,
-    `cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css`,
-    `webpack --display-modules --config demo/webpack.config.js`,
+    `mkdirp dist`,
+    {
+      js: [
+        `file2variable-cli src/vue-grid.template.html -o src/vue-variables.ts --html-minify --base src`,
+        `tsc -p src`,
+        `tsc -p demo`,
+        `webpack --display-modules --config demo/webpack.config.js`
+      ],
+      css: [
+        {
+          min: [
+            `lessc src/grid.less > dist/grid.css`,
+            `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css`
+          ],
+          demo: `lessc demo/common.less > demo/common.css`
+        },
+        `cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css`
+      ],
+      clean: `rimraf demo/**/index.bundle-*.js`
+    },
     `rev-static --config demo/rev-static.config.js`
   ],
-  lint: [
-    `tslint "src/*.ts" "src/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`,
-    `standard "**/*.config.js"`,
-    `stylelint "src/*.less" "demo/*.less" --syntax less`
-  ],
+  lint: {
+    ts: `tslint "src/*.ts" "src/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`,
+    js: `standard "**/*.config.js"`,
+    less: `stylelint "src/*.less" "demo/*.less"`
+  },
   test: [
     'tsc -p spec',
     'karma start spec/karma.config.js'
   ],
-  fix: [
-    `standard --fix "**/*.config.js"`
-  ],
-  release: [
-    `clean-release`
-  ]
+  fix: {
+    ts: `tslint --fix "src/*.ts" "src/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`,
+    js: `standard --fix "**/*.config.js"`,
+    less: `stylelint --fix "src/*.less" "demo/*.less"`
+  },
+  release: `clean-release`
 }
