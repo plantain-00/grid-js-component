@@ -9,6 +9,9 @@ export type GridData = {
     sortType?: "asc" | "desc";
 };
 
+/**
+ * @public
+ */
 export type GridRowData = {
     cells: GridCellData[];
     style?: string;

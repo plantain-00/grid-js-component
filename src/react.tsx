@@ -3,6 +3,9 @@ import * as ReactDOM from "react-dom";
 import * as common from "./common";
 export * from "./common";
 
+/**
+ * @public
+ */
 export class Grid extends React.Component<{
     data: common.GridData;
     resize?: boolean;

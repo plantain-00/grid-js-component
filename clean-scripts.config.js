@@ -26,7 +26,8 @@ module.exports = {
   lint: {
     ts: `tslint "src/*.ts" "src/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`,
     js: `standard "**/*.config.js"`,
-    less: `stylelint "src/*.less" "demo/*.less"`
+    less: `stylelint "src/*.less" "demo/*.less"`,
+    export: `no-unused-export "src/**/*.ts" "src/**/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`
   },
   test: [
     'tsc -p spec',
@@ -37,5 +38,6 @@ module.exports = {
     js: `standard --fix "**/*.config.js"`,
     less: `stylelint --fix "src/*.less" "demo/*.less"`
   },
-  release: `clean-release`
+  release: `clean-release`,
+  watch: `watch-then-execute "src/**/*.ts" "src/**/*.tsx" "demo/**/*.ts" "demo/**/*.tsx" "src/**/*.template.html" --exclude "src/*-variables.ts" --script "npm run build"`
 }
