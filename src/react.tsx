@@ -26,7 +26,7 @@ export class Grid extends React.Component<{
     private resizingIndex: number | null = null;
     private canSort = true;
 
-    public componentDidMount() {
+    componentDidMount() {
         this.heads = ReactDOM.findDOMNode(this).childNodes[1].childNodes[0] as HTMLElement;
         this.container = ReactDOM.findDOMNode(this).childNodes[1].childNodes[1] as HTMLElement;
         if (ReactDOM.findDOMNode(this).childNodes[0].childNodes.length > 1) {
@@ -49,7 +49,7 @@ export class Grid extends React.Component<{
         }
         this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container));
     }
-    public componentWillUnmount() {
+    componentWillUnmount() {
         if (this.container) {
             common.Ps.destroy(this.container);
 
