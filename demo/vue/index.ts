@@ -80,7 +80,7 @@ class App extends Vue {
     click(clickData: ClickData) {
         this.clickedCellValue = clickData.cell.value;
     }
-    action(actionData: ActionData) {
+    action(actionData: ActionData<{ id: number }>) {
         deleteOne(actionData.data.id);
 
         const viewData = getViewData();

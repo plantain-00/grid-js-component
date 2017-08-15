@@ -93,8 +93,8 @@ type GridRowData = {
     width?: number;
 };
 
-type GridCellData = {
-    value: any; // the value in the cell
+type GridCellData<T = any> = {
+    value: T; // the value in the cell
     component?: string | Function; //  if exists, show the component rather than the value in the cell
     style?: string; // the class string of the cell, used to set style
     width?: number;
@@ -126,8 +126,8 @@ type ClickData = {
 #### action data structure
 
 ```ts
-type ActionData = {
-    data: any; //  the raw event data from the custom component
+type ActionData<T = any> = {
+    data: T; //  the raw event data from the custom component
 } & (SortData | ClickData);
 ```
 

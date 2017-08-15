@@ -12,17 +12,17 @@ class Grid extends Vue {
     data: common.GridData;
     resize?: boolean;
 
-    container: HTMLElement;
-    heads: HTMLElement;
-    leftContainer?: HTMLElement;
-    rightContainer?: HTMLElement;
+    private container: HTMLElement;
+    private heads: HTMLElement;
+    private leftContainer?: HTMLElement;
+    private rightContainer?: HTMLElement;
 
-    resizingCell: common.GridCellData | null = null;
-    initialClientX: number;
-    initialWidth: number;
-    initialRowWidth: number;
-    resizingIndex: number | null = null;
-    canSort = true;
+    private resizingCell: common.GridCellData | null = null;
+    private initialClientX: number;
+    private initialWidth: number;
+    private initialRowWidth: number;
+    private resizingIndex: number | null = null;
+    private canSort = true;
 
     sort(sortData: common.SortData) {
         if (this.canSort) {

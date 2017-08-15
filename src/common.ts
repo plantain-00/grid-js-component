@@ -18,8 +18,8 @@ export type GridRowData = {
     width?: number;
 };
 
-export type GridCellData = {
-    value: any;
+export type GridCellData<T = any> = {
+    value: T;
     // tslint:disable-next-line:ban-types
     component?: string | Function;
     style?: string;
@@ -40,8 +40,8 @@ export type ClickData = {
     columnIndex: number;
 };
 
-export type ActionData = {
-    data: any;
+export type ActionData<T = any> = {
+    data: T;
 } & (SortData | ClickData);
 
 export type ResizeData = {

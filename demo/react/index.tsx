@@ -25,43 +25,8 @@ const data = getViewData();
 setComponents(data);
 
 class Main extends React.Component<{}, {}> {
-    data = data;
-    clickedCellValue: any = null;
-
-    sort(sortData: SortData) {
-        if (!sortData.cell.value) {
-            return;
-        }
-        const sortType = this.data.sortType === "asc" ? "desc" : "asc";
-        sort(sortData.cell.value, sortType);
-
-        const viewData = getViewData();
-        setComponents(viewData);
-        viewData.sortColumn = sortData.cell.value;
-        viewData.sortType = sortType;
-
-        this.data = viewData;
-        this.setState({ data: this.data });
-    }
-
-    click(clickData: ClickData) {
-        this.clickedCellValue = clickData.cell.value;
-        this.setState({ clickedCellValue: this.clickedCellValue });
-    }
-
-    action(actionData: ActionData) {
-        deleteOne(actionData.data.id);
-
-        const viewData = getViewData();
-        setComponents(viewData);
-
-        this.data = viewData;
-        this.setState({ data: this.data });
-    }
-
-    resized(resizeData: ResizeData) {
-        resized(resizeData);
-    }
+    private data = data;
+    private clickedCellValue: any = null;
 
     render() {
         return (
@@ -80,6 +45,41 @@ class Main extends React.Component<{}, {}> {
                 </p>
             </div>
         );
+    }
+
+    private sort(sortData: SortData) {
+        if (!sortData.cell.value) {
+            return;
+        }
+        const sortType = this.data.sortType === "asc" ? "desc" : "asc";
+        sort(sortData.cell.value, sortType);
+
+        const viewData = getViewData();
+        setComponents(viewData);
+        viewData.sortColumn = sortData.cell.value;
+        viewData.sortType = sortType;
+
+        this.data = viewData;
+        this.setState({ data: this.data });
+    }
+
+    private click(clickData: ClickData) {
+        this.clickedCellValue = clickData.cell.value;
+        this.setState({ clickedCellValue: this.clickedCellValue });
+    }
+
+    private action(actionData: ActionData<{ id: number }>) {
+        deleteOne(actionData.data.id);
+
+        const viewData = getViewData();
+        setComponents(viewData);
+
+        this.data = viewData;
+        this.setState({ data: this.data });
+    }
+
+    private resized(resizeData: ResizeData) {
+        resized(resizeData);
     }
 }
 

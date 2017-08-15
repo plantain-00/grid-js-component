@@ -14,83 +14,19 @@ export class Grid extends React.Component<{
     action: (actionData: common.ActionData) => void;
     resized: (resizeData: common.ResizeData) => void;
 }, {}> {
-    container: HTMLElement;
-    heads: HTMLElement;
-    leftContainer?: HTMLElement;
-    rightContainer?: HTMLElement;
+    private container: HTMLElement;
+    private heads: HTMLElement;
+    private leftContainer?: HTMLElement;
+    private rightContainer?: HTMLElement;
 
-    resizingCell: common.GridCellData | null = null;
-    initialClientX: number;
-    initialWidth: number;
-    initialRowWidth: number;
-    resizingIndex: number | null = null;
-    canSort = true;
+    private resizingCell: common.GridCellData | null = null;
+    private initialClientX: number;
+    private initialWidth: number;
+    private initialRowWidth: number;
+    private resizingIndex: number | null = null;
+    private canSort = true;
 
-    sort(sortData: common.SortData) {
-        if (this.canSort) {
-            this.props.sort(sortData);
-        } else {
-            this.canSort = true;
-        }
-    }
-
-    isAsc(column: string) {
-        return this.props.data.sortType === "asc" && this.props.data.sortColumn !== "" && this.props.data.sortColumn === column;
-    }
-    isDesc(column: string) {
-        return this.props.data.sortType === "desc" && this.props.data.sortColumn !== "" && this.props.data.sortColumn === column;
-    }
-
-    click(clickData: common.ClickData) {
-        this.props.click(clickData);
-    }
-
-    action(actionData: common.ActionData) {
-        this.props.action(actionData);
-    }
-
-    resizeStart(e: React.MouseEvent<HTMLDivElement>, cell: common.GridCellData, columnIndex: number) {
-        this.resizingCell = cell;
-        e.stopPropagation();
-        this.initialClientX = e.clientX;
-        this.initialWidth = (e.target as HTMLElement).parentElement!.getClientRects()[0].width;
-        this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width;
-        this.resizingIndex = columnIndex;
-    }
-    resizeEnd(e: React.MouseEvent<HTMLDivElement>) {
-        this.resizingCell = null;
-
-        if (!this.canSort) {
-            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
-            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
-            const resizeData: common.ResizeData = {
-                cellWidth,
-                rowWidth,
-                index: this.resizingIndex!,
-            };
-            this.props.resized(resizeData);
-        }
-    }
-    mousemove(e: React.MouseEvent<HTMLDivElement>) {
-        if (this.resizingCell) {
-            e.preventDefault();
-            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
-            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
-            this.resizingCell.width = cellWidth;
-            this.props.data.headers.width = rowWidth;
-            for (const row of this.props.data.rows) {
-                row.width = rowWidth;
-                row.cells[this.resizingIndex!].width = cellWidth;
-            }
-            this.forceUpdate();
-            this.canSort = false;
-        }
-    }
-    getStyle(width: number | undefined) {
-        return width ? { width } : {};
-    }
-
-    componentDidMount() {
+    public componentDidMount() {
         this.heads = ReactDOM.findDOMNode(this).childNodes[1].childNodes[0] as HTMLElement;
         this.container = ReactDOM.findDOMNode(this).childNodes[1].childNodes[1] as HTMLElement;
         if (ReactDOM.findDOMNode(this).childNodes[0].childNodes.length > 1) {
@@ -113,7 +49,7 @@ export class Grid extends React.Component<{
         }
         this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container));
     }
-    componentWillUnmount() {
+    public componentWillUnmount() {
         if (this.container) {
             common.Ps.destroy(this.container);
 
@@ -334,5 +270,69 @@ export class Grid extends React.Component<{
                 </table>
             </div>
         );
+    }
+
+    private sort(sortData: common.SortData) {
+        if (this.canSort) {
+            this.props.sort(sortData);
+        } else {
+            this.canSort = true;
+        }
+    }
+
+    private isAsc(column: string) {
+        return this.props.data.sortType === "asc" && this.props.data.sortColumn !== "" && this.props.data.sortColumn === column;
+    }
+    private isDesc(column: string) {
+        return this.props.data.sortType === "desc" && this.props.data.sortColumn !== "" && this.props.data.sortColumn === column;
+    }
+
+    private click(clickData: common.ClickData) {
+        this.props.click(clickData);
+    }
+
+    private action(actionData: common.ActionData) {
+        this.props.action(actionData);
+    }
+
+    private resizeStart(e: React.MouseEvent<HTMLDivElement>, cell: common.GridCellData, columnIndex: number) {
+        this.resizingCell = cell;
+        e.stopPropagation();
+        this.initialClientX = e.clientX;
+        this.initialWidth = (e.target as HTMLElement).parentElement!.getClientRects()[0].width;
+        this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width;
+        this.resizingIndex = columnIndex;
+    }
+    private resizeEnd(e: React.MouseEvent<HTMLDivElement>) {
+        this.resizingCell = null;
+
+        if (!this.canSort) {
+            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
+            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
+            const resizeData: common.ResizeData = {
+                cellWidth,
+                rowWidth,
+                index: this.resizingIndex!,
+            };
+            this.props.resized(resizeData);
+        }
+    }
+    private mousemove(e: React.MouseEvent<HTMLDivElement>) {
+        if (this.resizingCell) {
+            e.preventDefault();
+            const cellWidth = this.initialWidth + e.clientX - this.initialClientX;
+            const rowWidth = this.initialRowWidth + e.clientX - this.initialClientX;
+            this.resizingCell.width = cellWidth;
+            this.props.data.headers.width = rowWidth;
+            for (const row of this.props.data.rows) {
+                row.width = rowWidth;
+                row.cells[this.resizingIndex!].width = cellWidth;
+            }
+            this.forceUpdate();
+            this.canSort = false;
+        }
+    }
+    private getStyle(width: number | undefined) {
+        return width ? { width } : {};
     }
 }
