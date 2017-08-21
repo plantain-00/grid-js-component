@@ -54,5 +54,13 @@ module.exports = {
     less: `stylelint --fix "src/*.less" "demo/*.less"`
   },
   release: `clean-release`,
-  watch: `watch-then-execute "src/**/*.ts" "src/**/*.tsx" "demo/**/*.ts" "demo/**/*.tsx" "src/**/*.template.html" --exclude "src/*-variables.ts" --script "npm run build"`
+  watch: {
+    template: `file2variable-cli src/vue-grid.template.html -o src/vue-variables.ts --html-minify --base src --watch`,
+    src: `tsc -p src --watch`,
+    demo: `tsc -p demo --watch`,
+    webpack: `webpack --config demo/webpack.config.js --watch`,
+    less: `watch-then-execute "src/grid.less" --script "clean-scripts build[2].css[0].min"`,
+    lessDemo: `watch-then-execute "demo/common.less" --script "clean-scripts build[2].css[0].demo"`,
+    rev: `rev-static --config demo/rev-static.config.js --watch`
+  }
 }
