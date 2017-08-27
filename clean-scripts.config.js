@@ -35,8 +35,6 @@ module.exports = {
       for (const type of ['vue', 'react']) {
         await page.goto(`http://localhost:8000/demo/${type}`)
         await page.screenshot({ path: `demo/${type}/screenshot.png`, fullPage: true })
-        const content = await page.content()
-        fs.writeFileSync(`demo/${type}/screenshot-src.html`, content)
       }
       server.close()
       browser.close()
