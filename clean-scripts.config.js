@@ -27,7 +27,6 @@ module.exports = {
     async () => {
       const { createServer } = require('http-server')
       const puppeteer = require('puppeteer')
-      const fs = require('fs')
       const server = createServer()
       server.listen(8000)
       const browser = await puppeteer.launch()
