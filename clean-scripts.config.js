@@ -27,6 +27,9 @@ module.exports = {
     async () => {
       const { createServer } = require('http-server')
       const puppeteer = require('puppeteer')
+      const fs = require('fs')
+      const beautify = require('js-beautify').html
+      const parse5 = require('parse5')
       const server = createServer()
       server.listen(8000)
       const browser = await puppeteer.launch()
@@ -35,6 +38,17 @@ module.exports = {
       for (const type of ['vue', 'react']) {
         await page.goto(`http://localhost:8000/demo/${type}`)
         await page.screenshot({ path: `demo/${type}/screenshot.png`, fullPage: true })
+        const content = await page.content()
+        const document = parse5.parse(content)
+        forEach(document, node => {
+          if (node.attrs) {
+            const attr = node.attrs.find(a => a.name === 'data-ps-id')
+            if (attr) {
+              attr.value = '[data-ps-id]'
+            }
+          }
+        })
+        fs.writeFileSync(`demo/${type}/screenshot-src.html`, beautify(parse5.serialize(document)))
       }
       server.close()
       browser.close()
@@ -79,5 +93,14 @@ module.exports = {
     less: `watch-then-execute "src/grid.less" --script "clean-scripts build[2].css[0].min && clean-scripts build[2].css[1]"`,
     lessDemo: `watch-then-execute "demo/common.less" --script "clean-scripts build[2].css[0].demo && clean-scripts build[2].css[1]"`,
     rev: `rev-static --config demo/rev-static.config.js --watch`
+  }
+}
+
+function forEach (node, callback) {
+  callback(node)
+  if (node.childNodes) {
+    for (const childNode of node.childNodes) {
+      forEach(childNode, callback)
+    }
   }
 }
