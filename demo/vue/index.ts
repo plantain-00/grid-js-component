@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
+// tslint:disable-next-line:no-duplicate-imports
 import "../../dist/vue";
 import { GridData, SortData, ClickData, ActionData, ResizeData } from "../../dist/vue";
 
