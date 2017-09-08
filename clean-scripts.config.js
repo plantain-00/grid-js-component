@@ -1,4 +1,7 @@
 const childProcess = require('child_process')
+const util = require('util')
+
+const execAsync = util.promisify(childProcess.exec)
 
 module.exports = {
   build: [
@@ -58,26 +61,20 @@ module.exports = {
     ts: `tslint "src/*.ts" "src/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`,
     js: `standard "**/*.config.js"`,
     less: `stylelint "src/*.less" "demo/*.less"`,
-    export: `no-unused-export "src/**/*.ts" "src/**/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`
+    export: `no-unused-export "src/**/*.ts" "src/**/*.tsx" "src/*.less" "demo/**/*.ts" "demo/**/*.tsx"`
   },
   test: [
     'tsc -p spec',
     'karma start spec/karma.config.js',
     'git checkout demo/vue/screenshot.png',
     'git checkout demo/react/screenshot.png',
-    () => new Promise((resolve, reject) => {
-      childProcess.exec('git status -s', (error, stdout, stderr) => {
-        if (error) {
-          reject(error)
-        } else {
-          if (stdout) {
-            reject(new Error(`generated files doesn't match.`))
-          } else {
-            resolve()
-          }
-        }
-      }).stdout.pipe(process.stdout)
-    })
+    async () => {
+      const { stdout } = await execAsync('git status -s')
+      if (stdout) {
+        console.log(stdout)
+        throw new Error(`generated files doesn't match.`)
+      }
+    }
   ],
   fix: {
     ts: `tslint --fix "src/*.ts" "src/*.tsx" "demo/**/*.ts" "demo/**/*.tsx"`,
