@@ -17,14 +17,18 @@ module.exports = {
       css: [
         {
           min: [
-            `lessc src/grid.less > dist/grid.css`,
+            `lessc src/grid.less > src/grid.css`,
+            `postcss src/grid.css -o dist/grid.css`,
             `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css`
           ],
           demo: `lessc demo/common.less > demo/common.css`
         },
         `cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css`
       ],
-      clean: `rimraf demo/**/index.bundle-*.js`
+      clean: {
+        js: `rimraf demo/**/index.bundle-*.js`,
+        css: `rimraf demo/**/index.bundle-*.css`
+      }
     },
     `rev-static --config demo/rev-static.config.js`,
     async () => {
