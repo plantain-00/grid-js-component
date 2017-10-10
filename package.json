@@ -1,6 +1,6 @@
 {
   "name": "grid-js-component",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A reactjs and vuejs grid component.",
   "main": "index.js",
   "scripts": {
