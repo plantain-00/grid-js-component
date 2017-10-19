@@ -24,7 +24,7 @@ module.exports = {
           min: [
             `lessc src/grid.less > src/grid.css`,
             `postcss src/grid.css -o dist/grid.css`,
-            `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css`
+            `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/css/perfect-scrollbar.css`
           ],
           demo: `lessc demo/common.less > demo/common.css`
         },
