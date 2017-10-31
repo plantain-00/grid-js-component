@@ -50,7 +50,7 @@ export type ResizeData = {
     index: number;
 };
 
-import * as Ps from "perfect-scrollbar";
+import Ps from "perfect-scrollbar";
 
 export { Ps };
 
@@ -83,16 +83,16 @@ function getDeltaFromEvent(e: WheelEvent) {
     return { deltaX, deltaY };
 }
 
-export function updateVerticalScroll(e: WheelEvent, container: HTMLElement) {
+export function updateVerticalScroll(e: WheelEvent, container: HTMLElement, ps: Ps) {
     const { deltaY } = getDeltaFromEvent(e);
     container.scrollTop -= deltaY;
-    Ps.update(container);
+    ps.update();
 }
 
-export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement) {
+export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement, ps: Ps) {
     const { deltaX } = getDeltaFromEvent(e);
     container.scrollLeft += deltaX;
-    Ps.update(container);
+    ps.update();
 }
 
 export function handleScrollYEvent(e: Event, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {

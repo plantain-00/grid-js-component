@@ -23,6 +23,7 @@ class Grid extends Vue {
     private initialRowWidth: number;
     private resizingIndex: number | null = null;
     private canSort = true;
+    private ps: common.Ps;
 
     sort(sortData: common.SortData) {
         if (this.canSort) {
@@ -98,22 +99,22 @@ class Grid extends Vue {
             this.rightContainer = this.$el.childNodes[2].childNodes[1] as HTMLElement;
         }
 
-        common.Ps.initialize(this.container);
+        this.ps = new common.Ps(this.container);
 
         this.container.addEventListener("ps-scroll-y", e => common.handleScrollYEvent(e, this.leftContainer, this.rightContainer));
         this.container.addEventListener("ps-scroll-x", e => common.handleScrollXEvent(e, this.heads));
 
         if (this.leftContainer) {
-            this.leftContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container));
+            this.leftContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container, this.ps));
         }
         if (this.rightContainer) {
-            this.rightContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container));
+            this.rightContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container, this.ps));
         }
-        this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container));
+        this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container, this.ps));
     }
     beforeDestroy() {
         if (this.container) {
-            common.Ps.destroy(this.container);
+            this.ps.destroy();
 
             this.container.removeEventListener("ps-scroll-x");
             this.container.removeEventListener("ps-scroll-y");
