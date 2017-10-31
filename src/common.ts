@@ -83,36 +83,42 @@ function getDeltaFromEvent(e: WheelEvent) {
     return { deltaX, deltaY };
 }
 
-export function updateVerticalScroll(e: WheelEvent, container: HTMLElement, ps: Ps) {
+export function updateVerticalScroll(e: WheelEvent, container: HTMLElement, ps: Ps | null, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
     const { deltaY } = getDeltaFromEvent(e);
-    container.scrollTop -= deltaY;
-    ps.update();
+    const scrollTop = container.scrollTop - deltaY;
+    container.scrollTop = scrollTop;
+    if (ps) {
+        ps.update();
+    }
+    handleScrollYEvent(scrollTop, leftContainer, rightContainer);
 }
 
-export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement, ps: Ps) {
+export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement, ps: Ps | null) {
     const { deltaX } = getDeltaFromEvent(e);
     container.scrollLeft += deltaX;
-    ps.update();
+    if (ps) {
+        ps.update();
+    }
 }
 
-export function handleScrollYEvent(e: Event, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
+export function handleScrollYEvent(scrollTop: number, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
     if (leftContainer) {
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < leftContainer.childNodes.length; i++) {
-            (leftContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
+            (leftContainer.childNodes[i] as HTMLElement).style.top = -scrollTop + "px";
         }
     }
     if (rightContainer) {
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < rightContainer.childNodes.length; i++) {
-            (rightContainer.childNodes[i] as HTMLElement).style.top = -(e.target as HTMLElement).scrollTop + "px";
+            (rightContainer.childNodes[i] as HTMLElement).style.top = -scrollTop + "px";
         }
     }
 }
 
-export function handleScrollXEvent(e: Event, heads: HTMLElement) {
+export function handleScrollXEvent(scrollLeft: number, heads: HTMLElement) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < heads.childNodes.length; i++) {
-        (heads.childNodes[i] as HTMLElement).style.left = -(e.target as HTMLElement).scrollLeft + "px";
+        (heads.childNodes[i] as HTMLElement).style.left = -scrollLeft + "px";
     }
 }

@@ -25,7 +25,7 @@ export class Grid extends React.Component<{
     private initialRowWidth: number;
     private resizingIndex: number | null = null;
     private canSort = true;
-    private ps: common.Ps;
+    private ps: common.Ps | null;
 
     componentDidMount() {
         this.heads = ReactDOM.findDOMNode(this as any).childNodes[1].childNodes[0] as HTMLElement;
@@ -39,20 +39,25 @@ export class Grid extends React.Component<{
 
         this.ps = new common.Ps(this.container);
 
-        this.container.addEventListener("ps-scroll-y", e => common.handleScrollYEvent(e, this.leftContainer, this.rightContainer));
-        this.container.addEventListener("ps-scroll-x", e => common.handleScrollXEvent(e, this.heads));
+        this.container.addEventListener("ps-scroll-y", e => common.handleScrollYEvent((e.target as HTMLElement).scrollTop, this.leftContainer, this.rightContainer));
+        this.container.addEventListener("ps-scroll-x", e => common.handleScrollXEvent((e.target as HTMLElement).scrollLeft, this.heads));
+        this.container.addEventListener("ps-x-reach-start", e => common.handleScrollXEvent(0, this.heads));
+        this.container.addEventListener("ps-x-reach-end", e => common.handleScrollXEvent(this.container.scrollLeft, this.heads));
+        this.container.addEventListener("ps-y-reach-start", e => common.handleScrollYEvent(0, this.leftContainer, this.rightContainer));
+        this.container.addEventListener("ps-y-reach-end", e => common.handleScrollYEvent(this.container.scrollTop, this.leftContainer, this.rightContainer));
 
         if (this.leftContainer) {
-            this.leftContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container, this.ps));
+            this.leftContainer.addEventListener("wheel", e => common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer));
         }
         if (this.rightContainer) {
-            this.rightContainer.addEventListener("mousewheel", e => common.updateVerticalScroll(e, this.container, this.ps));
+            this.rightContainer.addEventListener("wheel", e => common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer));
         }
-        this.heads.addEventListener("mousewheel", e => common.updateHorizontalScroll(e, this.container, this.ps));
+        this.heads.addEventListener("wheel", e => common.updateHorizontalScroll(e, this.container, this.ps));
     }
     componentWillUnmount() {
-        if (this.container) {
+        if (this.container && this.ps) {
             this.ps.destroy();
+            this.ps = null;
 
             this.container.removeEventListener("ps-scroll-x");
             this.container.removeEventListener("ps-scroll-y");
