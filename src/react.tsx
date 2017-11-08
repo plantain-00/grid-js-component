@@ -39,36 +39,40 @@ export class Grid extends React.Component<{
 
         this.ps = new common.Ps(this.container);
 
-        this.container.addEventListener("ps-scroll-y", e => common.handleScrollYEvent((e.target as HTMLElement).scrollTop, this.leftContainer, this.rightContainer));
-        this.container.addEventListener("ps-scroll-x", e => common.handleScrollXEvent((e.target as HTMLElement).scrollLeft, this.heads));
-        this.container.addEventListener("ps-x-reach-start", e => common.handleScrollXEvent(0, this.heads));
-        this.container.addEventListener("ps-x-reach-end", e => common.handleScrollXEvent(this.container.scrollLeft, this.heads));
-        this.container.addEventListener("ps-y-reach-start", e => common.handleScrollYEvent(0, this.leftContainer, this.rightContainer));
-        this.container.addEventListener("ps-y-reach-end", e => common.handleScrollYEvent(this.container.scrollTop, this.leftContainer, this.rightContainer));
+        this.container.addEventListener("ps-scroll-y", this.handlePsScrollY);
+        this.container.addEventListener("ps-scroll-x", this.handlePsScrollX);
+        this.container.addEventListener("ps-x-reach-start", this.handlePsXReachStart);
+        this.container.addEventListener("ps-x-reach-end", this.handlePsXReachEnd);
+        this.container.addEventListener("ps-y-reach-start", this.handlePsYReachStart);
+        this.container.addEventListener("ps-y-reach-end", this.handlePsYReachEnd);
 
         if (this.leftContainer) {
-            this.leftContainer.addEventListener("wheel", e => common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer));
+            this.leftContainer.addEventListener("wheel", this.handleWheel);
         }
         if (this.rightContainer) {
-            this.rightContainer.addEventListener("wheel", e => common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer));
+            this.rightContainer.addEventListener("wheel", this.handleWheel);
         }
-        this.heads.addEventListener("wheel", e => common.updateHorizontalScroll(e, this.container, this.ps));
+        this.heads.addEventListener("wheel", this.handleWheelForHead);
     }
     componentWillUnmount() {
         if (this.container && this.ps) {
             this.ps.destroy();
             this.ps = null;
 
-            this.container.removeEventListener("ps-scroll-x");
-            this.container.removeEventListener("ps-scroll-y");
+            this.container.removeEventListener("ps-scroll-x", this.handlePsScrollX);
+            this.container.removeEventListener("ps-scroll-y", this.handlePsScrollY);
+            this.container.removeEventListener("ps-x-reach-start", this.handlePsXReachStart);
+            this.container.removeEventListener("ps-x-reach-end", this.handlePsXReachEnd);
+            this.container.removeEventListener("ps-y-reach-start", this.handlePsYReachStart);
+            this.container.removeEventListener("ps-y-reach-end", this.handlePsYReachEnd);
 
             if (this.leftContainer) {
-                this.leftContainer.removeEventListener("mousewheel");
+                this.leftContainer.removeEventListener("wheel", this.handleWheel);
             }
             if (this.rightContainer) {
-                this.rightContainer.removeEventListener("mousewheel");
+                this.rightContainer.removeEventListener("wheel", this.handleWheel);
             }
-            this.heads.removeEventListener("mousewheel");
+            this.heads.removeEventListener("wheel", this.handleWheelForHead);
         }
     }
 
@@ -277,6 +281,15 @@ export class Grid extends React.Component<{
             </div>
         );
     }
+
+    private handlePsScrollY = (e: Event) => common.handleScrollYEvent((e.target as HTMLElement).scrollTop, this.leftContainer, this.rightContainer);
+    private handlePsScrollX = (e: Event) => common.handleScrollXEvent((e.target as HTMLElement).scrollLeft, this.heads);
+    private handlePsXReachStart = (e: Event) => common.handleScrollXEvent(0, this.heads);
+    private handlePsXReachEnd = (e: Event) => common.handleScrollXEvent(this.container.scrollLeft, this.heads);
+    private handlePsYReachStart = (e: Event) => common.handleScrollYEvent(0, this.leftContainer, this.rightContainer);
+    private handlePsYReachEnd = (e: Event) => common.handleScrollYEvent(this.container.scrollTop, this.leftContainer, this.rightContainer);
+    private handleWheel = (e: WheelEvent) => common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer);
+    private handleWheelForHead = (e: WheelEvent) => common.updateHorizontalScroll(e, this.container, this.ps);
 
     private sort(sortData: common.SortData) {
         if (this.canSort) {
