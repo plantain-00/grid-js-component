@@ -97,6 +97,7 @@ export class Grid extends React.Component<{
                 const divider = this.props.resize ? (<div className="divider" onMouseDown={e => this.resizeStart(e, cell, columnIndex)}></div>) : null;
                 return (
                     <th className={"grid-main-head-row-cell " + (cell.style || "")}
+                        key={columnIndex}
                         style={this.getStyle(cell.width)}
                         onClick={e => this.sort({ cell, header: this.props.data.headers, columnIndex })}>
                         {ascMarker}
@@ -135,6 +136,7 @@ export class Grid extends React.Component<{
                 ) : null;
                 return (
                     <th className={"grid-left-head-row-cell " + (cell.style || "")}
+                        key={columnIndex}
                         onClick={e => this.sort({ cell, header: this.props.data.leftHeaders!, columnIndex })}>
                         {ascMarker}
                         {descMarker}
@@ -170,6 +172,7 @@ export class Grid extends React.Component<{
                 ) : null;
                 return (
                     <th className={"grid-right-head-row-cell " + (cell.style || "")}
+                        key={columnIndex}
                         onClick={e => this.sort({ cell, header: this.props.data.rightHeaders!, columnIndex })}>
                         {ascMarker}
                         {descMarker}
@@ -194,6 +197,7 @@ export class Grid extends React.Component<{
                 }) : cell.value;
                 return (
                     <td className={"grid-main-body-row-cell " + (cell.style || "")}
+                        key={columnIndex}
                         style={this.getStyle(cell.width)}
                         onClick={() => this.click({ cell, row, body: this.props.data.rows, rowIndex, columnIndex })}>
                         {bodyCell}
@@ -202,6 +206,7 @@ export class Grid extends React.Component<{
             });
             return (
                 <tr className={"grid-main-body-row " + (row.style || "")}
+                    key={rowIndex}
                     style={this.getStyle(row.width)}>
                     {cells}
                 </tr>
@@ -217,13 +222,14 @@ export class Grid extends React.Component<{
                     }) : cell.value;
                     return (
                         <td className={"grid-left-body-row-cell " + (cell.style || "")}
+                            key={columnIndex}
                             onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
                             {bodyCell}
                         </td>
                     );
                 });
                 return (
-                    <tr className={"grid-left-body-row " + (row.style || "")}>
+                    <tr className={"grid-left-body-row " + (row.style || "")} key={rowIndex}>
                         {cells}
                     </tr>
                 );
@@ -244,13 +250,14 @@ export class Grid extends React.Component<{
                     }) : cell.value;
                     return (
                         <td className={"grid-right-body-row-cell " + (cell.style || "")}
+                            key={columnIndex}
                             onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>
                             {bodyCell}
                         </td>
                     );
                 });
                 return (
-                    <tr className={"grid-right-body-row " + (row.style || "")}>
+                    <tr className={"grid-right-body-row " + (row.style || "")} key={rowIndex}>
                         {cells}
                     </tr>
                 );
