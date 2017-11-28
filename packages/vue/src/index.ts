@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import * as common from "./common";
-export * from "./common";
-import { vueGridTemplateHtml } from "./vue-variables";
+import * as common from "grid-js-component";
+export * from "grid-js-component";
+import { indexTemplateHtml } from "./variables";
 
 @Component({
-    template: vueGridTemplateHtml,
+    template: indexTemplateHtml,
     props: ["data", "resize"],
 })
 class Grid extends Vue {

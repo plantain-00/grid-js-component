@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export type GridData = {
     headers: GridRowData;
     rows: GridRowData[];
@@ -18,6 +21,9 @@ export type GridRowData = {
     width?: number;
 };
 
+/**
+ * @public
+ */
 export type GridCellData<T = any> = {
     value: T;
     // tslint:disable-next-line:ban-types
@@ -26,12 +32,18 @@ export type GridCellData<T = any> = {
     width?: number;
 };
 
+/**
+ * @public
+ */
 export type SortData = {
     cell: GridCellData;
     header: GridRowData;
     columnIndex: number;
 };
 
+/**
+ * @public
+ */
 export type ClickData = {
     cell: GridCellData;
     row: GridRowData;
@@ -40,10 +52,16 @@ export type ClickData = {
     columnIndex: number;
 };
 
+/**
+ * @public
+ */
 export type ActionData<T = any> = {
     data: T;
 } & (SortData | ClickData);
 
+/**
+ * @public
+ */
 export type ResizeData = {
     cellWidth: number;
     rowWidth: number;
@@ -83,6 +101,9 @@ function getDeltaFromEvent(e: WheelEvent) {
     return { deltaX, deltaY };
 }
 
+/**
+ * @public
+ */
 export function updateVerticalScroll(e: WheelEvent, container: HTMLElement, ps: Ps | null, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
     const { deltaY } = getDeltaFromEvent(e);
     const scrollTop = container.scrollTop - deltaY;
@@ -93,6 +114,9 @@ export function updateVerticalScroll(e: WheelEvent, container: HTMLElement, ps: 
     handleScrollYEvent(scrollTop, leftContainer, rightContainer);
 }
 
+/**
+ * @public
+ */
 export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement, ps: Ps | null) {
     const { deltaX } = getDeltaFromEvent(e);
     container.scrollLeft += deltaX;
@@ -101,6 +125,9 @@ export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement, ps
     }
 }
 
+/**
+ * @public
+ */
 export function handleScrollYEvent(scrollTop: number, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
     if (leftContainer) {
         // tslint:disable-next-line:prefer-for-of
@@ -116,6 +143,9 @@ export function handleScrollYEvent(scrollTop: number, leftContainer: HTMLElement
     }
 }
 
+/**
+ * @public
+ */
 export function handleScrollXEvent(scrollLeft: number, heads: HTMLElement) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < heads.childNodes.length; i++) {

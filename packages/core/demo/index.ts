@@ -1,4 +1,4 @@
-import { GridData, ResizeData } from "../dist/common";
+import { GridData, ResizeData } from "../dist/";
 
 let rawData = [
     {
@@ -55,21 +55,33 @@ let rawData = [
 const cellWidths = [0, 0, 0];
 let rowWidth = 0;
 
+/**
+ * @public
+ */
 export function sort(sortColumn: string, sortType: "asc" | "desc") {
     rawData.sort((a: any, b: any) => sortType === "asc"
         ? (typeof a[sortColumn] === "string" ? a[sortColumn].localeCompare(b[sortColumn]) : a[sortColumn] - b[sortColumn])
         : (typeof b[sortColumn] === "string" ? b[sortColumn].localeCompare(a[sortColumn]) : b[sortColumn] - a[sortColumn]));
 }
 
+/**
+ * @public
+ */
 export function deleteOne(id: number) {
     rawData = rawData.filter(d => d.id !== id);
 }
 
+/**
+ * @public
+ */
 export function resized(resizeData: ResizeData) {
     rowWidth = resizeData.rowWidth;
     cellWidths[resizeData.index] = resizeData.cellWidth;
 }
 
+/**
+ * @public
+ */
 export function getViewData() {
     const data: GridData = {
         sortType: "desc",

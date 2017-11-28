@@ -25,18 +25,18 @@ const resolve = {
 
 module.exports = [
   {
-    entry: './demo/vue/index',
+    entry: './packages/vue/demo/index',
     output: {
-      path: path.resolve(__dirname, 'vue'),
+      path: path.resolve(__dirname, 'packages/vue/demo'),
       filename: 'index.bundle.js'
     },
     plugins,
     resolve
   },
   {
-    entry: './demo/react/index',
+    entry: './packages/react/demo/index',
     output: {
-      path: path.resolve(__dirname, 'react'),
+      path: path.resolve(__dirname, 'packages/react/demo'),
       filename: 'index.bundle.js'
     },
     plugins,

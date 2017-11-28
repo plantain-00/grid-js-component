@@ -1,23 +1,31 @@
 const { Service, checkGitStatus, executeScriptAsync } = require('clean-scripts')
 const { watch } = require('watch-then-execute')
 
-const tsFiles = `"src/**/*.ts" "src/**/*.tsx" "spec/**/*.ts" "demo/**/*.ts" "demo/**/*.tsx" "screenshots/**/*.ts"`
-const lessFiles = `"src/**/*.less"`
-const jsFiles = `"*.config.js" "demo/*.config.js" "spec/**/*.config.js"`
+const tsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.@(ts|tsx)" "spec/**/*.ts" "screenshots/**/*.ts"`
+const lessFiles = `"packages/core/src/**/*.less" "packages/core/demo/**/*.less"`
+const jsFiles = `"*.config.js" "spec/**/*.config.js"`
+const excludeTsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.d.ts"`
 
-const templateCommand = `file2variable-cli src/vue-grid.template.html -o src/vue-variables.ts --html-minify --base src`
-const tscSrcCommand = `tsc -p src`
-const tscDemoCommand = `tsc -p demo`
-const webpackCommand = `webpack --display-modules --config demo/webpack.config.js`
-const revStaticCommand = `rev-static --config demo/rev-static.config.js`
-
-const srcCssCommand = [
-  `lessc src/grid.less > src/grid.css`,
-  `postcss src/grid.css -o dist/grid.css`,
-  `cleancss -o dist/grid.min.css dist/grid.css ./node_modules/perfect-scrollbar/css/perfect-scrollbar.css`
+const vueTemplateCommand = `file2variable-cli packages/vue/src/*.template.html -o packages/vue/src/variables.ts --html-minify --base packages/vue/src/`
+const tscSrcCommand = [
+  `tsc -p packages/core/src`,
+  `tsc -p packages/vue/src`,
+  `tsc -p packages/react/src`
 ]
-const demoCssCommand = `lessc demo/common.less > demo/common.css`
-const cleancssCommand = `cleancss -o demo/index.bundle.css dist/grid.min.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css demo/common.css`
+const tscDemoCommand = [
+  `tsc -p packages/core/demo`,
+  `tsc -p packages/vue/demo`,
+  `tsc -p packages/react/demo`
+]
+const webpackCommand = `webpack`
+const revStaticCommand = `rev-static`
+const cssCommand = [
+  `lessc packages/core/src/grid.less -sm=on > packages/core/src/grid.css`,
+  `postcss packages/core/src/grid.css -o packages/core/dist/grid.css`,
+  `cleancss packages/core/dist/grid.css ./node_modules/perfect-scrollbar/css/perfect-scrollbar.css -o packages/core/dist/grid.min.css`,
+  `lessc packages/core/demo/index.less -sm=on > packages/core/demo/index.css`,
+  `cleancss packages/core/dist/grid.min.css packages/core/demo/index.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css -o packages/core/demo/index.bundle.css`
+]
 
 module.exports = {
   build: [
@@ -25,30 +33,21 @@ module.exports = {
     `mkdirp dist`,
     {
       js: [
-        templateCommand,
+        vueTemplateCommand,
         tscSrcCommand,
         tscDemoCommand,
         webpackCommand
       ],
-      css: [
-        {
-          src: srcCssCommand,
-          demo: demoCssCommand
-        },
-        cleancssCommand
-      ],
-      clean: {
-        js: `rimraf demo/**/index.bundle-*.js`,
-        css: `rimraf demo/**/index.bundle-*.css`
-      }
+      css: cssCommand,
+      clean: `rimraf "packages/@(core|vue|react|angular)/demo/**/@(*.bundle-*.js|*.bundle-*.css)"`
     },
     revStaticCommand
   ],
   lint: {
-    ts: `tslint ${tsFiles}`,
+    ts: `tslint ${tsFiles} --exclude ${excludeTsFiles}`,
     js: `standard ${jsFiles}`,
     less: `stylelint ${lessFiles}`,
-    export: `no-unused-export ${tsFiles} ${lessFiles} --exclude "src/compiled/**/*"`,
+    export: `no-unused-export ${tsFiles} ${lessFiles} --exclude ${excludeTsFiles}`,
     commit: `commitlint --from=HEAD~1`
   },
   test: [
@@ -61,14 +60,12 @@ module.exports = {
     js: `standard --fix ${jsFiles}`,
     less: `stylelint --fix ${lessFiles}`
   },
-  release: `clean-release`,
   watch: {
-    template: `${templateCommand} --watch`,
+    template: `${vueTemplateCommand} --watch`,
     src: `${tscSrcCommand} --watch`,
     demo: `${tscDemoCommand} --watch`,
     webpack: `${webpackCommand} --watch`,
-    less: () => watch(['src/grid.less'], [], () => executeScriptAsync([srcCssCommand, cleancssCommand])),
-    lessDemo: () => watch(['demo/common.less'], [], () => executeScriptAsync([demoCssCommand, cleancssCommand])),
+    less: () => watch(['packages/core/src/*.less', 'packages/core/demo/*.less'], [], () => executeScriptAsync(cssCommand)),
     rev: `${revStaticCommand} --watch`
   },
   screenshot: [

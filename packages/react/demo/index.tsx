@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Grid, GridData, SortData, ClickData, ActionData, ResizeData } from "../../dist/react";
+import { Grid, GridData, SortData, ClickData, ActionData, ResizeData } from "../dist/";
 
 const ProficiencyPercent: React.StatelessComponent<{ data: number }> = props => <div style={{
     width: props.data + "%",
@@ -10,7 +10,7 @@ const ProficiencyPercent: React.StatelessComponent<{ data: number }> = props => 
 
 const DeleteButton: React.StatelessComponent<{ data: number, action: (actionData: any) => void }> = props => <button onClick={e => props.action({ type: "delete", id: props.data })}>delete</button>;
 
-import { getViewData, sort, deleteOne, resized } from "../common";
+import { getViewData, sort, deleteOne, resized } from "grid-js-component/demo/";
 
 function setComponents(viewData: GridData) {
     for (const row of viewData.rows) {

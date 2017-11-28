@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as common from "./common";
-export * from "./common";
+import * as common from "grid-js-component";
+export * from "grid-js-component";
 
 /**
  * @public

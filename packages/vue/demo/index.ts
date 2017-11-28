@@ -2,8 +2,8 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 // tslint:disable:no-duplicate-imports
-import "../../dist/vue";
-import { GridData, SortData, ClickData, ActionData, ResizeData } from "../../dist/vue";
+import "../dist/";
+import { GridData, SortData, ClickData, ActionData, ResizeData } from "../dist/";
 
 Vue.component("proficiency-percent", {
     template: `<div :style="style">{{data}}%</div>`,
@@ -28,7 +28,7 @@ Vue.component("delete-button", {
     },
 });
 
-import { getViewData, sort, deleteOne, resized } from "../common";
+import { getViewData, sort, deleteOne, resized } from "grid-js-component/demo/";
 
 function setComponents(viewData: GridData) {
     for (const row of viewData.rows) {

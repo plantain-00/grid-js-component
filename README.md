@@ -18,22 +18,18 @@ A reactjs and vuejs grid component.
 + sort
 + resize
 
-#### install
-
-`npm i grid-js-component`
-
 #### link css
 
 ```html
-<link rel="stylesheet" href="./node_modules/grid-js-component/grid.min.css" />
+<link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
 ```
 
-#### vuejs component demo
+#### vuejs component
 
-`npm i vue vue-class-component`
+`npm i grid-js-vue-component`
 
 ```ts
-import "grid-js-component/vue";
+import "grid-js-vue-component";
 ```
 
 ```html
@@ -44,12 +40,14 @@ import "grid-js-component/vue";
 </grid>
 ```
 
-the online demo: https://plantain-00.github.io/grid-js-component/demo/vue/index.html
+the online demo: https://plantain-00.github.io/grid-js-component/packages/vue/demo
 
-#### reactjs component demo
+#### reactjs component
+
+`npm i grid-js-react-component`
 
 ```ts
-import { Grid } from "grid-js-component/react";
+import { Grid } from "grid-js-react-component";
 ```
 
 ```jsx
@@ -60,7 +58,7 @@ import { Grid } from "grid-js-component/react";
 </Grid>
 ```
 
-the online demo: https://plantain-00.github.io/grid-js-component/demo/react/index.html
+the online demo: https://plantain-00.github.io/grid-js-component/packages/react/demo
 
 #### properties and events of the component
 
@@ -174,6 +172,33 @@ action | (actionData: any) => void | the `actionData` is `ActionData.data`
 + grid-right-body-row-cell
 
 #### changelogs
+
+```bash
+# v4
+npm i grid-js-component
+
+# v5
+npm i grid-js-vue-component
+npm i grid-js-react-component
+```
+
+```ts
+// v4
+import "grid-js-component/vue";
+import { Grid } from "grid-js-component/react";
+
+// v5
+import "grid-js-vue-component";
+import { Grid } from "grid-js-react-component";
+```
+
+```html
+// v4
+<link rel="stylesheet" href="./node_modules/grid-js-component/grid.min.css" />
+
+// v5
+<link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
+```
 
 ##### v4
 

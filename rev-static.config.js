@@ -1,8 +1,8 @@
 module.exports = {
   inputFiles: [
-    'demo/**/index.bundle.js',
-    'demo/**/index.ejs.html',
-    'demo/*.bundle.css'
+    'packages/@(vue|react|angular)/demo/**/*.bundle.js',
+    'packages/@(vue|react|angular)/demo/**/*.ejs.html',
+    'packages/core/demo/*.bundle.css'
   ],
   outputFiles: file => file.replace('.ejs', ''),
   json: false,
@@ -11,6 +11,6 @@ module.exports = {
   },
   sha: 256,
   customNewFileName: (filePath, fileString, md5String, baseName, extensionName) => baseName + '-' + md5String + extensionName,
-  base: 'demo',
-  fileSize: 'demo/file-size.json'
+  base: 'packages',
+  fileSize: 'file-size.json'
 }
