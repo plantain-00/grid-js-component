@@ -3,11 +3,8 @@
   "packages": [
     "packages/*"
   ],
-  "version": "5.0.0",
+  "version": "5.0.1",
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--pure-lockfile"
-  ],
   "command": {
     "publish": {
       "message": "feat: publish %s"
