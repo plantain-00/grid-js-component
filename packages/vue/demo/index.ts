@@ -45,7 +45,7 @@ setComponents(data);
 @Component({
     template: `
     <div>
-        <a href="https://github.com/plantain-00/grid-js-component/tree/master/packages/react/demo" target="_blank">the source code of the demo</a>
+        <a href="https://github.com/plantain-00/grid-js-component/tree/master/packages/vue/demo" target="_blank">the source code of the demo</a>
         <br/>
         <grid :data="data"
             resize="true"
