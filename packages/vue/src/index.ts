@@ -5,10 +5,10 @@ export * from "grid-js-component";
 import { indexTemplateHtml } from "./variables";
 
 @Component({
-    template: indexTemplateHtml,
+    render: indexTemplateHtml,
     props: ["data", "resize"],
 })
-class Grid extends Vue {
+export class Grid extends Vue {
     data: common.GridData;
     resize?: boolean;
 

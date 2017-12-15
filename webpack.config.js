@@ -39,7 +39,6 @@ module.exports = [
       path: path.resolve(__dirname, 'packages/react/demo'),
       filename: 'index.bundle.js'
     },
-    plugins,
-    resolve
+    plugins
   }
 ]
