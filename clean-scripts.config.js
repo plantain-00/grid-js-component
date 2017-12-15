@@ -22,7 +22,7 @@ const revStaticCommand = `rev-static`
 const cssCommand = [
   `lessc packages/core/src/grid.less -sm=on > packages/core/src/grid.css`,
   `postcss packages/core/src/grid.css -o packages/core/dist/grid.css`,
-  `cleancss packages/core/dist/grid.css ./node_modules/perfect-scrollbar/css/perfect-scrollbar.css -o packages/core/dist/grid.min.css`,
+  `cleancss packages/core/dist/grid.css ./packages/core/node_modules/perfect-scrollbar/css/perfect-scrollbar.css -o packages/core/dist/grid.min.css`,
   `lessc packages/core/demo/index.less -sm=on > packages/core/demo/index.css`,
   `cleancss packages/core/dist/grid.min.css packages/core/demo/index.css ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css -o packages/core/demo/index.bundle.css`
 ]
