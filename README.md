@@ -1,3 +1,5 @@
+# grid-js-component
+
 [![Dependency Status](https://david-dm.org/plantain-00/grid-js-component.svg)](https://david-dm.org/plantain-00/grid-js-component)
 [![devDependency Status](https://david-dm.org/plantain-00/grid-js-component/dev-status.svg)](https://david-dm.org/plantain-00/grid-js-component#info=devDependencies)
 [![Build Status: Linux](https://travis-ci.org/plantain-00/grid-js-component.svg?branch=master)](https://travis-ci.org/plantain-00/grid-js-component)
@@ -5,10 +7,9 @@
 [![npm version](https://badge.fury.io/js/grid-js-component.svg)](https://badge.fury.io/js/grid-js-component)
 [![Downloads](https://img.shields.io/npm/dm/grid-js-component.svg)](https://www.npmjs.com/package/grid-js-component)
 
-# grid-js-component
 A reactjs and vuejs grid component.
 
-#### features
+## features
 
 + vuejs component
 + reactjs component
@@ -18,13 +19,13 @@ A reactjs and vuejs grid component.
 + sort
 + resize
 
-#### link css
+## link css
 
 ```html
 <link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
 ```
 
-#### vuejs component
+## vuejs component
 
 `npm i grid-js-vue-component`
 
@@ -40,9 +41,9 @@ import "grid-js-vue-component";
 </grid>
 ```
 
-the online demo: https://plantain-00.github.io/grid-js-component/packages/vue/demo
+the online demo: <https://plantain-00.github.io/grid-js-component/packages/vue/demo>
 
-#### reactjs component
+## reactjs component
 
 `npm i grid-js-react-component`
 
@@ -58,9 +59,9 @@ import { Grid } from "grid-js-react-component";
 </Grid>
 ```
 
-the online demo: https://plantain-00.github.io/grid-js-component/packages/react/demo
+the online demo: <https://plantain-00.github.io/grid-js-component/packages/react/demo>
 
-#### properties and events of the component
+## properties and events of the component
 
 name | type | description
 --- | --- | ---
@@ -71,7 +72,7 @@ click | (clickData: [ClickData](#click-data-structure)) => void | triggered when
 action | (actionData: [ActionData](#action-data-structure)) => void | triggered when custom component triggered events
 resized | (resizeData: [ResizeData](#resize-data-structure)) => void | triggered when resizing action finished
 
-#### grid data structure
+## grid data structure
 
 ```ts
 type GridData = {
@@ -99,7 +100,7 @@ type GridCellData<T = any> = {
 };
 ```
 
-#### sort data structure
+## sort data structure
 
 ```ts
 type SortData = {
@@ -109,7 +110,7 @@ type SortData = {
 };
 ```
 
-#### click data structure
+### click data structure
 
 ```ts
 type ClickData = {
@@ -121,7 +122,7 @@ type ClickData = {
 };
 ```
 
-#### action data structure
+### action data structure
 
 ```ts
 type ActionData<T = any> = {
@@ -129,7 +130,7 @@ type ActionData<T = any> = {
 } & (SortData | ClickData);
 ```
 
-#### resize data structure
+### resize data structure
 
 ```ts
 type ResizeData = {
@@ -139,14 +140,14 @@ type ResizeData = {
 };
 ```
 
-#### properties and events of the custom component
+### properties and events of the custom component
 
 name | type | description
 --- | --- | ---
 data | any | is `GridCellData.value`
 action | (actionData: any) => void | the `actionData` is `ActionData.data`
 
-#### general styles
+### general styles
 
 + grid
 + grid-main
@@ -171,7 +172,7 @@ action | (actionData: any) => void | the `actionData` is `ActionData.data`
 + grid-right-body-row
 + grid-right-body-row-cell
 
-#### changelogs
+### changelogs
 
 ```bash
 # v4
@@ -200,7 +201,7 @@ import { Grid } from "grid-js-react-component";
 <link rel="stylesheet" href="./node_modules/grid-js-component/dist/grid.min.css" />
 ```
 
-##### v4
+#### v4
 
 ```ts
 // v3
@@ -210,7 +211,7 @@ import "grid-js-component/dist/vue";
 import "grid-js-component/vue";
 ```
 
-##### v3
+#### v3
 
 ```bash
 // v2
@@ -220,7 +221,7 @@ sort: (columnName: string) => void;
 sort: (sortData: common.SortData) => void;
 ```
 
-##### v2
+#### v2
 
 ```bash
 // v1
