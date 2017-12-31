@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/plantain-00/grid-js-component#readme",
   "devDependencies": {
-    "@commitlint/cli": "5.2.6",
+    "@commitlint/cli": "5.2.8",
     "@commitlint/config-angular": "5.1.1",
-    "@types/jasmine": "2.8.2",
+    "@types/jasmine": "2.8.3",
     "@types/puppeteer": "0.13.9",
     "autoprefixer": "7.2.3",
     "clean-css-cli": "4.1.10",
