@@ -26,7 +26,6 @@ export type GridRowData = {
  */
 export type GridCellData<T = any> = {
   value: T;
-    // tslint:disable-next-line:ban-types
   component?: string | Function;
   style?: string;
   width?: number;
@@ -130,13 +129,11 @@ export function updateHorizontalScroll (e: WheelEvent, container: HTMLElement, p
  */
 export function handleScrollYEvent (scrollTop: number, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
   if (leftContainer) {
-        // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < leftContainer.childNodes.length; i++) {
       (leftContainer.childNodes[i] as HTMLElement).style.top = -scrollTop + 'px'
     }
   }
   if (rightContainer) {
-        // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < rightContainer.childNodes.length; i++) {
       (rightContainer.childNodes[i] as HTMLElement).style.top = -scrollTop + 'px'
     }
@@ -147,7 +144,6 @@ export function handleScrollYEvent (scrollTop: number, leftContainer: HTMLElemen
  * @public
  */
 export function handleScrollXEvent (scrollLeft: number, heads: HTMLElement) {
-    // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < heads.childNodes.length; i++) {
     (heads.childNodes[i] as HTMLElement).style.left = -scrollLeft + 'px'
   }
