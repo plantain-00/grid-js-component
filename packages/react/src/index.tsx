@@ -85,36 +85,36 @@ export class Grid extends React.Component<{
           action: (actionData: any) => this.action({ cell, header: this.props.data.headers, columnIndex, data: actionData })
         }) : cell.value
         const ascMarker = this.isAsc(cell.value) ? (
-                    <svg width='10' height='10'>
-                        <polygon points='0,10 5,0 10,10'></polygon>
-                    </svg>
-                ) : null
+          <svg width='10' height='10'>
+            <polygon points='0,10 5,0 10,10'></polygon>
+          </svg>
+        ) : null
         const descMarker = this.isDesc(cell.value) ? (
-                    <svg width='10' height='10'>
-                        <polygon points='0,0 5,10 10,0'></polygon>
-                    </svg>
-                ) : null
+          <svg width='10' height='10'>
+            <polygon points='0,0 5,10 10,0'></polygon>
+          </svg>
+        ) : null
         const divider = this.props.resize ? (<div className='divider' onMouseDown={e => this.resizeStart(e, cell, columnIndex)}></div>) : null
         return (
-                    <th className={'grid-main-head-row-cell ' + (cell.style || '')}
-                        key={columnIndex}
-                        style={this.getStyle(cell.width)}
-                        onClick={e => this.sort({ cell, header: this.props.data.headers, columnIndex })}>
-                        {ascMarker}
-                        {descMarker}
-                        {headCell}
-                        {divider}
-                    </th>
+          <th className={'grid-main-head-row-cell ' + (cell.style || '')}
+            key={columnIndex}
+            style={this.getStyle(cell.width)}
+            onClick={e => this.sort({ cell, header: this.props.data.headers, columnIndex })}>
+            {ascMarker}
+            {descMarker}
+            {headCell}
+            {divider}
+          </th>
         )
       })
       mainHead = (
-                <thead className='grid-main-head'>
-                    <tr className={'grid-main-head-row ' + (this.props.data.headers.style || '')}
-                        style={this.getStyle(this.props.data.headers.width)}>
-                        {headCells}
-                    </tr>
-                </thead>
-            )
+        <thead className='grid-main-head'>
+          <tr className={'grid-main-head-row ' + (this.props.data.headers.style || '')}
+            style={this.getStyle(this.props.data.headers.width)}>
+            {headCells}
+          </tr>
+        </thead>
+      )
     }
 
     let leftHead: JSX.Element | null = null
@@ -125,32 +125,32 @@ export class Grid extends React.Component<{
           action: (actionData: any) => this.action({ cell, header: this.props.data.leftHeaders!, columnIndex, data: actionData })
         }) : cell.value
         const ascMarker = this.isAsc(cell.value) ? (
-                    <svg width='10' height='10'>
-                        <polygon points='0,10 5,0 10,10'></polygon>
-                    </svg>
-                ) : null
+          <svg width='10' height='10'>
+            <polygon points='0,10 5,0 10,10'></polygon>
+          </svg>
+        ) : null
         const descMarker = this.isDesc(cell.value) ? (
-                    <svg width='10' height='10'>
-                        <polygon points='0,0 5,10 10,0'></polygon>
-                    </svg>
-                ) : null
+          <svg width='10' height='10'>
+            <polygon points='0,0 5,10 10,0'></polygon>
+          </svg>
+        ) : null
         return (
-                    <th className={'grid-left-head-row-cell ' + (cell.style || '')}
-                        key={columnIndex}
-                        onClick={e => this.sort({ cell, header: this.props.data.leftHeaders!, columnIndex })}>
-                        {ascMarker}
-                        {descMarker}
-                        {headCell}
-                    </th>
+          <th className={'grid-left-head-row-cell ' + (cell.style || '')}
+            key={columnIndex}
+            onClick={e => this.sort({ cell, header: this.props.data.leftHeaders!, columnIndex })}>
+            {ascMarker}
+            {descMarker}
+            {headCell}
+          </th>
         )
       })
       leftHead = (
-                <thead className='grid-left-head'>
-                    <tr className={'grid-left-head-row ' + (this.props.data.leftHeaders.style || '')}>
-                        {headCells}
-                    </tr>
-                </thead>
-            )
+        <thead className='grid-left-head'>
+          <tr className={'grid-left-head-row ' + (this.props.data.leftHeaders.style || '')}>
+            {headCells}
+          </tr>
+        </thead>
+      )
     }
 
     let rightHead: JSX.Element | null = null
@@ -161,32 +161,32 @@ export class Grid extends React.Component<{
           action: (actionData: any) => this.action({ cell, header: this.props.data.rightHeaders!, columnIndex, data: actionData })
         }) : cell.value
         const ascMarker = this.isAsc(cell.value) ? (
-                    <svg width='10' height='10'>
-                        <polygon points='0,10 5,0 10,10'></polygon>
-                    </svg>
-                ) : null
+          <svg width='10' height='10'>
+            <polygon points='0,10 5,0 10,10'></polygon>
+          </svg>
+        ) : null
         const descMarker = this.isDesc(cell.value) ? (
-                    <svg width='10' height='10'>
-                        <polygon points='0,0 5,10 10,0'></polygon>
-                    </svg>
-                ) : null
+          <svg width='10' height='10'>
+            <polygon points='0,0 5,10 10,0'></polygon>
+          </svg>
+        ) : null
         return (
-                    <th className={'grid-right-head-row-cell ' + (cell.style || '')}
-                        key={columnIndex}
-                        onClick={e => this.sort({ cell, header: this.props.data.rightHeaders!, columnIndex })}>
-                        {ascMarker}
-                        {descMarker}
-                        {headCell}
-                    </th>
+          <th className={'grid-right-head-row-cell ' + (cell.style || '')}
+            key={columnIndex}
+            onClick={e => this.sort({ cell, header: this.props.data.rightHeaders!, columnIndex })}>
+            {ascMarker}
+            {descMarker}
+            {headCell}
+          </th>
         )
       })
       rightHead = (
-                <thead className='grid-right-head'>
-                    <tr className={'grid-right-head-row ' + (this.props.data.rightHeaders.style || '')}>
-                        {headCells}
-                    </tr>
-                </thead>
-            )
+        <thead className='grid-right-head'>
+          <tr className={'grid-right-head-row ' + (this.props.data.rightHeaders.style || '')}>
+            {headCells}
+          </tr>
+        </thead>
+      )
     }
 
     const mainBody = this.props.data.rows.map((row, rowIndex) => {
@@ -196,20 +196,20 @@ export class Grid extends React.Component<{
           action: (actionData: any) => this.action({ cell, row, body: this.props.data.rows, rowIndex, columnIndex, data: actionData })
         }) : cell.value
         return (
-                    <td className={'grid-main-body-row-cell ' + (cell.style || '')}
-                        key={columnIndex}
-                        style={this.getStyle(cell.width)}
-                        onClick={() => this.click({ cell, row, body: this.props.data.rows, rowIndex, columnIndex })}>
-                        {bodyCell}
-                    </td>
+          <td className={'grid-main-body-row-cell ' + (cell.style || '')}
+            key={columnIndex}
+            style={this.getStyle(cell.width)}
+            onClick={() => this.click({ cell, row, body: this.props.data.rows, rowIndex, columnIndex })}>
+            {bodyCell}
+          </td>
         )
       })
       return (
-                <tr className={'grid-main-body-row ' + (row.style || '')}
-                    key={rowIndex}
-                    style={this.getStyle(row.width)}>
-                    {cells}
-                </tr>
+        <tr className={'grid-main-body-row ' + (row.style || '')}
+          key={rowIndex}
+          style={this.getStyle(row.width)}>
+          {cells}
+        </tr>
       )
     })
     let leftBody: JSX.Element | null = null
@@ -221,24 +221,24 @@ export class Grid extends React.Component<{
             action: (actionData: any) => this.action({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex, data: actionData })
           }) : cell.value
           return (
-                        <td className={'grid-left-body-row-cell ' + (cell.style || '')}
-                            key={columnIndex}
-                            onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
-                            {bodyCell}
-                        </td>
+            <td className={'grid-left-body-row-cell ' + (cell.style || '')}
+              key={columnIndex}
+              onClick={() => this.click({ cell, row, body: this.props.data.leftRows!, rowIndex, columnIndex })}>
+              {bodyCell}
+            </td>
           )
         })
         return (
-                    <tr className={'grid-left-body-row ' + (row.style || '')} key={rowIndex}>
-                        {cells}
-                    </tr>
+          <tr className={'grid-left-body-row ' + (row.style || '')} key={rowIndex}>
+            {cells}
+          </tr>
         )
       })
       leftBody = (
-                <tbody className='grid-left-body'>
-                    {leftBodyRows}
-                </tbody>
-            )
+        <tbody className='grid-left-body'>
+          {leftBodyRows}
+        </tbody>
+      )
     }
     let rightBody: JSX.Element | null = null
     if (this.props.data.rightRows) {
@@ -249,43 +249,43 @@ export class Grid extends React.Component<{
             action: (actionData: any) => this.action({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex, data: actionData })
           }) : cell.value
           return (
-                        <td className={'grid-right-body-row-cell ' + (cell.style || '')}
-                            key={columnIndex}
-                            onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>
-                            {bodyCell}
-                        </td>
+            <td className={'grid-right-body-row-cell ' + (cell.style || '')}
+              key={columnIndex}
+              onClick={() => this.click({ cell, row, body: this.props.data.rightRows!, rowIndex, columnIndex })}>
+              {bodyCell}
+            </td>
           )
         })
         return (
-                    <tr className={'grid-right-body-row ' + (row.style || '')} key={rowIndex}>
-                        {cells}
-                    </tr>
+          <tr className={'grid-right-body-row ' + (row.style || '')} key={rowIndex}>
+            {cells}
+          </tr>
         )
       })
       rightBody = (
-                <tbody className='grid-right-body'>
-                    {rightBodyRows}
-                </tbody>
-            )
+        <tbody className='grid-right-body'>
+          {rightBodyRows}
+        </tbody>
+      )
     }
 
     return (
-            <div className='grid' onMouseUp={e => this.resizeEnd(e)} onMouseMove={e => this.mousemove(e)}>
-                <table className='grid-left'>
-                    {leftHead}
-                    {leftBody}
-                </table>
-                <table className='grid-main'>
-                    {mainHead}
-                    <tbody className='grid-main-body'>
-                        {mainBody}
-                    </tbody>
-                </table>
-                <table className='grid-right'>
-                    {rightHead}
-                    {rightBody}
-                </table>
-            </div>
+      <div className='grid' onMouseUp={e => this.resizeEnd(e)} onMouseMove={e => this.mousemove(e)}>
+        <table className='grid-left'>
+          {leftHead}
+          {leftBody}
+        </table>
+        <table className='grid-main'>
+          {mainHead}
+          <tbody className='grid-main-body'>
+            {mainBody}
+          </tbody>
+        </table>
+        <table className='grid-right'>
+          {rightHead}
+          {rightBody}
+        </table>
+      </div>
     )
   }
 
