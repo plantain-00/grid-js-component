@@ -24,8 +24,8 @@
   "devDependencies": {
     "@commitlint/cli": "6.0.2",
     "@commitlint/config-conventional": "6.0.2",
-    "@types/jasmine": "2.8.4",
-    "@types/puppeteer": "0.13.9",
+    "@types/jasmine": "2.8.6",
+    "@types/puppeteer": "1.0.0",
     "autoprefixer": "7.2.5",
     "clean-css-cli": "4.1.10",
     "clean-scripts": "1.7.0",
