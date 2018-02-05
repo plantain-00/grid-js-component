@@ -10,21 +10,21 @@ import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
   props: ['data', 'resize']
 })
 export class Grid extends Vue {
-  data: common.GridData
+  data!: common.GridData
   resize?: boolean
 
-  private container: HTMLElement
-  private heads: HTMLElement
+  private container!: HTMLElement
+  private heads!: HTMLElement
   private leftContainer?: HTMLElement
   private rightContainer?: HTMLElement
 
   private resizingCell: common.GridCellData | null = null
-  private initialClientX: number
-  private initialWidth: number
-  private initialRowWidth: number
+  private initialClientX!: number
+  private initialWidth!: number
+  private initialRowWidth!: number
   private resizingIndex: number | null = null
   private canSort = true
-  private ps: common.Ps | null
+  private ps!: common.Ps | null
 
   sort (sortData: common.SortData) {
     if (this.canSort) {

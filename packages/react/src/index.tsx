@@ -14,18 +14,18 @@ export class Grid extends React.Component<{
   action: (actionData: common.ActionData) => void;
   resized: (resizeData: common.ResizeData) => void;
 }, {}> {
-  private container: HTMLElement
-  private heads: HTMLElement
+  private container!: HTMLElement
+  private heads!: HTMLElement
   private leftContainer?: HTMLElement
   private rightContainer?: HTMLElement
 
   private resizingCell: common.GridCellData | null = null
-  private initialClientX: number
-  private initialWidth: number
-  private initialRowWidth: number
+  private initialClientX!: number
+  private initialWidth!: number
+  private initialRowWidth!: number
   private resizingIndex: number | null = null
   private canSort = true
-  private ps: common.Ps | null
+  private ps!: common.Ps | null
 
   componentDidMount () {
     this.heads = ReactDOM.findDOMNode(this as any).childNodes[1].childNodes[0] as HTMLElement
