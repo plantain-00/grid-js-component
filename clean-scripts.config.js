@@ -7,16 +7,14 @@ const jsFiles = `"*.config.js" "spec/**/*.config.js"`
 const excludeTsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.d.ts"`
 
 const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2variable.config.js`
-const tscSrcCommand = [
-  `tsc -p packages/core/src`,
-  `tsc -p packages/vue/src`,
-  `tsc -p packages/react/src`
-]
-const tscDemoCommand = [
-  `tsc -p packages/core/demo`,
-  `tsc -p packages/vue/demo`,
-  `tsc -p packages/react/demo`
-]
+const tscCoreSrcCommand = `tsc -p packages/core/src`
+const tscVueSrcCommand = `tsc -p packages/vue/src`
+const tscReactSrcCommand = `tsc -p packages/react/src`
+
+const tscCoreDemoCommand = `tsc -p packages/core/demo`
+const tscVueDemoCommand = `tsc -p packages/vue/demo`
+const tscReactDemoCommand = `tsc -p packages/react/demo`
+
 const webpackCommand = `webpack`
 const revStaticCommand = `rev-static`
 const cssCommand = [
@@ -32,8 +30,16 @@ module.exports = {
     {
       js: [
         vueTemplateCommand,
-        tscSrcCommand,
-        tscDemoCommand,
+        tscCoreSrcCommand,
+        {
+          tscVueSrcCommand,
+          tscReactSrcCommand
+        },
+        tscCoreDemoCommand,
+        {
+          tscVueDemoCommand,
+          tscReactDemoCommand
+        },
         webpackCommand
       ],
       css: cssCommand,
@@ -60,9 +66,13 @@ module.exports = {
     less: `stylelint --fix ${lessFiles}`
   },
   watch: {
-    template: `${vueTemplateCommand} --watch`,
-    src: `${tscSrcCommand} --watch`,
-    demo: `${tscDemoCommand} --watch`,
+    vueTemplateCommand: `${vueTemplateCommand} --watch`,
+    tscCoreSrcCommand: `${tscCoreSrcCommand} --watch`,
+    tscVueSrcCommand: `${tscVueSrcCommand} --watch`,
+    tscReactSrcCommand: `${tscReactSrcCommand} --watch`,
+    tscCoreDemoCommand: `${tscCoreDemoCommand} --watch`,
+    tscVueDemoCommand: `${tscVueDemoCommand} --watch`,
+    tscReactDemoCommand: `${tscReactDemoCommand} --watch`,
     webpack: `${webpackCommand} --watch`,
     less: () => watch(['packages/core/src/*.less', 'packages/core/demo/*.less'], [], () => executeScriptAsync(cssCommand)),
     rev: `${revStaticCommand} --watch`
