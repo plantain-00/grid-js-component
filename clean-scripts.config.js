@@ -15,7 +15,9 @@ const tscCoreDemoCommand = `tsc -p packages/core/demo`
 const tscVueDemoCommand = `tsc -p packages/vue/demo`
 const tscReactDemoCommand = `tsc -p packages/react/demo`
 
-const webpackCommand = `webpack`
+const webpackVueCommand = `webpack --config packages/vue/demo/webpack.config.js`
+const webpackReactCommand = `webpack --config packages/react/demo/webpack.config.js`
+
 const revStaticCommand = `rev-static`
 const cssCommand = [
   `lessc packages/core/src/grid.less -sm=on > packages/core/src/grid.css`,
@@ -29,18 +31,21 @@ module.exports = {
   build: [
     {
       js: [
-        vueTemplateCommand,
         tscCoreSrcCommand,
-        {
-          tscVueSrcCommand,
-          tscReactSrcCommand
-        },
         tscCoreDemoCommand,
         {
-          tscVueDemoCommand,
-          tscReactDemoCommand
-        },
-        webpackCommand
+          vue: [
+            vueTemplateCommand,
+            tscVueSrcCommand,
+            tscVueDemoCommand,
+            webpackVueCommand
+          ],
+          react: [
+            tscReactSrcCommand,
+            tscReactDemoCommand,
+            webpackReactCommand
+          ]
+        }
       ],
       css: cssCommand,
       clean: `rimraf "packages/@(core|vue|react|angular)/demo/**/@(*.bundle-*.js|*.bundle-*.css)"`
@@ -73,7 +78,8 @@ module.exports = {
     tscCoreDemoCommand: `${tscCoreDemoCommand} --watch`,
     tscVueDemoCommand: `${tscVueDemoCommand} --watch`,
     tscReactDemoCommand: `${tscReactDemoCommand} --watch`,
-    webpack: `${webpackCommand} --watch`,
+    webpackVueCommand: `${webpackVueCommand} --watch`,
+    webpackReactCommand: `${webpackReactCommand} --watch`,
     less: () => watch(['packages/core/src/*.less', 'packages/core/demo/*.less'], [], () => executeScriptAsync(cssCommand)),
     rev: `${revStaticCommand} --watch`
   },
