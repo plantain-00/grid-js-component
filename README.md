@@ -33,6 +33,14 @@ A reactjs and vuejs grid component.
 import "grid-js-vue-component";
 ```
 
+or
+
+```html
+<script src="./node_modules/vue/dist/vue.min.js"></script>
+<script src="./node_modules/vue-class-component/dist/vue-class-component.min.js"></script>
+<script src="./node_modules/grid-js-vue-component/dist/grid-js-vue-component.min.js"></script>
+```
+
 ```html
 <grid :data="data"
     @sort="sort($event)"
@@ -49,6 +57,14 @@ the online demo: <https://plantain-00.github.io/grid-js-component/packages/vue/d
 
 ```ts
 import { Grid } from "grid-js-react-component";
+```
+
+or
+
+```html
+<script src="./node_modules/react/umd/react.production.min.js"></script>
+<script src="./node_modules/react-dom/umd/react-dom.production.min.js"></script>
+<script src="./node_modules/grid-js-react-component/dist/grid-js-react-component.min.js"></script>
 ```
 
 ```jsx
