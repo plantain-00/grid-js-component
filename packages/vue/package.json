@@ -1,6 +1,6 @@
 {
   "name": "grid-js-vue-component",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A vuejs grid component.",
@@ -18,12 +18,12 @@
     "dist"
   ],
   "dependencies": {
-    "grid-js-component": "^5.1.1",
+    "grid-js-component": "^5.2.0",
     "vue": "2",
     "vue-class-component": "6"
   },
   "peerDependencies": {
-    "grid-js-component": "^5.1.1",
+    "grid-js-component": "^5.2.0",
     "vue": "2",
     "vue-class-component": "6"
   }

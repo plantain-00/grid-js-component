@@ -1,6 +1,6 @@
 {
   "name": "grid-js-react-component",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs grid component.",
@@ -18,7 +18,7 @@
     "dist"
   ],
   "dependencies": {
-    "grid-js-component": "^5.1.1",
+    "grid-js-component": "^5.2.0",
     "react": "16",
     "react-dom": "16"
   },
@@ -27,7 +27,7 @@
     "@types/react-dom": "16.0.4"
   },
   "peerDependencies": {
-    "grid-js-component": "^5.1.1",
+    "grid-js-component": "^5.2.0",
     "react": "16",
     "react-dom": "16"
   }
