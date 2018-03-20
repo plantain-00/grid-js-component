@@ -2,6 +2,9 @@
   "name": "grid-js-vue-component",
   "version": "5.2.0",
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/grid-js-react-component.min.js",
+  "jsdelivr": "dist/grid-js-react-component.min.js",
   "types": "dist/index.d.ts",
   "description": "A vuejs grid component.",
   "repository": {

@@ -2,6 +2,9 @@
   "name": "grid-js-react-component",
   "version": "5.2.0",
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/grid-js-react-component.min.js",
+  "jsdelivr": "dist/grid-js-react-component.min.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs grid component.",
   "repository": {
