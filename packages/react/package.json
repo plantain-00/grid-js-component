@@ -1,6 +1,6 @@
 {
   "name": "grid-js-react-component",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/grid-js-react-component.min.js",
