@@ -1,10 +1,10 @@
 {
   "name": "grid-js-vue-component",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "unpkg": "dist/grid-js-react-component.min.js",
-  "jsdelivr": "dist/grid-js-react-component.min.js",
+  "unpkg": "dist/grid-js-vue-component.min.js",
+  "jsdelivr": "dist/grid-js-vue-component.min.js",
   "types": "dist/index.d.ts",
   "description": "A vuejs grid component.",
   "repository": {
