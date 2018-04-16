@@ -1,0 +1,37 @@
+{
+  "name": "grid-js-react-component",
+  "version": "5.2.1",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/grid-js-react-component.min.js",
+  "jsdelivr": "dist/grid-js-react-component.min.js",
+  "types": "dist/index.d.ts",
+  "description": "A reactjs grid component.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/grid-js-component.git"
+  },
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/grid-js-component/issues"
+  },
+  "homepage": "https://github.com/plantain-00/grid-js-component#readme",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "grid-js-component": "^5.2.0",
+    "react": "16",
+    "react-dom": "16"
+  },
+  "devDependencies": {
+    "@types/react": "16.3.10",
+    "@types/react-dom": "16.0.5"
+  },
+  "peerDependencies": {
+    "grid-js-component": "^5.2.0",
+    "react": "16",
+    "react-dom": "16"
+  }
+}

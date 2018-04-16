@@ -1,0 +1,33 @@
+{
+  "name": "grid-js-vue-component",
+  "version": "5.2.2",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/grid-js-vue-component.min.js",
+  "jsdelivr": "dist/grid-js-vue-component.min.js",
+  "types": "dist/index.d.ts",
+  "description": "A vuejs grid component.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/grid-js-component.git"
+  },
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/grid-js-component/issues"
+  },
+  "homepage": "https://github.com/plantain-00/grid-js-component#readme",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "grid-js-component": "^5.2.0",
+    "vue": "2",
+    "vue-class-component": "6"
+  },
+  "peerDependencies": {
+    "grid-js-component": "^5.2.0",
+    "vue": "2",
+    "vue-class-component": "6"
+  }
+}
