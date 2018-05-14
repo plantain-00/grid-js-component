@@ -3,6 +3,8 @@ import * as ReactDOM from 'react-dom'
 import * as common from 'grid-js-component'
 export * from 'grid-js-component'
 
+const polygonPoints = '0,10 5,0 10,10'
+
 /**
  * @public
  */
@@ -27,7 +29,7 @@ export class Grid extends React.Component<{
   private canSort = true
   private ps!: common.Ps | null
 
-  componentDidMount () {
+  componentDidMount() {
     this.heads = ReactDOM.findDOMNode(this as any)!.childNodes[1].childNodes[0] as HTMLElement
     this.container = ReactDOM.findDOMNode(this as any)!.childNodes[1].childNodes[1] as HTMLElement
     if (ReactDOM.findDOMNode(this as any)!.childNodes[0].childNodes.length > 1) {
@@ -54,7 +56,7 @@ export class Grid extends React.Component<{
     }
     this.heads.addEventListener('wheel', this.handleWheelForHead)
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.container && this.ps) {
       this.ps.destroy()
       this.ps = null
@@ -76,7 +78,8 @@ export class Grid extends React.Component<{
     }
   }
 
-  render () {
+  // tslint:disable-next-line:cognitive-complexity no-big-function
+  render() {
     let mainHead: JSX.Element | null = null
     if (this.props.data.headers && this.props.data.headers.cells) {
       const headCells = this.props.data.headers.cells.map((cell, columnIndex) => {
@@ -86,12 +89,12 @@ export class Grid extends React.Component<{
         }) : cell.value
         const ascMarker = this.isAsc(cell.value) ? (
           <svg width='10' height='10'>
-            <polygon points='0,10 5,0 10,10'></polygon>
+            <polygon points={polygonPoints}></polygon>
           </svg>
         ) : null
         const descMarker = this.isDesc(cell.value) ? (
           <svg width='10' height='10'>
-            <polygon points='0,0 5,10 10,0'></polygon>
+            <polygon points={polygonPoints}></polygon>
           </svg>
         ) : null
         const divider = this.props.resize ? (<div className='divider' onMouseDown={e => this.resizeStart(e, cell, columnIndex)}></div>) : null
@@ -126,7 +129,7 @@ export class Grid extends React.Component<{
         }) : cell.value
         const ascMarker = this.isAsc(cell.value) ? (
           <svg width='10' height='10'>
-            <polygon points='0,10 5,0 10,10'></polygon>
+            <polygon points={polygonPoints}></polygon>
           </svg>
         ) : null
         const descMarker = this.isDesc(cell.value) ? (
@@ -162,7 +165,7 @@ export class Grid extends React.Component<{
         }) : cell.value
         const ascMarker = this.isAsc(cell.value) ? (
           <svg width='10' height='10'>
-            <polygon points='0,10 5,0 10,10'></polygon>
+            <polygon points={polygonPoints}></polygon>
           </svg>
         ) : null
         const descMarker = this.isDesc(cell.value) ? (
@@ -298,7 +301,7 @@ export class Grid extends React.Component<{
   private handleWheel = (e: WheelEvent) => common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer)
   private handleWheelForHead = (e: WheelEvent) => common.updateHorizontalScroll(e, this.container, this.ps)
 
-  private sort (sortData: common.SortData) {
+  private sort(sortData: common.SortData) {
     if (this.canSort) {
       this.props.sort(sortData)
     } else {
@@ -306,22 +309,22 @@ export class Grid extends React.Component<{
     }
   }
 
-  private isAsc (column: string) {
+  private isAsc(column: string) {
     return this.props.data.sortType === 'asc' && this.props.data.sortColumn !== '' && this.props.data.sortColumn === column
   }
-  private isDesc (column: string) {
+  private isDesc(column: string) {
     return this.props.data.sortType === 'desc' && this.props.data.sortColumn !== '' && this.props.data.sortColumn === column
   }
 
-  private click (clickData: common.ClickData) {
+  private click(clickData: common.ClickData) {
     this.props.click(clickData)
   }
 
-  private action (actionData: common.ActionData) {
+  private action(actionData: common.ActionData) {
     this.props.action(actionData)
   }
 
-  private resizeStart (e: React.MouseEvent<HTMLDivElement>, cell: common.GridCellData, columnIndex: number) {
+  private resizeStart(e: React.MouseEvent<HTMLDivElement>, cell: common.GridCellData, columnIndex: number) {
     this.resizingCell = cell
     e.stopPropagation()
     this.initialClientX = e.clientX
@@ -329,7 +332,7 @@ export class Grid extends React.Component<{
     this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width
     this.resizingIndex = columnIndex
   }
-  private resizeEnd (e: React.MouseEvent<HTMLDivElement>) {
+  private resizeEnd(e: React.MouseEvent<HTMLDivElement>) {
     this.resizingCell = null
 
     if (!this.canSort) {
@@ -343,7 +346,7 @@ export class Grid extends React.Component<{
       this.props.resized(resizeData)
     }
   }
-  private mousemove (e: React.MouseEvent<HTMLDivElement>) {
+  private mousemove(e: React.MouseEvent<HTMLDivElement>) {
     if (this.resizingCell) {
       e.preventDefault()
       const cellWidth = this.initialWidth + e.clientX - this.initialClientX
@@ -358,7 +361,7 @@ export class Grid extends React.Component<{
       this.canSort = false
     }
   }
-  private getStyle (width: number | undefined) {
+  private getStyle(width: number | undefined) {
     return width ? { width } : {}
   }
 }

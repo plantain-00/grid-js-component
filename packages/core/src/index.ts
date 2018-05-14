@@ -71,30 +71,30 @@ import Ps from 'perfect-scrollbar'
 
 export { Ps }
 
-function getDeltaFromEvent (e: WheelEvent) {
+function getDeltaFromEvent(e: WheelEvent) {
   let deltaX = e.deltaX
   let deltaY = -1 * e.deltaY
 
   if (typeof deltaX === 'undefined' || typeof deltaY === 'undefined') {
-        // OS X Safari
+    // OS X Safari
     deltaX = -1 * e.wheelDeltaX / 6
     deltaY = e.wheelDeltaY / 6
   }
 
   if (e.deltaMode && e.deltaMode === 1) {
-        // Firefox in deltaMode 1: Line scrolling
+    // Firefox in deltaMode 1: Line scrolling
     deltaX *= 10
     deltaY *= 10
   }
 
   if (isNaN(deltaX) && isNaN(deltaY)) {
-        // IE in some mouse drivers
+    // IE in some mouse drivers
     deltaX = 0
     deltaY = e.wheelDelta
   }
 
   if (e.shiftKey) {
-        // reverse axis with shift key
+    // reverse axis with shift key
     return { deltaX: -deltaY, deltaY: -deltaX }
   }
   return { deltaX, deltaY }
@@ -103,7 +103,7 @@ function getDeltaFromEvent (e: WheelEvent) {
 /**
  * @public
  */
-export function updateVerticalScroll (e: WheelEvent, container: HTMLElement, ps: Ps | null, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
+export function updateVerticalScroll(e: WheelEvent, container: HTMLElement, ps: Ps | null, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
   const { deltaY } = getDeltaFromEvent(e)
   const scrollTop = container.scrollTop - deltaY
   container.scrollTop = scrollTop
@@ -116,7 +116,7 @@ export function updateVerticalScroll (e: WheelEvent, container: HTMLElement, ps:
 /**
  * @public
  */
-export function updateHorizontalScroll (e: WheelEvent, container: HTMLElement, ps: Ps | null) {
+export function updateHorizontalScroll(e: WheelEvent, container: HTMLElement, ps: Ps | null) {
   const { deltaX } = getDeltaFromEvent(e)
   container.scrollLeft += deltaX
   if (ps) {
@@ -127,7 +127,7 @@ export function updateHorizontalScroll (e: WheelEvent, container: HTMLElement, p
 /**
  * @public
  */
-export function handleScrollYEvent (scrollTop: number, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
+export function handleScrollYEvent(scrollTop: number, leftContainer: HTMLElement | undefined, rightContainer: HTMLElement | undefined) {
   if (leftContainer) {
     for (let i = 0; i < leftContainer.childNodes.length; i++) {
       (leftContainer.childNodes[i] as HTMLElement).style.top = -scrollTop + 'px'
@@ -143,7 +143,7 @@ export function handleScrollYEvent (scrollTop: number, leftContainer: HTMLElemen
 /**
  * @public
  */
-export function handleScrollXEvent (scrollLeft: number, heads: HTMLElement) {
+export function handleScrollXEvent(scrollLeft: number, heads: HTMLElement) {
   for (let i = 0; i < heads.childNodes.length; i++) {
     (heads.childNodes[i] as HTMLElement).style.left = -scrollLeft + 'px'
   }

@@ -9,7 +9,7 @@ Vue.component('proficiency-percent', {
   template: `<div :style="style">{{data}}%</div>`,
   props: ['data'],
   computed: {
-    style (this: { data: number } & Vue) {
+    style(this: { data: number } & Vue) {
       return {
         width: this.data + '%',
         backgroundColor: this.data >= 50 ? 'rgb(0, 160, 0)' : 'rgb(255, 153, 0)'
@@ -22,7 +22,7 @@ Vue.component('delete-button', {
   template: `<button @click="click()">delete</button>`,
   props: ['data'],
   methods: {
-    click (this: { data: number } & Vue) {
+    click(this: { data: number } & Vue) {
       this.$emit('action', { type: 'delete', id: this.data })
     }
   }
@@ -30,7 +30,7 @@ Vue.component('delete-button', {
 
 import { getViewData, sort, deleteOne, resized } from 'grid-js-component/demo/'
 
-function setComponents (viewData: GridData) {
+function setComponents(viewData: GridData) {
   for (const row of viewData.rows) {
     row.cells[0].component = 'proficiency-percent'
   }
@@ -64,7 +64,7 @@ class App extends Vue {
   data = data
   clickedCellValue = null
 
-  sort (sortData: SortData) {
+  sort(sortData: SortData) {
     if (!sortData.cell.value) {
       return
     }
@@ -78,10 +78,10 @@ class App extends Vue {
 
     this.data = viewData
   }
-  click (clickData: ClickData) {
+  click(clickData: ClickData) {
     this.clickedCellValue = clickData.cell.value
   }
-  action (actionData: ActionData<{ id: number }>) {
+  action(actionData: ActionData<{ id: number }>) {
     deleteOne(actionData.data.id)
 
     const viewData = getViewData()
@@ -89,7 +89,7 @@ class App extends Vue {
 
     this.data = viewData
   }
-  resized (resizeData: ResizeData) {
+  resized(resizeData: ResizeData) {
     resized(resizeData)
   }
 }

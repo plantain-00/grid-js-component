@@ -26,7 +26,7 @@ export class Grid extends Vue {
   private canSort = true
   private ps!: common.Ps | null
 
-  sort (sortData: common.SortData) {
+  sort(sortData: common.SortData) {
     if (this.canSort) {
       this.$emit('sort', sortData)
     } else {
@@ -34,22 +34,22 @@ export class Grid extends Vue {
     }
   }
 
-  isAsc (column: string) {
+  isAsc(column: string) {
     return this.data.sortType === 'asc' && this.data.sortColumn !== '' && this.data.sortColumn === column
   }
-  isDesc (column: string) {
+  isDesc(column: string) {
     return this.data.sortType === 'desc' && this.data.sortColumn !== '' && this.data.sortColumn === column
   }
 
-  click (clickData: common.ClickData) {
+  click(clickData: common.ClickData) {
     this.$emit('click', clickData)
   }
 
-  action (actionData: common.ActionData) {
+  action(actionData: common.ActionData) {
     this.$emit('action', actionData)
   }
 
-  resizeStart (e: MouseEvent, cell: common.GridCellData, columnIndex: number) {
+  resizeStart(e: MouseEvent, cell: common.GridCellData, columnIndex: number) {
     this.resizingCell = cell
     e.stopPropagation()
     e.stopImmediatePropagation()
@@ -58,7 +58,7 @@ export class Grid extends Vue {
     this.initialRowWidth = (e.target as HTMLElement).parentElement!.parentElement!.getClientRects()[0].width
     this.resizingIndex = columnIndex
   }
-  resizeEnd (e: MouseEvent) {
+  resizeEnd(e: MouseEvent) {
     this.resizingCell = null
 
     if (!this.canSort) {
@@ -72,7 +72,7 @@ export class Grid extends Vue {
       this.$emit('resized', resizeData)
     }
   }
-  mousemove (e: MouseEvent) {
+  mousemove(e: MouseEvent) {
     if (this.resizingCell) {
       e.preventDefault()
       const cellWidth = this.initialWidth + e.clientX - this.initialClientX
@@ -86,11 +86,11 @@ export class Grid extends Vue {
       this.canSort = false
     }
   }
-  getStyle (width: number | undefined) {
+  getStyle(width: number | undefined) {
     return width ? { width } : {}
   }
 
-  mounted () {
+  mounted() {
     this.heads = this.$el.childNodes[1].childNodes[0] as HTMLElement
     this.container = this.$el.childNodes[1].childNodes[1] as HTMLElement
     if (this.$el.childNodes[0].childNodes.length > 1) {
@@ -117,7 +117,7 @@ export class Grid extends Vue {
     }
     this.heads.addEventListener('wheel', this.handleWheelForHead)
   }
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.container && this.ps) {
       this.ps.destroy()
       this.ps = null
@@ -139,28 +139,28 @@ export class Grid extends Vue {
     }
   }
 
-  private handlePsScrollY (e: Event) {
+  private handlePsScrollY(e: Event) {
     common.handleScrollYEvent((e.target as HTMLElement).scrollTop, this.leftContainer, this.rightContainer)
   }
-  private handlePsScrollX (e: Event) {
+  private handlePsScrollX(e: Event) {
     common.handleScrollXEvent((e.target as HTMLElement).scrollLeft, this.heads)
   }
-  private handlePsXReachStart (e: Event) {
+  private handlePsXReachStart(e: Event) {
     common.handleScrollXEvent(0, this.heads)
   }
-  private handlePsXReachEnd (e: Event) {
+  private handlePsXReachEnd(e: Event) {
     common.handleScrollXEvent(this.container.scrollLeft, this.heads)
   }
-  private handlePsYReachStart (e: Event) {
+  private handlePsYReachStart(e: Event) {
     common.handleScrollYEvent(0, this.leftContainer, this.rightContainer)
   }
-  private handlePsYReachEnd (e: Event) {
+  private handlePsYReachEnd(e: Event) {
     common.handleScrollYEvent(this.container.scrollTop, this.leftContainer, this.rightContainer)
   }
-  private handleWheel (e: WheelEvent) {
+  private handleWheel(e: WheelEvent) {
     common.updateVerticalScroll(e, this.container, this.ps, this.leftContainer, this.rightContainer)
   }
-  private handleWheelForHead (e: WheelEvent) {
+  private handleWheelForHead(e: WheelEvent) {
     common.updateHorizontalScroll(e, this.container, this.ps)
   }
 }
