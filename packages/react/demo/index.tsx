@@ -12,7 +12,7 @@ const DeleteButton: React.StatelessComponent<{ data: number, action: (actionData
 
 import { getViewData, sort, deleteOne, resized } from 'grid-js-component/demo/'
 
-function setComponents (viewData: GridData) {
+function setComponents(viewData: GridData) {
   for (const row of viewData.rows) {
     row.cells[0].component = ProficiencyPercent
   }
@@ -28,7 +28,7 @@ class Main extends React.Component<{}, {}> {
   private data = data
   private clickedCellValue: any = null
 
-  render () {
+  render() {
     return (
       <div>
         <a href='https://github.com/plantain-00/grid-js-component/tree/master/packages/react/demo' target='_blank'>the source code of the demo</a>
@@ -47,7 +47,7 @@ class Main extends React.Component<{}, {}> {
     )
   }
 
-  private sort (sortData: SortData) {
+  private sort(sortData: SortData) {
     if (!sortData.cell.value) {
       return
     }
@@ -63,12 +63,12 @@ class Main extends React.Component<{}, {}> {
     this.setState({ data: this.data })
   }
 
-  private click (clickData: ClickData) {
+  private click(clickData: ClickData) {
     this.clickedCellValue = clickData.cell.value
     this.setState({ clickedCellValue: this.clickedCellValue })
   }
 
-  private action (actionData: ActionData<{ id: number }>) {
+  private action(actionData: ActionData<{ id: number }>) {
     deleteOne(actionData.data.id)
 
     const viewData = getViewData()
@@ -78,7 +78,7 @@ class Main extends React.Component<{}, {}> {
     this.setState({ data: this.data })
   }
 
-  private resized (resizeData: ResizeData) {
+  private resized(resizeData: ResizeData) {
     resized(resizeData)
   }
 }

@@ -58,23 +58,23 @@ let rowWidth = 0
 /**
  * @public
  */
-export function sort (sortColumn: string, sortType: 'asc' | 'desc') {
+export function sort(sortColumn: string, sortType: 'asc' | 'desc') {
   rawData.sort((a: any, b: any) => sortType === 'asc'
-        ? (typeof a[sortColumn] === 'string' ? a[sortColumn].localeCompare(b[sortColumn]) : a[sortColumn] - b[sortColumn])
-        : (typeof b[sortColumn] === 'string' ? b[sortColumn].localeCompare(a[sortColumn]) : b[sortColumn] - a[sortColumn]))
+    ? (typeof a[sortColumn] === 'string' ? a[sortColumn].localeCompare(b[sortColumn]) : a[sortColumn] - b[sortColumn])
+    : (typeof b[sortColumn] === 'string' ? b[sortColumn].localeCompare(a[sortColumn]) : b[sortColumn] - a[sortColumn]))
 }
 
 /**
  * @public
  */
-export function deleteOne (id: number) {
+export function deleteOne(id: number) {
   rawData = rawData.filter(d => d.id !== id)
 }
 
 /**
  * @public
  */
-export function resized (resizeData: ResizeData) {
+export function resized(resizeData: ResizeData) {
   rowWidth = resizeData.rowWidth
   cellWidths[resizeData.index] = resizeData.cellWidth
 }
@@ -82,15 +82,15 @@ export function resized (resizeData: ResizeData) {
 /**
  * @public
  */
-export function getViewData () {
+export function getViewData() {
   const data: GridData = {
     sortType: 'desc',
     sortColumn: '',
     headers: {
       cells: [
-                { value: 'proficiency', style: 'test-cell-class', width: cellWidths[0] },
-                { value: 'country', width: cellWidths[1] },
-                { value: 'gender', width: cellWidths[2] }
+        { value: 'proficiency', style: 'test-cell-class', width: cellWidths[0] },
+        { value: 'country', width: cellWidths[1] },
+        { value: 'gender', width: cellWidths[2] }
       ],
       style: 'test-row-class',
       width: rowWidth
@@ -98,13 +98,13 @@ export function getViewData () {
     rows: [],
     leftHeaders: {
       cells: [
-                { value: 'name' }
+        { value: 'name' }
       ]
     },
     leftRows: [],
     rightHeaders: {
       cells: [
-                { value: '' }
+        { value: '' }
       ]
     },
     rightRows: []
@@ -113,20 +113,20 @@ export function getViewData () {
   for (const row of rawData) {
     data.rows.push({
       cells: [
-                { value: row.proficiency, width: cellWidths[0] },
-                { value: row.country, width: cellWidths[1] },
-                { value: row.gender, width: cellWidths[2] }
+        { value: row.proficiency, width: cellWidths[0] },
+        { value: row.country, width: cellWidths[1] },
+        { value: row.gender, width: cellWidths[2] }
       ],
       width: rowWidth
     })
     data.leftRows!.push({
       cells: [
-                { value: row.name }
+        { value: row.name }
       ]
     })
     data.rightRows!.push({
       cells: [
-                { value: row.id }
+        { value: row.id }
       ]
     })
   }
