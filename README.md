@@ -27,6 +27,8 @@ A reactjs and vuejs grid component.
 
 ## vuejs component
 
+[![gzip size](https://img.badgesize.io/https://unpkg.com/grid-js-vue-component?compression=gzip)](https://unpkg.com/grid-js-vue-component)
+
 `npm i grid-js-vue-component`
 
 ```ts
@@ -52,6 +54,8 @@ or
 the online demo: <https://plantain-00.github.io/grid-js-component/packages/vue/demo>
 
 ## reactjs component
+
+[![gzip size](https://img.badgesize.io/https://unpkg.com/grid-js-react-component?compression=gzip)](https://unpkg.com/grid-js-react-component)
 
 `npm i grid-js-react-component`
 
