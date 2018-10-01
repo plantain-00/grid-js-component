@@ -30,13 +30,14 @@ export class Grid extends React.Component<{
   private ps!: common.Ps | null
 
   componentDidMount() {
-    this.heads = ReactDOM.findDOMNode(this as any)!.childNodes[1].childNodes[0] as HTMLElement
-    this.container = ReactDOM.findDOMNode(this as any)!.childNodes[1].childNodes[1] as HTMLElement
-    if (ReactDOM.findDOMNode(this as any)!.childNodes[0].childNodes.length > 1) {
-      this.leftContainer = ReactDOM.findDOMNode(this as any)!.childNodes[0].childNodes[1] as HTMLElement
+    const thisDom = ReactDOM.findDOMNode(this as any) as HTMLElement
+    this.heads = thisDom.childNodes[1].childNodes[0] as HTMLElement
+    this.container = thisDom.childNodes[1].childNodes[1] as HTMLElement
+    if (thisDom.childNodes[0].childNodes.length > 1) {
+      this.leftContainer = thisDom.childNodes[0].childNodes[1] as HTMLElement
     }
-    if (ReactDOM.findDOMNode(this as any)!.childNodes[2].childNodes.length > 1) {
-      this.rightContainer = ReactDOM.findDOMNode(this as any)!.childNodes[2].childNodes[1] as HTMLElement
+    if (thisDom.childNodes[2].childNodes.length > 1) {
+      this.rightContainer = thisDom.childNodes[2].childNodes[1] as HTMLElement
     }
 
     this.ps = new common.Ps(this.container)
