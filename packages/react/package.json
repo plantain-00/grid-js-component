@@ -26,8 +26,8 @@
     "react-dom": "16"
   },
   "devDependencies": {
-    "@types/react": "16.4.15",
-    "@types/react-dom": "16.0.8"
+    "@types/react": "16.4.16",
+    "@types/react-dom": "16.0.9"
   },
   "peerDependencies": {
     "grid-js-component": "^5.2.0",
