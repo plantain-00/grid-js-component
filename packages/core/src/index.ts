@@ -77,8 +77,8 @@ function getDeltaFromEvent(e: WheelEvent) {
 
   if (typeof deltaX === 'undefined' || typeof deltaY === 'undefined') {
     // OS X Safari
-    deltaX = -1 * e.wheelDeltaX / 6
-    deltaY = e.wheelDeltaY / 6
+    deltaX = -1 * (e as any).wheelDeltaX / 6
+    deltaY = (e as any).wheelDeltaY / 6
   }
 
   if (e.deltaMode && e.deltaMode === 1) {
@@ -90,7 +90,7 @@ function getDeltaFromEvent(e: WheelEvent) {
   if (isNaN(deltaX) && isNaN(deltaY)) {
     // IE in some mouse drivers
     deltaX = 0
-    deltaY = e.wheelDelta
+    deltaY = (e as any).wheelDelta
   }
 
   if (e.shiftKey) {
