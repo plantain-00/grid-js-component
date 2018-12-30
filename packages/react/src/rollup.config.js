@@ -4,13 +4,13 @@ import commonjs from 'rollup-plugin-commonjs'
 
 export default {
   input: 'packages/react/dist/index.js',
-  name: 'Grid',
   plugins: [
     resolve({ browser: true }),
     uglify(),
     commonjs()
   ],
   output: {
+    name: 'Grid',
     file: 'packages/react/dist/grid-js-react-component.min.js',
     format: 'umd'
   },

@@ -4,13 +4,13 @@ import commonjs from 'rollup-plugin-commonjs'
 
 export default {
   input: 'packages/vue/dist/index.js',
-  name: 'Grid',
   plugins: [
     resolve({ browser: true }),
     uglify(),
     commonjs()
   ],
   output: {
+    name: 'Grid',
     file: 'packages/vue/dist/grid-js-vue-component.min.js',
     format: 'umd'
   },
