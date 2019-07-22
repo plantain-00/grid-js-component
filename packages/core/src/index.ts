@@ -1,7 +1,7 @@
 /**
  * @public
  */
-export type GridData = {
+export interface GridData {
   headers: GridRowData;
   rows: GridRowData[];
   leftHeaders?: GridRowData;
@@ -15,7 +15,7 @@ export type GridData = {
 /**
  * @public
  */
-export type GridRowData = {
+export interface GridRowData {
   cells: GridCellData[];
   style?: string;
   width?: number;
@@ -24,7 +24,7 @@ export type GridRowData = {
 /**
  * @public
  */
-export type GridCellData<T = any> = {
+export interface GridCellData<T = any> {
   value: T;
   component?: string | Function;
   style?: string;
@@ -34,7 +34,7 @@ export type GridCellData<T = any> = {
 /**
  * @public
  */
-export type SortData = {
+export interface SortData {
   cell: GridCellData;
   header: GridRowData;
   columnIndex: number;
@@ -43,7 +43,7 @@ export type SortData = {
 /**
  * @public
  */
-export type ClickData = {
+export interface ClickData {
   cell: GridCellData;
   row: GridRowData;
   body: GridRowData[];
@@ -61,7 +61,7 @@ export type ActionData<T = any> = {
 /**
  * @public
  */
-export type ResizeData = {
+export interface ResizeData {
   cellWidth: number;
   rowWidth: number;
   index: number;
