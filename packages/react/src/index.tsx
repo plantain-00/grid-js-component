@@ -79,7 +79,6 @@ export class Grid extends React.Component<{
     }
   }
 
-  // tslint:disable-next-line:cognitive-complexity no-big-function
   render() {
     let mainHead: JSX.Element | null = null
     if (this.props.data.headers && this.props.data.headers.cells) {
